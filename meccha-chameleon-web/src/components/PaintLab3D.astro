@@ -1,51 +1,102 @@
 ---
-// WebGL practice mannequin: rotate in one mode, paint directly onto the mesh in the other.
+// Original WebGL practice figure. It is intentionally not a game asset.
 ---
 
 <section class="paint-lab-3d" data-paint-lab-3d aria-label="3D Camouflage Simulator">
-	<div class="paint-lab-3d__topbar"><span><i></i>3D practice figure</span><output data-status>Paint mode</output></div>
+	<div class="paint-lab-3d__topbar">
+		<span><i></i>3D practice figure</span>
+		<output data-status aria-live="polite">Loading practice canvas…</output>
+	</div>
+
 	<div class="paint-lab-3d__layout">
 		<div class="paint-lab-3d__stage">
-			<div class="paint-lab-3d__stage-tools"><label>Background <input type="file" accept="image/*" data-background /></label><label>Background scale <input data-background-scale type="range" min="50" max="250" value="100" /></label><button type="button" data-move-background aria-pressed="false">Move background</button><button type="button" data-mode="paint" class="is-active">Paint figure</button><button type="button" data-mode="rotate">Rotate figure</button><label>Figure zoom <input data-zoom type="range" min="75" max="150" value="100" /></label></div>
-			<div class="paint-lab-3d__viewport" data-viewport aria-label="3D figure canvas"></div>
+			<div class="paint-lab-3d__stage-tools" aria-label="Canvas controls">
+				<label class="paint-lab-3d__upload"><span>Upload scene</span><span class="paint-lab-3d__choose-file">Choose image</span><input class="paint-lab-3d__file-input" type="file" accept="image/png,image/jpeg,image/webp" data-background /><span data-file-label>No image selected</span></label>
+				<div class="paint-lab-3d__tool-group" aria-label="Background controls">
+					<button type="button" data-fit-background disabled>Fit scene</button>
+					<button type="button" data-move-background aria-pressed="false" disabled>Position scene</button>
+					<button type="button" data-eyedropper aria-pressed="false" disabled>Eyedropper</button>
+					<label>Scene scale <input data-background-scale type="range" min="50" max="250" value="100" disabled /><output data-background-scale-out>100%</output></label>
+				</div>
+				<div class="paint-lab-3d__tool-group paint-lab-3d__mode-group" role="group" aria-label="Figure interaction mode">
+					<button type="button" data-mode="paint" class="is-active" aria-pressed="true">Paint</button>
+					<button type="button" data-mode="rotate" aria-pressed="false">Rotate</button>
+					<label>Figure zoom <input data-zoom type="range" min="75" max="150" value="100" /><output data-zoom-out>100%</output></label>
+				</div>
+			</div>
+
+			<div class="paint-lab-3d__viewport" data-viewport aria-label="3D painting canvas" aria-busy="true">
+				<p class="paint-lab-3d__loading" data-loading>Preparing the practice figure…</p>
+			</div>
 			<p class="paint-lab-3d__help" data-help>Paint mode: drag across the figure to apply colour to its surface.</p>
-			<div class="paint-lab-3d__actions"><button type="button" data-undo disabled>Undo stroke</button><button type="button" data-reset>Reset figure</button><button type="button" class="paint-lab-3d__save" data-save>Save PNG</button></div>
+			<div class="paint-lab-3d__actions">
+				<button type="button" data-undo disabled>Undo stroke</button>
+				<button type="button" data-reset>Reset paint</button>
+				<button type="button" data-reset-scene disabled>Clear scene</button>
+				<button type="button" class="paint-lab-3d__save" data-save>Save PNG</button>
+			</div>
 		</div>
 
-		<aside class="paint-lab-3d__panel" aria-label="Game style colour controls">
-			<p class="paint-lab-3d__panel-title"><span>COLOUR</span> Painter controls</p>
+		<aside class="paint-lab-3d__panel" aria-label="Practice colour controls">
+			<p class="paint-lab-3d__panel-title"><span>COLOUR</span> Practice controls</p>
+			<p class="paint-lab-3d__panel-lead">Choose one scene colour, then paint broad surfaces before edge detail.</p>
+
 			<div class="paint-lab-3d__picker">
-				<div class="paint-lab-3d__wheel" data-wheel role="slider" tabindex="0" aria-label="Colour wheel"><canvas data-wheel-canvas width="240" height="240"></canvas><span data-wheel-dot></span></div>
-				<div class="paint-lab-3d__preview"><span data-preview></span><span data-preview-shadow></span><small>sRGB Preview</small><output data-hex>#B9E84A</output></div>
+				<div class="paint-lab-3d__wheel" data-wheel tabindex="0" aria-label="Colour wheel. Use arrow keys to fine tune hue and saturation." aria-describedby="colour-wheel-help">
+					<canvas data-wheel-canvas width="240" height="240"></canvas><span data-wheel-dot></span>
+				</div>
+				<div class="paint-lab-3d__preview">
+					<span data-preview></span><span data-preview-shadow></span><small>sRGB Preview</small><output data-hex>#B9E84A</output>
+				</div>
 			</div>
-			<div class="paint-lab-3d__channels">
-				<label>R <input data-r type="range" min="0" max="255" value="185" /><output data-r-out>185</output></label>
-				<label>G <input data-g type="range" min="0" max="255" value="232" /><output data-g-out>232</output></label>
-				<label>B <input data-b type="range" min="0" max="255" value="74" /><output data-b-out>74</output></label>
-				<label>H <input data-h type="range" min="0" max="360" value="78" /><output data-h-out>78°</output></label>
-				<label>S <input data-s type="range" min="0" max="100" value="76" /><output data-s-out>76%</output></label>
-				<label>V <input data-v type="range" min="0" max="100" value="91" /><output data-v-out>91%</output></label>
+			<p id="colour-wheel-help" class="sr-only">Left and right arrows change hue. Up and down arrows change saturation.</p>
+
+			<div class="paint-lab-3d__brush-controls">
+				<label>Brush <input data-brush type="range" min="12" max="110" value="12" /><output data-brush-out>12 px</output></label>
+				<label>Opacity <input data-opacity type="range" min="20" max="100" value="100" /><output data-opacity-out>100%</output></label>
 			</div>
-			<div class="paint-lab-3d__finish"><p>Surface finish</p><label>Metallic <input data-metallic type="range" min="0" max="100" value="0" /><output data-metallic-out>0.0</output></label><label>Roughness <input data-roughness type="range" min="0" max="100" value="55" /><output data-roughness-out>0.6</output></label><label>Brush <input data-brush type="range" min="12" max="110" value="12" /><output data-brush-out>12 px</output></label><label>Opacity <input data-opacity type="range" min="20" max="100" value="100" /><output data-opacity-out>100%</output></label></div>
-			<p class="paint-lab-3d__tip"><strong>How it works</strong> · Paint mode colours the mesh surface. Switch to rotate mode to inspect the other side.</p>
+
+			<details class="paint-lab-3d__advanced">
+				<summary>Fine tune colour &amp; surface</summary>
+				<div class="paint-lab-3d__channels">
+					<label>R <input data-r type="range" min="0" max="255" value="185" /><output data-r-out>185</output></label>
+					<label>G <input data-g type="range" min="0" max="255" value="232" /><output data-g-out>232</output></label>
+					<label>B <input data-b type="range" min="0" max="255" value="74" /><output data-b-out>74</output></label>
+					<label>H <input data-h type="range" min="0" max="360" value="78" /><output data-h-out>78°</output></label>
+					<label>S <input data-s type="range" min="0" max="100" value="76" /><output data-s-out>76%</output></label>
+					<label>V <input data-v type="range" min="0" max="100" value="91" /><output data-v-out>91%</output></label>
+				</div>
+				<div class="paint-lab-3d__finish">
+					<label>Metallic <input data-metallic type="range" min="0" max="100" value="0" /><output data-metallic-out>0.0</output></label>
+					<label>Roughness <input data-roughness type="range" min="0" max="100" value="55" /><output data-roughness-out>0.6</output></label>
+				</div>
+			</details>
+
+			<p class="paint-lab-3d__tip"><strong>Original practice figure</strong> · This browser tool is for colour and silhouette exercises; it does not use official game assets.</p>
 		</aside>
 	</div>
 </section>
 
 <style>
-	.paint-lab-3d { --ink:#10271e; --panel:#153329; --line:#587063; --cream:#f4f0df; --accent:#b9e84a; margin:clamp(2rem,5vw,4rem) 0; background:var(--panel); border:1px solid #0c2118; box-shadow:12px 14px 0 #cbc4ae; color:var(--cream); overflow:hidden; }
-	.paint-lab-3d__topbar { display:flex; align-items:center; min-height:44px; padding:0 1rem; background:#eceddf; color:#15271f; font-size:.74rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
-	.paint-lab-3d__topbar span { display:flex; align-items:center; gap:.55rem; }.paint-lab-3d__topbar i { width:9px; height:9px; border-radius:50%; background:#ec6f5e; box-shadow:0 0 0 3px #ec6f5e33; }.paint-lab-3d__topbar output { margin-left:auto; color:#436e57; }
-	.paint-lab-3d__layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(330px,.65fr); }.paint-lab-3d__stage { min-width:0; background:#dce2d5; color:#193126; }
-	.paint-lab-3d__stage-tools { display:flex; flex-wrap:wrap; align-items:center; gap:.55rem; padding:.7rem .9rem; background:#cfd9cc; border-bottom:1px solid #9caf9f; font-size:.68rem; font-weight:900; text-transform:uppercase; letter-spacing:.05em; }.paint-lab-3d__stage-tools label { display:flex; align-items:center; gap:.45rem; }.paint-lab-3d__stage-tools input[type=file] { max-width:128px; font-size:.63rem; }.paint-lab-3d__stage-tools button { border:1px solid #789080; background:#eef0e5; padding:.38rem .55rem; color:#1b3529; font:800 .68rem/1 var(--font-body); cursor:pointer; }.paint-lab-3d__stage-tools button.is-active { background:#1d4935; border-color:#1d4935; color:#f2f1e4; }.paint-lab-3d__stage-tools input[type=range] { width:72px; accent-color:#487b60; }
-	.paint-lab-3d__viewport { position:relative; min-height:500px; background:radial-gradient(circle at 50% 26%,#f6f4e8 0,#d4dfd2 45%,#b6c6b8 100%); touch-action:none; }.paint-lab-3d__viewport canvas { display:block; width:100%; height:100%; cursor:crosshair; }.paint-lab-3d__stage:has([data-mode=rotate].is-active) .paint-lab-3d__viewport canvas { cursor:grab; }
-	.paint-lab-3d__help { margin:0; padding:.55rem .9rem; background:#e9ece1; border-top:1px solid #a5b3a6; color:#486152; font-size:.73rem; }.paint-lab-3d__actions { display:flex; gap:.55rem; padding:.9rem; background:#eceddf; }.paint-lab-3d__actions button { border:1px solid #829385; background:transparent; color:#193126; padding:.54rem .7rem; font:800 .75rem/1 var(--font-body); cursor:pointer; }.paint-lab-3d__actions button:disabled { opacity:.4; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:auto; border-color:#1c4433; background:#1c4433; color:#f2f1e4; }
-	.paint-lab-3d__panel { padding:1.35rem; background:linear-gradient(145deg,#17382b,#10251c 72%); }.paint-lab-3d__panel-title { margin:0; padding-bottom:.78rem; border-bottom:1px solid #697b70; font-family:var(--font-heading); font-size:1.12rem; }.paint-lab-3d__panel-title span { margin-right:.48rem; color:var(--accent); font-family:var(--font-body); font-size:.68rem; font-weight:900; letter-spacing:.11em; }
-	.paint-lab-3d__picker { display:grid; grid-template-columns:134px 1fr; gap:1rem; align-items:center; padding:1rem 0; }.paint-lab-3d__wheel { position:relative; width:128px; aspect-ratio:1; border:4px solid #f0ead8; border-radius:50%; box-shadow:0 0 0 2px #0a1811,0 3px 10px #0008; overflow:hidden; touch-action:none; cursor:crosshair; }.paint-lab-3d__wheel canvas { display:block; width:100%; height:100%; }.paint-lab-3d__wheel span { position:absolute; left:82%; top:58%; width:13px; height:13px; border:2px solid #10251a; border-radius:50%; background:var(--accent); box-shadow:0 0 0 2px #f6efd9,0 1px 3px #0008; transform:translate(-50%,-50%); pointer-events:none; }.paint-lab-3d__wheel:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
-	.paint-lab-3d__preview { display:grid; gap:.45rem; }.paint-lab-3d__preview > span { min-height:27px; border:2px solid #dfe4d6; background:var(--accent); box-shadow:inset 0 -6px #0002; }.paint-lab-3d__preview > span:nth-child(2) { background:color-mix(in srgb,var(--accent) 62%,#0a1710); }.paint-lab-3d__preview small { color:#dce4d6; font-size:.65rem; font-weight:800; }.paint-lab-3d__preview output { padding:.3rem .4rem; background:#07120c; color:#f0f2e4; font-size:.72rem; font-weight:800; letter-spacing:.06em; }
-	.paint-lab-3d__channels,.paint-lab-3d__finish { display:grid; gap:.48rem; padding:.85rem 0; border-top:1px solid #697b70; }.paint-lab-3d__channels label,.paint-lab-3d__finish label { display:grid; grid-template-columns:18px 1fr 45px; align-items:center; gap:.5rem; font-size:.68rem; font-weight:900; }.paint-lab-3d__channels input,.paint-lab-3d__finish input { appearance:none; height:9px; margin:0; border:1px solid #0a1510; background:#34483c; cursor:pointer; }.paint-lab-3d__channels input::-webkit-slider-thumb,.paint-lab-3d__finish input::-webkit-slider-thumb { appearance:none; width:5px; height:17px; border:1px solid #172419; background:#f2edd8; box-shadow:0 1px 3px #0008; }.paint-lab-3d__channels output,.paint-lab-3d__finish output { padding:.13rem .2rem; background:#07120c; color:#f0f2e4; text-align:right; font-size:.64rem; }.paint-lab-3d__channels label:nth-child(1) input { background:linear-gradient(90deg,#180909,#f13535); }.paint-lab-3d__channels label:nth-child(2) input { background:linear-gradient(90deg,#08190b,#31da55); }.paint-lab-3d__channels label:nth-child(3) input { background:linear-gradient(90deg,#080a1a,#3d72ed); }.paint-lab-3d__channels label:nth-child(4) input { background:linear-gradient(90deg,#f33,#f3e845,#30da61,#38b9e8,#5c59d8,#d64dad,#f33); }.paint-lab-3d__channels label:nth-child(5) input { background:linear-gradient(90deg,#f2edda,var(--accent)); }.paint-lab-3d__channels label:nth-child(6) input { background:linear-gradient(90deg,#07120c,var(--accent)); }.paint-lab-3d__finish p { margin:0 0 .1rem; color:var(--accent); font-size:.65rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }.paint-lab-3d__finish label:nth-of-type(1) input { background:linear-gradient(90deg,#15231a,#f2edda); }.paint-lab-3d__finish label:nth-of-type(2) input { background:linear-gradient(90deg,#f2edda,#15231a); }.paint-lab-3d__finish label:nth-of-type(3) input { background:linear-gradient(90deg,#2c5a42,var(--accent)); }.paint-lab-3d__finish label:nth-of-type(4) input { background:linear-gradient(90deg,#1e3a2d,var(--accent)); }.paint-lab-3d__tip { margin:0; padding-top:.85rem; border-top:1px solid #697b70; color:#b4c6b6; font-size:.76rem; line-height:1.5; }.paint-lab-3d__tip strong { color:var(--accent); font-size:.67rem; letter-spacing:.08em; text-transform:uppercase; }
-	@media (max-width:1024px) { .paint-lab-3d__layout { grid-template-columns:1fr; }.paint-lab-3d__panel { border-top:1px solid #587063; }.paint-lab-3d__viewport { min-height:400px; } }
-	@media (max-width:768px) { .paint-lab-3d__picker { grid-template-columns:1fr; }.paint-lab-3d__preview { grid-template-columns:1fr 1fr; }.paint-lab-3d__preview small,.paint-lab-3d__preview output { grid-column:1/-1; }.paint-lab-3d__stage-tools { align-items:flex-start; }.paint-lab-3d__viewport { min-height:340px; } }
+	.paint-lab-3d { --ink:#18342a; --panel:#19382d; --panel-deep:#10271e; --line:#618174; --cream:#fbf4df; --accent:#b9e84a; margin:clamp(1.5rem,4vw,3rem) 0; border:1px solid #173328; background:var(--panel); box-shadow:10px 12px 0 #d9cfb6; color:var(--cream); overflow:hidden; }
+	.paint-lab-3d button, .paint-lab-3d input { font:inherit; }
+	.paint-lab-3d__topbar { display:flex; align-items:center; gap:1rem; min-height:46px; padding:0 1rem; background:#fbf7e9; color:#173328; font-size:.78rem; font-weight:900; letter-spacing:.075em; text-transform:uppercase; }
+	.paint-lab-3d__topbar span { display:flex; align-items:center; gap:.55rem; }.paint-lab-3d__topbar i { width:9px; height:9px; border-radius:50%; background:#ff7c62; box-shadow:0 0 0 3px #ff7c6233; }.paint-lab-3d__topbar output { margin-left:auto; overflow:hidden; color:#4d7560; font-size:.68rem; text-overflow:ellipsis; white-space:nowrap; }
+	.paint-lab-3d__layout { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(330px,.6fr); }.paint-lab-3d__stage { min-width:0; background:#e2e8dc; color:#193126; }
+	.paint-lab-3d__stage-tools { display:flex; flex-wrap:wrap; align-items:center; gap:.7rem 1rem; padding:.8rem 1rem; background:#d1ddcf; border-bottom:1px solid #a7baaa; font-size:.75rem; font-weight:800; letter-spacing:.025em; }.paint-lab-3d__upload { display:flex; position:relative; align-items:center; gap:.45rem; min-width:0; cursor:pointer; }.paint-lab-3d__file-input { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }.paint-lab-3d__choose-file { padding:.43rem .62rem; border:1px solid #718b7b; background:#f8f6e9; color:#193126; font-size:.74rem; font-weight:800; transition:background-color 160ms ease,border-color 160ms ease; }.paint-lab-3d__upload:hover .paint-lab-3d__choose-file { border-color:#193e2f; background:#edf4df; }.paint-lab-3d__upload:focus-within .paint-lab-3d__choose-file { outline:2px solid #ffca61; outline-offset:2px; }.paint-lab-3d__upload [data-file-label] { max-width:14ch; overflow:hidden; color:#587062; font-size:.69rem; font-weight:700; text-overflow:ellipsis; white-space:nowrap; }
+	.paint-lab-3d__tool-group { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; padding-left:1rem; border-left:1px solid #a5b6a6; }.paint-lab-3d__tool-group label { display:flex; align-items:center; gap:.35rem; }.paint-lab-3d__tool-group button { border:1px solid #718b7b; background:#f8f6e9; padding:.46rem .65rem; color:#193126; font-size:.74rem; font-weight:800; cursor:pointer; }.paint-lab-3d__tool-group button:hover:not(:disabled) { border-color:#193e2f; background:#edf4df; }.paint-lab-3d__tool-group button.is-active { background:#1d4935; border-color:#1d4935; color:#fffaf0; }.paint-lab-3d__tool-group button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__tool-group input[type=range] { width:72px; accent-color:#487b60; }.paint-lab-3d__tool-group output { min-width:3.2rem; color:#496858; font-size:.68rem; }
+	.paint-lab-3d__viewport { position:relative; display:grid; min-height:500px; place-items:center; background:radial-gradient(circle at 50% 25%,#fbf9ee 0,#d4dfd2 45%,#b7c8ba 100%); touch-action:none; }.paint-lab-3d__viewport canvas { display:block; width:100%; height:100%; cursor:crosshair; }.paint-lab-3d__stage:has([data-mode=rotate].is-active) .paint-lab-3d__viewport canvas { cursor:grab; }.paint-lab-3d__viewport.is-positioning canvas { cursor:move; }.paint-lab-3d__viewport.is-picking-colour canvas { cursor:copy; }.paint-lab-3d__loading { margin:0; padding:1rem; color:#476553; font-size:.86rem; font-weight:700; text-align:center; }
+	.paint-lab-3d__help { margin:0; padding:.68rem 1rem; background:#f5f6ed; border-top:1px solid #adbbaa; color:#466353; font-size:.8rem; line-height:1.45; }.paint-lab-3d__actions { display:flex; flex-wrap:wrap; gap:.55rem; padding:.9rem 1rem; background:#fbf7e9; }.paint-lab-3d__actions button { border:1px solid #819486; background:transparent; color:#193126; padding:.58rem .75rem; font-size:.78rem; font-weight:800; cursor:pointer; }.paint-lab-3d__actions button:hover:not(:disabled) { background:#e8efdf; }.paint-lab-3d__actions button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:auto; border-color:#1c4433; background:#1c4433; color:#fffaf0; }
+	.paint-lab-3d__panel { padding:1.35rem; background:linear-gradient(160deg,#204835,#10271e 75%); }.paint-lab-3d__panel-title { margin:0; padding-bottom:.65rem; border-bottom:1px solid #769183; font-family:var(--font-heading); font-size:1.2rem; }.paint-lab-3d__panel-title span { margin-right:.48rem; color:var(--accent); font-family:var(--font-body); font-size:.7rem; font-weight:900; letter-spacing:.12em; }.paint-lab-3d__panel-lead { margin:.75rem 0 0; color:#c6d7ca; font-size:.82rem; line-height:1.5; }
+	.paint-lab-3d__picker { display:grid; grid-template-columns:136px 1fr; gap:1rem; align-items:center; padding:1rem 0; }.paint-lab-3d__wheel { position:relative; width:128px; aspect-ratio:1; border:4px solid #f7eed7; border-radius:50%; box-shadow:0 0 0 2px #0a1811,0 3px 10px #0008; overflow:hidden; touch-action:none; cursor:crosshair; }.paint-lab-3d__wheel canvas { display:block; width:100%; height:100%; }.paint-lab-3d__wheel span { position:absolute; left:82%; top:58%; width:13px; height:13px; border:2px solid #10251a; border-radius:50%; background:var(--accent); box-shadow:0 0 0 2px #f6efd9,0 1px 3px #0008; transform:translate(-50%,-50%); pointer-events:none; }.paint-lab-3d__wheel:focus-visible { outline:3px solid #ffca61; outline-offset:4px; }
+	.paint-lab-3d__preview { display:grid; gap:.45rem; }.paint-lab-3d__preview > span { min-height:28px; border:2px solid #e9eadb; background:var(--accent); box-shadow:inset 0 -6px #0002; }.paint-lab-3d__preview > span:nth-child(2) { background:color-mix(in srgb,var(--accent) 62%,#0a1710); }.paint-lab-3d__preview small { color:#dce7d9; font-size:.7rem; font-weight:800; }.paint-lab-3d__preview output { padding:.35rem .45rem; background:#08140d; color:#f4f4e7; font-size:.76rem; font-weight:800; letter-spacing:.06em; }
+	.paint-lab-3d__brush-controls { display:grid; gap:.65rem; padding:.9rem 0; border-top:1px solid #718779; border-bottom:1px solid #718779; }.paint-lab-3d__brush-controls label,.paint-lab-3d__channels label,.paint-lab-3d__finish label { display:grid; grid-template-columns:clamp(4.8rem,22%,6.3rem) 1fr 3.3rem; align-items:center; gap:.55rem; color:#f5f1df; font-size:.78rem; font-weight:800; }.paint-lab-3d__brush-controls input,.paint-lab-3d__channels input,.paint-lab-3d__finish input { appearance:none; height:9px; margin:0; border:1px solid #09160f; background:#405447; cursor:pointer; }.paint-lab-3d__brush-controls input::-webkit-slider-thumb,.paint-lab-3d__channels input::-webkit-slider-thumb,.paint-lab-3d__finish input::-webkit-slider-thumb { appearance:none; width:8px; height:18px; border:1px solid #172419; background:#fff8df; box-shadow:0 1px 3px #0008; }.paint-lab-3d__brush-controls output,.paint-lab-3d__channels output,.paint-lab-3d__finish output { padding:.16rem .25rem; background:#09150e; color:#f4f4e7; font-size:.7rem; text-align:right; }.paint-lab-3d__brush-controls label:nth-child(1) input { background:linear-gradient(90deg,#2c5a42,var(--accent)); }.paint-lab-3d__brush-controls label:nth-child(2) input { background:linear-gradient(90deg,#1e3a2d,var(--accent)); }
+	.paint-lab-3d__advanced { margin-top:.95rem; border-bottom:1px solid #718779; }.paint-lab-3d__advanced summary { padding:.15rem 0 .9rem; color:#dce9da; font-size:.78rem; font-weight:800; cursor:pointer; }.paint-lab-3d__advanced[open] summary { color:var(--accent); }.paint-lab-3d__channels,.paint-lab-3d__finish { display:grid; gap:.52rem; padding:.2rem 0 .9rem; }.paint-lab-3d__channels label:nth-child(1) input { background:linear-gradient(90deg,#180909,#f13535); }.paint-lab-3d__channels label:nth-child(2) input { background:linear-gradient(90deg,#08190b,#31da55); }.paint-lab-3d__channels label:nth-child(3) input { background:linear-gradient(90deg,#080a1a,#3d72ed); }.paint-lab-3d__channels label:nth-child(4) input { background:linear-gradient(90deg,#f33,#f3e845,#30da61,#38b9e8,#5c59d8,#d64dad,#f33); }.paint-lab-3d__channels label:nth-child(5) input { background:linear-gradient(90deg,#f2edda,var(--accent)); }.paint-lab-3d__channels label:nth-child(6) input { background:linear-gradient(90deg,#07120c,var(--accent)); }.paint-lab-3d__finish { padding-top:.85rem; border-top:1px dashed #718779; }.paint-lab-3d__finish label:nth-child(1) input { background:linear-gradient(90deg,#15231a,#f2edda); }.paint-lab-3d__finish label:nth-child(2) input { background:linear-gradient(90deg,#f2edda,#15231a); }
+	.paint-lab-3d__tip { margin:1rem 0 0; color:#c4d7c7; font-size:.78rem; line-height:1.55; }.paint-lab-3d__tip strong { color:var(--accent); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; }
+	.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+	@media (max-width:1024px) { .paint-lab-3d__layout { grid-template-columns:1fr; }.paint-lab-3d__panel { border-top:1px solid #587063; }.paint-lab-3d__viewport { min-height:420px; } }
+	@media (max-width:768px) { .paint-lab-3d__topbar output { max-width:45%; }.paint-lab-3d__tool-group { width:100%; padding-left:0; border-left:0; }.paint-lab-3d__picker { grid-template-columns:1fr; }.paint-lab-3d__preview { grid-template-columns:1fr 1fr; }.paint-lab-3d__preview small,.paint-lab-3d__preview output { grid-column:1/-1; }.paint-lab-3d__viewport { min-height:360px; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:0; } }
+	@media (prefers-reduced-motion: reduce) { .paint-lab-3d *, .paint-lab-3d *::before, .paint-lab-3d *::after { scroll-behavior:auto !important; transition-duration:.01ms !important; } }
 </style>
 
 <script>
@@ -55,8 +106,8 @@
 		if (lab.dataset.paintLabReady === 'true') return;
 		lab.dataset.paintLabReady = 'true';
 
-		const THREE = await import('three') as typeof THREE_NS;
 		const viewport = lab.querySelector<HTMLElement>('[data-viewport]')!;
+		const loading = lab.querySelector<HTMLElement>('[data-loading]')!;
 		const status = lab.querySelector<HTMLOutputElement>('[data-status]')!;
 		const help = lab.querySelector<HTMLElement>('[data-help]')!;
 		const wheel = lab.querySelector<HTMLElement>('[data-wheel]')!;
@@ -65,65 +116,343 @@
 		const preview = lab.querySelector<HTMLElement>('[data-preview]')!;
 		const previewShadow = lab.querySelector<HTMLElement>('[data-preview-shadow]')!;
 		const hexOutput = lab.querySelector<HTMLOutputElement>('[data-hex]')!;
+		const fileLabel = lab.querySelector<HTMLElement>('[data-file-label]')!;
 		const backgroundScaleInput = lab.querySelector<HTMLInputElement>('[data-background-scale]')!;
+		const backgroundScaleOutput = lab.querySelector<HTMLOutputElement>('[data-background-scale-out]')!;
 		const backgroundMoveButton = lab.querySelector<HTMLButtonElement>('[data-move-background]')!;
+		const fitBackgroundButton = lab.querySelector<HTMLButtonElement>('[data-fit-background]')!;
+		const eyedropperButton = lab.querySelector<HTMLButtonElement>('[data-eyedropper]')!;
+		const clearSceneButton = lab.querySelector<HTMLButtonElement>('[data-reset-scene]')!;
+		const undoButton = lab.querySelector<HTMLButtonElement>('[data-undo]')!;
 		const inputs = {
 			r: lab.querySelector<HTMLInputElement>('[data-r]')!, g: lab.querySelector<HTMLInputElement>('[data-g]')!, b: lab.querySelector<HTMLInputElement>('[data-b]')!,
 			h: lab.querySelector<HTMLInputElement>('[data-h]')!, s: lab.querySelector<HTMLInputElement>('[data-s]')!, v: lab.querySelector<HTMLInputElement>('[data-v]')!,
 			metallic: lab.querySelector<HTMLInputElement>('[data-metallic]')!, roughness: lab.querySelector<HTMLInputElement>('[data-roughness]')!, brush: lab.querySelector<HTMLInputElement>('[data-brush]')!, opacity: lab.querySelector<HTMLInputElement>('[data-opacity]')!, zoom: lab.querySelector<HTMLInputElement>('[data-zoom]')!,
 		};
-		const out = (name:string) => lab.querySelector<HTMLOutputElement>(`[data-${name}-out]`)!;
-		const renderer = new THREE.WebGLRenderer({ antialias:true, preserveDrawingBuffer:true, alpha:true });
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; renderer.outputColorSpace=THREE.SRGBColorSpace; viewport.append(renderer.domElement);
-		const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(37,1,.1,100); camera.position.set(0,.08,5.7); camera.lookAt(0,.08,0);
-		const ambient = new THREE.HemisphereLight(0xfff8dc,0x3d624d,1.75); scene.add(ambient); const key = new THREE.DirectionalLight(0xfff5dc,2.65); key.position.set(-3,5,4); key.castShadow=true; key.shadow.mapSize.set(1024,1024); scene.add(key); const fill = new THREE.DirectionalLight(0x9bd6ff,.75); fill.position.set(4,2,2); scene.add(fill);
-		const figure = new THREE.Group(); scene.add(figure);
-		// Each softly overlapping part owns a high-resolution paint texture, so a brush mark stays local to the clicked surface.
-		const createPaintPart = (geometry:THREE_NS.BufferGeometry,x:number,y:number,z:number,rz=0,scale:[number,number,number]=[1,1,1]) => { geometry.scale(...scale); geometry.rotateZ(rz); geometry.translate(x,y,z); const canvas=document.createElement('canvas'); canvas.width=canvas.height=1024; const ctx=canvas.getContext('2d')!; ctx.fillStyle='#f4f1e6';ctx.fillRect(0,0,1024,1024);const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;const material=new THREE.MeshStandardMaterial({map:texture,color:0xffffff,roughness:.7,metalness:0});const mesh=new THREE.Mesh(geometry,material);mesh.castShadow=true;mesh.receiveShadow=true;mesh.userData={canvas,ctx,texture};figure.add(mesh);return mesh; };
-		const leftArmPath = new THREE.CatmullRomCurve3([new THREE.Vector3(-.27,.57,0),new THREE.Vector3(-.40,.43,0),new THREE.Vector3(-.49,.10,0),new THREE.Vector3(-.52,-.23,0),new THREE.Vector3(-.49,-.43,0)]);
-		const rightArmPath = new THREE.CatmullRomCurve3([new THREE.Vector3(.27,.57,0),new THREE.Vector3(.40,.43,0),new THREE.Vector3(.49,.10,0),new THREE.Vector3(.52,-.23,0),new THREE.Vector3(.49,-.43,0)]);
-		const parts=[
-			createPaintPart(new THREE.SphereGeometry(.46,64,48),0,1.23,0,0,[1,1.07,.95]),createPaintPart(new THREE.SphereGeometry(.19,48,32),0,.76,0),createPaintPart(new THREE.CapsuleGeometry(.39,.92,16,48),0,.03,0),
-			createPaintPart(new THREE.TubeGeometry(leftArmPath,56,.155,20,false),0,0,0),createPaintPart(new THREE.TubeGeometry(rightArmPath,56,.155,20,false),0,0,0),createPaintPart(new THREE.SphereGeometry(.17,32,24),-.49,-.43,0,0,[.95,1.2,.95]),createPaintPart(new THREE.SphereGeometry(.17,32,24),.49,-.43,0,0,[.95,1.2,.95]),
-			createPaintPart(new THREE.CapsuleGeometry(.215,.75,16,40),-.21,-.98,0,.012),createPaintPart(new THREE.CapsuleGeometry(.215,.75,16,40),.21,-.98,0,-.012),
+
+		const out = (name: string) => lab.querySelector<HTMLOutputElement>(`[data-${name}-out]`)!;
+		const setStatus = (message: string) => { status.value = message; };
+
+		let THREE: typeof THREE_NS;
+		let renderer: THREE_NS.WebGLRenderer;
+		try {
+			THREE = await import('three') as typeof THREE_NS;
+			renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true, alpha: true });
+		} catch {
+			viewport.setAttribute('aria-busy', 'false');
+			loading.textContent = 'This browser could not start the 3D practice canvas. Try a current browser with WebGL enabled.';
+			setStatus('3D canvas unavailable');
+			return;
+		}
+
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+		renderer.outputColorSpace = THREE.SRGBColorSpace;
+		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+		viewport.append(renderer.domElement);
+
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+		camera.position.set(0, 0.08, 6.15);
+		camera.lookAt(0, 0, 0);
+		scene.add(new THREE.HemisphereLight(0xfff9e4, 0x3d624d, 1.55));
+		const key = new THREE.DirectionalLight(0xfff8df, 2.45);
+		key.position.set(-3.5, 5, 4);
+		key.castShadow = true;
+		key.shadow.mapSize.set(768, 768);
+		scene.add(key);
+		const rim = new THREE.DirectionalLight(0xb4d8ff, 0.55);
+		rim.position.set(3, 1.5, -1);
+		scene.add(rim);
+
+		const figure = new THREE.Group();
+		scene.add(figure);
+		const createPaintPart = (geometry: THREE_NS.BufferGeometry, position: [number, number, number], rotationZ = 0, scale: [number, number, number] = [1, 1, 1]) => {
+			geometry.scale(...scale);
+			geometry.rotateZ(rotationZ);
+			geometry.translate(...position);
+			const canvas = document.createElement('canvas');
+			canvas.width = canvas.height = 768;
+			const context = canvas.getContext('2d', { willReadFrequently: true })!;
+			context.fillStyle = '#f4f1e6';
+			context.fillRect(0, 0, canvas.width, canvas.height);
+			const texture = new THREE.CanvasTexture(canvas);
+			texture.colorSpace = THREE.SRGBColorSpace;
+			const paintMaterial = new THREE.MeshStandardMaterial({ map: texture, color: 0xffffff, roughness: 0.58, metalness: 0 });
+			const mesh = new THREE.Mesh(geometry, paintMaterial);
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			mesh.userData = { canvas, context, texture, paintMaterial };
+			figure.add(mesh);
+			return mesh;
+		};
+		const leftArmPath = new THREE.CatmullRomCurve3([
+			new THREE.Vector3(-0.27, 0.57, -0.01), new THREE.Vector3(-0.42, 0.43, -0.01), new THREE.Vector3(-0.5, 0.1, -0.01), new THREE.Vector3(-0.52, -0.24, -0.01), new THREE.Vector3(-0.49, -0.43, -0.01),
+		]);
+		const rightArmPath = new THREE.CatmullRomCurve3([
+			new THREE.Vector3(0.27, 0.57, -0.01), new THREE.Vector3(0.42, 0.43, -0.01), new THREE.Vector3(0.5, 0.1, -0.01), new THREE.Vector3(0.52, -0.24, -0.01), new THREE.Vector3(0.49, -0.43, -0.01),
+		]);
+		const parts = [
+			createPaintPart(new THREE.SphereGeometry(0.44, 48, 36), [0, 1.21, 0], 0, [1, 1.08, 0.94]),
+			createPaintPart(new THREE.SphereGeometry(0.18, 36, 24), [0, 0.76, 0], 0, [1, 1.05, 0.92]),
+			createPaintPart(new THREE.CapsuleGeometry(0.38, 0.9, 14, 40), [0, 0.03, 0], 0, [1.02, 1, 0.88]),
+			createPaintPart(new THREE.TubeGeometry(leftArmPath, 56, 0.15, 18, false), [0, 0, 0]),
+			createPaintPart(new THREE.TubeGeometry(rightArmPath, 56, 0.15, 18, false), [0, 0, 0]),
+			createPaintPart(new THREE.SphereGeometry(0.165, 28, 20), [-0.49, -0.43, -0.01], 0, [0.94, 1.2, 0.94]),
+			createPaintPart(new THREE.SphereGeometry(0.165, 28, 20), [0.49, -0.43, -0.01], 0, [0.94, 1.2, 0.94]),
+			createPaintPart(new THREE.CapsuleGeometry(0.21, 0.72, 14, 34), [-0.2, -0.98, 0], 0.012, [1, 1, 0.9]),
+			createPaintPart(new THREE.CapsuleGeometry(0.21, 0.72, 14, 34), [0.2, -0.98, 0], -0.012, [1, 1, 0.9]),
 		];
-		const raycaster = new THREE.Raycaster(); const pointer = new THREE.Vector2(); let mode:'paint'|'rotate'='paint'; let colour={h:78,s:.76,v:.91}; let paintColor='#b9e84a'; let pointerDown=false; let movingBackground=false; let previous={x:0,y:0}; let lastPaint:{ mesh:THREE_NS.Object3D;x:number;y:number }|null=null; let history:string[][]=[]; let background:THREE_NS.Mesh|undefined;
-		const hsvRgb=(h:number,s:number,v:number) => { const c=v*s,x=c*(1-Math.abs((h/60)%2-1)),m=v-c; let r=0,g=0,b=0;if(h<60)[r,g,b]=[c,x,0];else if(h<120)[r,g,b]=[x,c,0];else if(h<180)[r,g,b]=[0,c,x];else if(h<240)[r,g,b]=[0,x,c];else if(h<300)[r,g,b]=[x,0,c];else[r,g,b]=[c,0,x];return {r:Math.round((r+m)*255),g:Math.round((g+m)*255),b:Math.round((b+m)*255)}; };
-		const rgbHex=(r:number,g:number,b:number)=>'#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
-		const hexHsv=(hex:string)=>{const n=parseInt(hex.slice(1),16),r=((n>>16)&255)/255,g=((n>>8)&255)/255,b=(n&255)/255,max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;let h=0;if(d){if(max===r)h=((g-b)/d)%6;else if(max===g)h=(b-r)/d+2;else h=(r-g)/d+4;h=(h*60+360)%360;}return{h,s:max?d/max:0,v:max};};
-		const drawWheel=()=>{const ctx=wheelCanvas.getContext('2d')!,image=ctx.createImageData(240,240),mid=120;for(let y=0;y<240;y++)for(let x=0;x<240;x++){const dx=x-mid,dy=y-mid,rad=Math.hypot(dx,dy),i=(y*240+x)*4;if(rad>mid){image.data[i+3]=0;continue;}const rgb=hsvRgb((Math.atan2(dy,dx)*180/Math.PI+360)%360,rad/mid,1);image.data[i]=rgb.r;image.data[i+1]=rgb.g;image.data[i+2]=rgb.b;image.data[i+3]=255;}ctx.putImageData(image,0,0);};
-		const sync=(hex:string)=>{if(!/^#[0-9a-f]{6}$/i.test(hex))return;paintColor=hex.toLowerCase();colour=hexHsv(paintColor);const rgb=hsvRgb(colour.h,colour.s,colour.v); inputs.r.value=String(rgb.r);inputs.g.value=String(rgb.g);inputs.b.value=String(rgb.b);inputs.h.value=String(Math.round(colour.h));inputs.s.value=String(Math.round(colour.s*100));inputs.v.value=String(Math.round(colour.v*100));out('r').value=String(rgb.r);out('g').value=String(rgb.g);out('b').value=String(rgb.b);out('h').value=`${Math.round(colour.h)}°`;out('s').value=`${Math.round(colour.s*100)}%`;out('v').value=`${Math.round(colour.v*100)}%`;preview.style.background=paintColor;previewShadow.style.background=`color-mix(in srgb,${paintColor} 60%,#07120c)`;hexOutput.value=paintColor.toUpperCase();lab.style.setProperty('--accent',paintColor);const angle=colour.h*Math.PI/180,dist=colour.s*42;wheelDot.style.left=`${50+Math.cos(angle)*dist}%`;wheelDot.style.top=`${50+Math.sin(angle)*dist}%`;};
-		const updateFinish=()=>{const metallic=Number(inputs.metallic.value)/100,roughness=Number(inputs.roughness.value)/100;parts.forEach(p=>{const m=p.material as THREE_NS.MeshStandardMaterial;m.metalness=metallic;m.roughness=roughness;m.needsUpdate=true;});out('metallic').value=metallic.toFixed(1);out('roughness').value=roughness.toFixed(1);out('brush').value=`${inputs.brush.value} px`;out('opacity').value=`${inputs.opacity.value}%`;};
-		const resize=()=>{const box=viewport.getBoundingClientRect();renderer.setSize(box.width,box.height,false);camera.aspect=box.width/box.height;camera.updateProjectionMatrix();};new ResizeObserver(resize).observe(viewport);resize();
-		const render=()=>renderer.render(scene,camera);renderer.setAnimationLoop(render);
-		const resetPaint=()=>{parts.forEach(part=>{const data=part.userData,ctx=data.ctx as CanvasRenderingContext2D,canvas=data.canvas as HTMLCanvasElement;ctx.fillStyle='#f4f1e6';ctx.fillRect(0,0,canvas.width,canvas.height);data.texture.needsUpdate=true;});};
-		const snapshot=()=>{history.push(parts.map(part=>(part.userData.canvas as HTMLCanvasElement).toDataURL()));if(history.length>14)history.shift();(lab.querySelector<HTMLButtonElement>('[data-undo]')!).disabled=false;};
-		const paintHit=(event:PointerEvent)=>{const box=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-box.left)/box.width)*2-1;pointer.y=-((event.clientY-box.top)/box.height)*2+1;raycaster.setFromCamera(pointer,camera);const hit=raycaster.intersectObjects(parts,false)[0];if(!hit?.uv){lastPaint=null;return;}const data=hit.object.userData,ctx=data.ctx as CanvasRenderingContext2D,canvas=data.canvas as HTMLCanvasElement,x=hit.uv.x*canvas.width,y=(1-hit.uv.y)*canvas.height,radius=22+(Number(inputs.brush.value)/110)*105,alpha=Number(inputs.opacity.value)/100,rgb=hsvRgb(colour.h,colour.s,colour.v),solid=`rgb(${rgb.r},${rgb.g},${rgb.b})`;ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.globalAlpha=alpha;ctx.fillStyle=solid;const uvStep=lastPaint?.mesh===hit.object?Math.hypot(lastPaint.x-x,lastPaint.y-y):Infinity;if(uvStep<radius*3&&lastPaint){ctx.strokeStyle=solid;ctx.lineWidth=radius*1.75;ctx.beginPath();ctx.moveTo(lastPaint.x,lastPaint.y);ctx.lineTo(x,y);ctx.stroke();}ctx.beginPath();ctx.arc(x,y,radius*.875,0,Math.PI*2);ctx.fill();ctx.restore();data.texture.needsUpdate=true;lastPaint={mesh:hit.object,x,y};};
-		renderer.domElement.addEventListener('pointerdown',(event:PointerEvent)=>{if(movingBackground&&!background){status.value='Upload a background image first';return;}pointerDown=true;lastPaint=null;previous={x:event.clientX,y:event.clientY};renderer.domElement.setPointerCapture(event.pointerId);if(movingBackground){status.value='Moving background';return;}if(mode==='paint'){snapshot();paintHit(event);status.value='Painting surface';}});renderer.domElement.addEventListener('pointermove',(event:PointerEvent)=>{if(!pointerDown)return;if(movingBackground&&background){const bounds=renderer.domElement.getBoundingClientRect();background.position.x+=(event.clientX-previous.x)/bounds.width*4.8;background.position.y-=(event.clientY-previous.y)/bounds.height*4.8;previous={x:event.clientX,y:event.clientY};return;}if(mode==='rotate'){figure.rotation.y+=(event.clientX-previous.x)*.012;figure.rotation.x=Math.max(-.28,Math.min(.22,figure.rotation.x+(event.clientY-previous.y)*.008));previous={x:event.clientX,y:event.clientY};}else paintHit(event);});renderer.domElement.addEventListener('pointerup',()=>{pointerDown=false;lastPaint=null;status.value=movingBackground?'Background positioned':mode==='paint'?'Paint mode':'Rotate mode';});
-		wheel.addEventListener('pointerdown',(event)=>{const choose=(e:PointerEvent)=>{const b=wheelCanvas.getBoundingClientRect(),x=e.clientX-b.left-b.width/2,y=e.clientY-b.top-b.height/2;const h=(Math.atan2(y,x)*180/Math.PI+360)%360,s=Math.min(1,Math.hypot(x,y)/(b.width/2));sync(rgbHex(...Object.values(hsvRgb(h,s,colour.v)) as [number,number,number]));};choose(event);const move=(e:PointerEvent)=>choose(e);wheel.setPointerCapture(event.pointerId);wheel.addEventListener('pointermove',move);wheel.addEventListener('pointerup',()=>wheel.removeEventListener('pointermove',move),{once:true});});
-		inputs.r.addEventListener('input',()=>sync(rgbHex(Number(inputs.r.value),Number(inputs.g.value),Number(inputs.b.value))));inputs.g.addEventListener('input',()=>sync(rgbHex(Number(inputs.r.value),Number(inputs.g.value),Number(inputs.b.value))));inputs.b.addEventListener('input',()=>sync(rgbHex(Number(inputs.r.value),Number(inputs.g.value),Number(inputs.b.value))));[inputs.h,inputs.s,inputs.v].forEach(input=>input.addEventListener('input',()=>sync(rgbHex(...Object.values(hsvRgb(Number(inputs.h.value),Number(inputs.s.value)/100,Number(inputs.v.value)/100)) as [number,number,number]))));[inputs.metallic,inputs.roughness,inputs.brush,inputs.opacity].forEach(input=>input.addEventListener('input',updateFinish));inputs.zoom.addEventListener('input',()=>{const scale=Number(inputs.zoom.value)/100;figure.scale.set(scale,scale,scale);});
-		lab.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach(button=>button.addEventListener('click',()=>{mode=button.dataset.mode as 'paint'|'rotate';lab.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('is-active',b===button));status.value=mode==='paint'?'Paint mode':'Rotate mode';help.textContent=mode==='paint'?'Paint mode: drag across the figure to apply colour to its surface.':'Rotate mode: drag the figure to inspect every side, then switch back to paint.';}));
-		backgroundScaleInput.addEventListener('input',()=>{if(!background)return;const scale=Number(backgroundScaleInput.value)/100;background.scale.set(scale,scale,1);status.value=`Background scale ${backgroundScaleInput.value}%`;});
-		backgroundMoveButton.addEventListener('click',()=>{movingBackground=!movingBackground;backgroundMoveButton.classList.toggle('is-active',movingBackground);backgroundMoveButton.setAttribute('aria-pressed',String(movingBackground));backgroundMoveButton.textContent=movingBackground?'Finish moving':'Move background';status.value=movingBackground?'Drag on the canvas to position the background':'Paint mode';});
-		lab.querySelector<HTMLButtonElement>('[data-reset]')!.addEventListener('click',()=>{resetPaint();history=[];(lab.querySelector<HTMLButtonElement>('[data-undo]')!).disabled=true;status.value='Fresh figure';});lab.querySelector<HTMLButtonElement>('[data-undo]')!.addEventListener('click',()=>{const previousState=history.pop();if(!previousState)return;previousState.forEach((url,index)=>{const image=new Image();image.onload=()=>{const data=parts[index].userData,ctx=data.ctx as CanvasRenderingContext2D;ctx.clearRect(0,0,1024,1024);ctx.drawImage(image,0,0);data.texture.needsUpdate=true;};image.src=url;});(lab.querySelector<HTMLButtonElement>('[data-undo]')!).disabled=history.length===0;});lab.querySelector<HTMLButtonElement>('[data-save]')!.addEventListener('click',()=>{const link=document.createElement('a');link.download='meccha-chameleon-3d-paint.png';link.href=renderer.domElement.toDataURL('image/png');link.click();status.value='PNG saved';});
-		lab.querySelector<HTMLInputElement>('[data-background]')!.addEventListener('change',(event:Event)=>{const file=(event.currentTarget as HTMLInputElement).files?.[0];if(!file)return;const url=URL.createObjectURL(file);new THREE.TextureLoader().load(url,(texture:THREE_NS.Texture)=>{texture.colorSpace=THREE.SRGBColorSpace;if(background)scene.remove(background);const img=texture.image as HTMLImageElement;const aspect=img.width/img.height;background=new THREE.Mesh(new THREE.PlaneGeometry(5.4*aspect,5.4),new THREE.MeshBasicMaterial({map:texture}));background.position.set(0,.3,-2.5);backgroundScaleInput.value='100';scene.add(background);status.value='Background loaded — use scale or Move background';URL.revokeObjectURL(url);});});
-		drawWheel();sync(paintColor);updateFinish();
+
+		const raycaster = new THREE.Raycaster();
+		const pointer = new THREE.Vector2();
+		let mode: 'paint' | 'rotate' = 'paint';
+		let colour = { h: 78, s: 0.76, v: 0.91 };
+		let paintColor = '#b9e84a';
+		let pointerDown = false;
+		let movingBackground = false;
+		let pickingBackground = false;
+		let previous = { x: 0, y: 0 };
+		let lastPaint: { mesh: THREE_NS.Object3D; x: number; y: number } | null = null;
+		let history: ImageData[][] = [];
+		let background: THREE_NS.Mesh | undefined;
+		let renderRequested = false;
+
+		const hsvRgb = (h: number, s: number, v: number) => {
+			const c = v * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = v - c;
+			let r = 0, g = 0, b = 0;
+			if (h < 60) [r, g, b] = [c, x, 0]; else if (h < 120) [r, g, b] = [x, c, 0]; else if (h < 180) [r, g, b] = [0, c, x]; else if (h < 240) [r, g, b] = [0, x, c]; else if (h < 300) [r, g, b] = [x, 0, c]; else [r, g, b] = [c, 0, x];
+			return { r: Math.round((r + m) * 255), g: Math.round((g + m) * 255), b: Math.round((b + m) * 255) };
+		};
+		const rgbHex = (r: number, g: number, b: number) => '#' + [r, g, b].map((value) => Math.round(value).toString(16).padStart(2, '0')).join('');
+		const hexHsv = (hex: string) => {
+			const value = parseInt(hex.slice(1), 16), r = ((value >> 16) & 255) / 255, g = ((value >> 8) & 255) / 255, b = (value & 255) / 255;
+			const max = Math.max(r, g, b), min = Math.min(r, g, b), delta = max - min;
+			let h = 0;
+			if (delta) { if (max === r) h = ((g - b) / delta) % 6; else if (max === g) h = (b - r) / delta + 2; else h = (r - g) / delta + 4; h = (h * 60 + 360) % 360; }
+			return { h, s: max ? delta / max : 0, v: max };
+		};
+		const render = () => { renderRequested = false; renderer.render(scene, camera); };
+		const requestRender = () => { if (renderRequested) return; renderRequested = true; requestAnimationFrame(render); };
+		const resize = () => { const box = viewport.getBoundingClientRect(); renderer.setSize(box.width, box.height, false); camera.aspect = box.width / box.height; camera.updateProjectionMatrix(); requestRender(); };
+		new ResizeObserver(resize).observe(viewport);
+
+		const updateWheelPosition = () => {
+			const angle = colour.h * Math.PI / 180, distance = colour.s * 42;
+			wheelDot.style.left = `${50 + Math.cos(angle) * distance}%`;
+			wheelDot.style.top = `${50 + Math.sin(angle) * distance}%`;
+			wheel.setAttribute('aria-valuetext', `Hue ${Math.round(colour.h)} degrees, saturation ${Math.round(colour.s * 100)} percent`);
+		};
+		const drawWheel = () => {
+			const context = wheelCanvas.getContext('2d')!, image = context.createImageData(240, 240), centre = 120;
+			for (let y = 0; y < 240; y++) for (let x = 0; x < 240; x++) {
+				const dx = x - centre, dy = y - centre, radius = Math.hypot(dx, dy), index = (y * 240 + x) * 4;
+				if (radius > centre) { image.data[index + 3] = 0; continue; }
+				const rgb = hsvRgb((Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360, radius / centre, 1);
+				image.data[index] = rgb.r; image.data[index + 1] = rgb.g; image.data[index + 2] = rgb.b; image.data[index + 3] = 255;
+			}
+			context.putImageData(image, 0, 0);
+		};
+		const sync = (hex: string) => {
+			if (!/^#[0-9a-f]{6}$/i.test(hex)) return;
+			paintColor = hex.toLowerCase(); colour = hexHsv(paintColor);
+			const rgb = hsvRgb(colour.h, colour.s, colour.v);
+			inputs.r.value = String(rgb.r); inputs.g.value = String(rgb.g); inputs.b.value = String(rgb.b);
+			inputs.h.value = String(Math.round(colour.h)); inputs.s.value = String(Math.round(colour.s * 100)); inputs.v.value = String(Math.round(colour.v * 100));
+			out('r').value = String(rgb.r); out('g').value = String(rgb.g); out('b').value = String(rgb.b);
+			out('h').value = `${Math.round(colour.h)}°`; out('s').value = `${Math.round(colour.s * 100)}%`; out('v').value = `${Math.round(colour.v * 100)}%`;
+			preview.style.background = paintColor; previewShadow.style.background = `color-mix(in srgb, ${paintColor} 60%, #07120c)`; hexOutput.value = paintColor.toUpperCase(); lab.style.setProperty('--accent', paintColor);
+			updateWheelPosition(); requestRender();
+		};
+		const updateFinish = () => {
+			const metallic = Number(inputs.metallic.value) / 100;
+			const roughness = Number(inputs.roughness.value) / 100;
+			parts.forEach((part) => {
+				const paintMaterial = part.userData.paintMaterial as THREE_NS.MeshStandardMaterial;
+				paintMaterial.metalness = metallic;
+				paintMaterial.roughness = roughness;
+				paintMaterial.needsUpdate = true;
+			});
+			out('metallic').value = metallic.toFixed(1); out('roughness').value = roughness.toFixed(1);
+			out('brush').value = `${inputs.brush.value} px`; out('opacity').value = `${inputs.opacity.value}%`; out('zoom').value = `${inputs.zoom.value}%`;
+			requestRender();
+		};
+		const snapshot = () => {
+			history.push(parts.map((part) => {
+				const canvas = part.userData.canvas as HTMLCanvasElement;
+				return (part.userData.context as CanvasRenderingContext2D).getImageData(0, 0, canvas.width, canvas.height);
+			}));
+			if (history.length > 6) history.shift();
+			undoButton.disabled = false;
+		};
+		const resetPaint = () => {
+			parts.forEach((part) => {
+				const canvas = part.userData.canvas as HTMLCanvasElement;
+				const context = part.userData.context as CanvasRenderingContext2D;
+				context.fillStyle = '#f4f1e6'; context.fillRect(0, 0, canvas.width, canvas.height);
+				(part.userData.texture as THREE_NS.CanvasTexture).needsUpdate = true;
+			});
+			history = []; undoButton.disabled = true; requestRender();
+		};
+		const applyBrush = (part: THREE_NS.Mesh, x: number, y: number) => {
+			const context = part.userData.context as CanvasRenderingContext2D;
+			const radius = 7 + (Number(inputs.brush.value) / 110) * 35;
+			const alpha = Number(inputs.opacity.value) / 100;
+			const rgb = hsvRgb(colour.h, colour.s, colour.v);
+			const fill = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+			context.save();
+			context.globalAlpha = alpha;
+			context.lineCap = 'round'; context.lineJoin = 'round';
+			if (lastPaint?.mesh === part && Math.hypot(lastPaint.x - x, lastPaint.y - y) < radius * 3) {
+				context.strokeStyle = fill; context.lineWidth = radius * 1.35;
+				context.beginPath(); context.moveTo(lastPaint.x, lastPaint.y); context.lineTo(x, y); context.stroke();
+			}
+			const gradient = context.createRadialGradient(x, y, radius * 0.18, x, y, radius);
+			gradient.addColorStop(0, fill); gradient.addColorStop(0.8, fill); gradient.addColorStop(1, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0)`);
+			context.fillStyle = gradient; context.beginPath(); context.arc(x, y, radius, 0, Math.PI * 2); context.fill(); context.restore();
+			(part.userData.texture as THREE_NS.CanvasTexture).needsUpdate = true; lastPaint = { mesh: part, x, y }; requestRender();
+		};
+		const paintHit = (event: PointerEvent) => {
+			const box = renderer.domElement.getBoundingClientRect();
+			pointer.x = ((event.clientX - box.left) / box.width) * 2 - 1; pointer.y = -((event.clientY - box.top) / box.height) * 2 + 1;
+			raycaster.setFromCamera(pointer, camera);
+			const hit = raycaster.intersectObjects(parts, false)[0];
+			if (!hit?.uv) { lastPaint = null; return; }
+			const canvas = hit.object.userData.canvas as HTMLCanvasElement;
+			applyBrush(hit.object as THREE_NS.Mesh, hit.uv.x * canvas.width, (1 - hit.uv.y) * canvas.height);
+		};
+		const setEyedropper = (active: boolean) => {
+			pickingBackground = active;
+			eyedropperButton.classList.toggle('is-active', active);
+			eyedropperButton.setAttribute('aria-pressed', String(active));
+			eyedropperButton.textContent = active ? 'Click scene colour' : 'Eyedropper';
+			viewport.classList.toggle('is-picking-colour', active);
+		};
+		const pickBackgroundColour = (event: PointerEvent) => {
+			if (!background) return;
+			const box = renderer.domElement.getBoundingClientRect();
+			pointer.x = ((event.clientX - box.left) / box.width) * 2 - 1;
+			pointer.y = -((event.clientY - box.top) / box.height) * 2 + 1;
+			raycaster.setFromCamera(pointer, camera);
+			const hit = raycaster.intersectObject(background, false)[0];
+			const sampler = background.userData.sampler as { canvas: HTMLCanvasElement; context: CanvasRenderingContext2D } | undefined;
+			if (!hit?.uv || !sampler) { setStatus('Click a visible part of the uploaded scene'); return; }
+			try {
+				const x = Math.min(sampler.canvas.width - 1, Math.max(0, Math.floor(hit.uv.x * sampler.canvas.width)));
+				const y = Math.min(sampler.canvas.height - 1, Math.max(0, Math.floor((1 - hit.uv.y) * sampler.canvas.height)));
+				const [r, g, b, alpha] = sampler.context.getImageData(x, y, 1, 1).data;
+				if (!alpha) { setStatus('That scene pixel is transparent. Choose another point.'); return; }
+				const hex = rgbHex(r, g, b);
+				sync(hex);
+				setEyedropper(false);
+				help.textContent = 'Paint mode: drag across the figure to apply colour to its surface.';
+				setStatus(`Sampled ${hex.toUpperCase()}`);
+			} catch {
+				setStatus('This scene colour could not be sampled. Try another image.');
+			}
+		};
+		const fitBackground = () => {
+			if (!background) return;
+			background.position.set(0, 0.14, -1.65); background.scale.set(1, 1, 1);
+			backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; requestRender();
+		};
+		const setBackgroundControls = (enabled: boolean) => {
+			backgroundScaleInput.disabled = !enabled; backgroundMoveButton.disabled = !enabled; fitBackgroundButton.disabled = !enabled; eyedropperButton.disabled = !enabled; clearSceneButton.disabled = !enabled;
+		};
+		const clearBackground = () => {
+			if (!background) return;
+			background.geometry.dispose();
+			const backgroundMaterial = background.material as THREE_NS.MeshBasicMaterial;
+			backgroundMaterial.map?.dispose(); backgroundMaterial.dispose(); scene.remove(background); background = undefined;
+			movingBackground = false; viewport.classList.remove('is-positioning'); backgroundMoveButton.classList.remove('is-active'); backgroundMoveButton.setAttribute('aria-pressed', 'false'); backgroundMoveButton.textContent = 'Position scene'; setEyedropper(false); backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; fileLabel.textContent = 'No image selected'; setBackgroundControls(false); requestRender();
+		};
+
+		renderer.domElement.addEventListener('pointerdown', (event: PointerEvent) => {
+			if (pickingBackground) { pickBackgroundColour(event); return; }
+			pointerDown = true; lastPaint = null; previous = { x: event.clientX, y: event.clientY }; renderer.domElement.setPointerCapture(event.pointerId);
+			if (movingBackground) { setStatus('Positioning scene'); return; }
+			if (mode === 'paint') { snapshot(); paintHit(event); setStatus('Painting surface'); }
+		});
+		renderer.domElement.addEventListener('pointermove', (event: PointerEvent) => {
+			if (!pointerDown) return;
+			if (movingBackground && background) {
+				const bounds = renderer.domElement.getBoundingClientRect();
+				background.position.x += (event.clientX - previous.x) / bounds.width * 4.8; background.position.y -= (event.clientY - previous.y) / bounds.height * 4.8; previous = { x: event.clientX, y: event.clientY }; requestRender(); return;
+			}
+			if (mode === 'rotate') { figure.rotation.y += (event.clientX - previous.x) * 0.012; figure.rotation.x = Math.max(-0.23, Math.min(0.18, figure.rotation.x + (event.clientY - previous.y) * 0.007)); previous = { x: event.clientX, y: event.clientY }; requestRender(); return; }
+			paintHit(event);
+		});
+		renderer.domElement.addEventListener('pointerup', () => { pointerDown = false; lastPaint = null; setStatus(movingBackground ? 'Scene positioned' : mode === 'paint' ? 'Paint mode' : 'Rotate mode'); });
+
+		const chooseWheelColour = (event: PointerEvent) => {
+			const bounds = wheelCanvas.getBoundingClientRect(), x = event.clientX - bounds.left - bounds.width / 2, y = event.clientY - bounds.top - bounds.height / 2;
+			const h = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360, s = Math.min(1, Math.hypot(x, y) / (bounds.width / 2));
+			const rgb = hsvRgb(h, s, colour.v); sync(rgbHex(rgb.r, rgb.g, rgb.b));
+		};
+		wheel.addEventListener('pointerdown', (event) => { chooseWheelColour(event); wheel.setPointerCapture(event.pointerId); const move = (moveEvent: PointerEvent) => chooseWheelColour(moveEvent); wheel.addEventListener('pointermove', move); wheel.addEventListener('pointerup', () => wheel.removeEventListener('pointermove', move), { once: true }); });
+		wheel.addEventListener('keydown', (event) => {
+			const step = event.shiftKey ? 10 : 3;
+			let h = colour.h, s = colour.s;
+			if (event.key === 'ArrowLeft') h = (h - step + 360) % 360; else if (event.key === 'ArrowRight') h = (h + step) % 360; else if (event.key === 'ArrowUp') s = Math.min(1, s + step / 100); else if (event.key === 'ArrowDown') s = Math.max(0, s - step / 100); else return;
+			event.preventDefault(); const rgb = hsvRgb(h, s, colour.v); sync(rgbHex(rgb.r, rgb.g, rgb.b)); setStatus(`Colour updated: hue ${Math.round(h)}, saturation ${Math.round(s * 100)}%`);
+		});
+
+		inputs.r.addEventListener('input', () => sync(rgbHex(Number(inputs.r.value), Number(inputs.g.value), Number(inputs.b.value))));
+		inputs.g.addEventListener('input', () => sync(rgbHex(Number(inputs.r.value), Number(inputs.g.value), Number(inputs.b.value))));
+		inputs.b.addEventListener('input', () => sync(rgbHex(Number(inputs.r.value), Number(inputs.g.value), Number(inputs.b.value))));
+		[inputs.h, inputs.s, inputs.v].forEach((input) => input.addEventListener('input', () => { const rgb = hsvRgb(Number(inputs.h.value), Number(inputs.s.value) / 100, Number(inputs.v.value) / 100); sync(rgbHex(rgb.r, rgb.g, rgb.b)); }));
+		[inputs.metallic, inputs.roughness, inputs.brush, inputs.opacity].forEach((input) => input.addEventListener('input', updateFinish));
+		inputs.zoom.addEventListener('input', () => { const scale = Number(inputs.zoom.value) / 100; figure.scale.set(scale, scale, scale); updateFinish(); });
+		lab.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => button.addEventListener('click', () => { mode = button.dataset.mode as 'paint' | 'rotate'; lab.querySelectorAll('[data-mode]').forEach((item) => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); }); help.textContent = mode === 'paint' ? 'Paint mode: drag across the figure to apply colour to its surface.' : 'Rotate mode: drag the figure to inspect its silhouette, then switch back to paint.'; setStatus(mode === 'paint' ? 'Paint mode' : 'Rotate mode'); }));
+		backgroundScaleInput.addEventListener('input', () => { if (!background) return; const scale = Number(backgroundScaleInput.value) / 100; background.scale.set(scale, scale, 1); backgroundScaleOutput.value = `${backgroundScaleInput.value}%`; setStatus(`Scene scale ${backgroundScaleInput.value}%`); requestRender(); });
+		backgroundMoveButton.addEventListener('click', () => { if (!background) return; setEyedropper(false); movingBackground = !movingBackground; viewport.classList.toggle('is-positioning', movingBackground); backgroundMoveButton.classList.toggle('is-active', movingBackground); backgroundMoveButton.setAttribute('aria-pressed', String(movingBackground)); backgroundMoveButton.textContent = movingBackground ? 'Finish positioning' : 'Position scene'; setStatus(movingBackground ? 'Drag the scene behind the figure' : 'Scene positioned'); });
+		eyedropperButton.addEventListener('click', () => { if (!background) return; if (movingBackground) backgroundMoveButton.click(); const active = !pickingBackground; setEyedropper(active); help.textContent = active ? 'Eyedropper: click a colour in your uploaded scene to copy it into the palette.' : 'Paint mode: drag across the figure to apply colour to its surface.'; setStatus(active ? 'Eyedropper ready — click the uploaded scene' : 'Paint mode'); });
+		fitBackgroundButton.addEventListener('click', () => { fitBackground(); setStatus('Scene fitted to canvas'); });
+		clearSceneButton.addEventListener('click', () => { clearBackground(); setStatus('Scene cleared'); });
+		lab.querySelector<HTMLButtonElement>('[data-reset]')!.addEventListener('click', () => { resetPaint(); setStatus('Paint reset'); });
+		undoButton.addEventListener('click', () => {
+			const previousState = history.pop();
+			if (!previousState) return;
+			previousState.forEach((imageData, index) => {
+				const part = parts[index];
+				(part.userData.context as CanvasRenderingContext2D).putImageData(imageData, 0, 0);
+				(part.userData.texture as THREE_NS.CanvasTexture).needsUpdate = true;
+			});
+			undoButton.disabled = history.length === 0;
+			requestRender();
+			setStatus('Stroke undone');
+		});
+		lab.querySelector<HTMLButtonElement>('[data-save]')!.addEventListener('click', () => { requestRender(); window.requestAnimationFrame(() => { const link = document.createElement('a'); link.download = 'meccha-chameleon-camouflage-practice.png'; link.href = renderer.domElement.toDataURL('image/png'); link.click(); setStatus('PNG saved'); }); });
+		lab.querySelector<HTMLInputElement>('[data-background]')!.addEventListener('change', (event: Event) => {
+			const file = (event.currentTarget as HTMLInputElement).files?.[0];
+			if (!file) return;
+			if (file.size > 12 * 1024 * 1024) { setStatus('Choose an image smaller than 12 MB'); return; }
+			const url = URL.createObjectURL(file);
+			new THREE.TextureLoader().load(url, (texture: THREE_NS.Texture) => {
+				clearBackground(); texture.colorSpace = THREE.SRGBColorSpace;
+				const image = texture.image as HTMLImageElement, aspect = image.width / image.height;
+				background = new THREE.Mesh(new THREE.PlaneGeometry(5.8 * aspect, 5.8), new THREE.MeshBasicMaterial({ map: texture }));
+				const samplingScale = Math.min(1, 2048 / Math.max(image.width, image.height));
+				const samplerCanvas = document.createElement('canvas');
+				samplerCanvas.width = Math.max(1, Math.round(image.width * samplingScale));
+				samplerCanvas.height = Math.max(1, Math.round(image.height * samplingScale));
+				const samplerContext = samplerCanvas.getContext('2d', { willReadFrequently: true })!;
+				samplerContext.drawImage(image, 0, 0, samplerCanvas.width, samplerCanvas.height);
+				background.userData.sampler = { canvas: samplerCanvas, context: samplerContext };
+				background.position.set(0, 0.14, -1.65); scene.add(background);
+				backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; fileLabel.textContent = file.name; setBackgroundControls(true); URL.revokeObjectURL(url); requestRender(); setStatus('Scene loaded — fit, position, or paint');
+			}, undefined, () => { URL.revokeObjectURL(url); setStatus('That image could not be loaded. Try PNG, JPG, or WebP.'); });
+		});
+
+		drawWheel(); sync(paintColor); updateFinish(); resize(); viewport.setAttribute('aria-busy', 'false'); loading.remove(); setStatus('Paint mode');
 	};
 
 	document.querySelectorAll<HTMLElement>('[data-paint-lab-3d]').forEach((lab) => {
 		if ('IntersectionObserver' in window) {
-			const observer = new IntersectionObserver(
-				(entries) => {
-					if (!entries.some((entry) => entry.isIntersecting)) return;
-					observer.disconnect();
-					void bootPaintLab(lab);
-				},
-				{ rootMargin: '160px' },
-			);
+			const observer = new IntersectionObserver((entries) => { if (!entries.some((entry) => entry.isIntersecting)) return; observer.disconnect(); void bootPaintLab(lab); }, { rootMargin: '160px' });
 			observer.observe(lab);
 			return;
 		}
-
 		void bootPaintLab(lab);
 	});
 </script>
