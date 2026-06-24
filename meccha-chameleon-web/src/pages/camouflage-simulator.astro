@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PaintLab from '../components/PaintLab3D.astro';
+import { pageSeo } from '../seo/pages.js';
+import { buildWebApplicationJsonLd } from '../seo/meta.js';
+import { siteStats } from '../data/site-meta.js';
+
+const seo = pageSeo.paintLab;
+const paintLabJsonLd = buildWebApplicationJsonLd({
+	name: 'MECCHA CHAMELEON Camouflage Simulator',
+	description: seo.description,
+	path: '/camouflage-simulator',
+	dateModified: siteStats.lastVerified,
+});
+---
+
+<BaseLayout
+	title={seo.title}
+	description={seo.description}
+	keywords={seo.keywords}
+	jsonLd={paintLabJsonLd}
+>
+	<div class="PaintLabPage">
+		<section class="inner-hero-section"><div class="container"><div class="inner-hero-content">
+			<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="breadcrumb-list"><li><a href="/">Home</a></li><li><span aria-current="page">Camouflage Simulator</span></li></ol></nav>
+			<span class="section-label">Practice Simulator · 3D Surface Edition</span><h1>MECCHA CHAMELEON Camouflage Simulator</h1>
+			<p class="page-intro">A browser-based camouflage practice simulator built around a round 3D figure. Upload a background, rotate the figure to inspect its silhouette, then paint directly onto its surface to practise colour, shadow, and edge detail.</p>
+			<div class="inner-hero-meta"><span>Browser-local uploads</span><span>Colour & composition practice</span><span>No account required</span></div>
+		</div></div></section>
+		<section class="inner-content-section"><div class="container"><PaintLab /></div></section>
+		<section class="inner-content-section is-alt"><div class="container"><div class="inner-content-block is-wide">
+			<h2>Use it as a composition drill</h2>
+			<p>The Camouflage Simulator works best when you test one visual decision at a time. Use it to bring colour, silhouette, and background position together before trying the idea in a live stage.</p>
+			<table class="inner-data-table"><thead><tr><th>Practice pass</th><th>What to do</th><th>What to look for</th></tr></thead><tbody><tr><td>1. Place the scene</td><td>Upload a background and set a crop that gives the figure one readable surface behind it.</td><td>Does the figure sit against one material rather than several unrelated surfaces?</td></tr><tr><td>2. Inspect the silhouette</td><td>Switch to <strong>Rotate figure</strong> and look at the head, torso, arms, and legs from the likely Seeker angle.</td><td>Which body planes are most likely to break the outline?</td></tr><tr><td>3. Paint the surface</td><td>Switch back to <strong>Paint figure</strong>, cover a broad plane first, then add restrained darker or lighter marks.</td><td>Do the colours and surface finish hold together as the figure rotates?</td></tr><tr><td>4. Review honestly</td><td>Reset and try one alternative background or two-colour approach.</td><td>Which change—scene, broad colour, or edge treatment—made the largest difference?</td></tr></tbody></table>
+		</div></div></section>
+		<section class="inner-content-section" aria-labelledby="method-title"><div class="container"><div class="inner-content-block">
+			<h2 id="method-title">What this tool helps you practise</h2>
+			<p>The tool focuses on visual fundamentals that transfer to hide-and-seek games: choose a local backdrop, reduce a hard outline, and use restrained colour variation. Use it to practise colour grouping, scene framing, brush restraint, and the way a silhouette reads against a background.</p>
+			<ul><li><strong>Practise:</strong> colour grouping, scene framing, brush restraint, and silhouette reading.</li><li><strong>Bring your own background:</strong> upload a screenshot or image, position it, then paint the figure to fit the scene.</li><li><strong>Take it into a round:</strong> pair the exercise with current map knowledge, patch notes, and your room’s rules.</li></ul>
+			<p>For game facts, read the <a href="/wiki">Wiki</a> and <a href="/updates">patch archive</a>. For stage-specific practice, start with <a href="/wiki#wiki-maps">Wiki map notes</a>.</p>
+		</div></div></section>
+		<section class="inner-content-section is-alt" aria-labelledby="privacy-title"><div class="container"><div class="inner-content-block is-wide">
+			<h2 id="privacy-title">Privacy, images, and export</h2>
+			<table class="inner-data-table"><thead><tr><th>Action</th><th>How it is handled</th></tr></thead><tbody><tr><td>Upload a background</td><td>The selected image is read by your browser for the current canvas session. This page does not send it to the site or save it to a server.</td></tr><tr><td>Move or scale a background</td><td>Position and scale are applied only to the in-browser canvas until you refresh, clear the background, or close the page.</td></tr><tr><td>Paint the figure</td><td>Brush strokes remain in the local canvas session. Reset clears them from the current canvas.</td></tr><tr><td>Save PNG</td><td>The browser creates a PNG from the visible canvas. Review your chosen background before sharing an export.</td></tr></tbody></table>
+			<p>Do not upload private, copyrighted, or sensitive images unless you have the right to use them. Review your export before sharing it publicly.</p>
+		</div></div></section>
+	</div>
+</BaseLayout>

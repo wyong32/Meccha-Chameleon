@@ -1,0 +1,203 @@
+---
+// Updates — 单页 patch notes
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteStats } from '../../data/site-meta.js';
+import { pageSeo } from '../../seo/pages.js';
+import { buildWebPageJsonLd } from '../../seo/meta.js';
+import ContentAnchorSidebar from '../../components/ContentAnchorSidebar.astro';
+import '../../styles/pages/UpdatesPage.css';
+
+const seo = pageSeo.updatesIndex;
+const pageJsonLd = buildWebPageJsonLd({
+	name: seo.title,
+	description: seo.description,
+	path: '/updates',
+});
+
+const patches = [
+	{
+		id: 'v1-8-0',
+		version: 'v1.8.0',
+		date: '2026-06-24',
+		type: 'feature',
+		typeLabel: 'Feature',
+		title: '11 emotes and Osaka map fixes',
+		summary: 'Adds 11 emotes, fixes an Osaka map gap that allowed out-of-bounds clipping, and fixes eliminated players not disappearing in Basic Mode.',
+		links: [{ href: '/wiki/maps/osaka', label: 'Osaka map note' }],
+		impact: 'If your group uses Osaka, retest old hiding routes after updating. Basic Mode hosts should also confirm eliminated players now clear correctly before setting room rules around callouts.',
+	},
+	{
+		id: 'v1-8-1',
+		version: 'v1.8.1',
+		date: '2026-06-24',
+		type: 'fix',
+		typeLabel: 'Fix',
+		title: '1.8.1 update notice and rollback context',
+		summary: 'The developer posted update 1.8.1 and later announced a rollback because of a bug. The latest official announcement is update 1.8.0, so verify the version shown in your own client before testing a route.',
+		links: [],
+		impact: 'Do not assume every client has the same build during a rollback window. Confirm the displayed version before treating an Osaka clip, emote, or elimination behaviour as reproducible.',
+	},
+	{
+		id: 'v1-7-0',
+		version: 'v1.7.0',
+		date: '2026-06-22',
+		type: 'maps',
+		typeLabel: 'Maps',
+		title: 'Osaka map and report feature',
+		summary: 'Adds the official Osaka map and a report feature, and fixes the Discord link on the title screen.',
+		links: [{ href: '/wiki/maps/osaka', label: 'Osaka map note' }],
+		impact: 'Treat Osaka as a fresh map-learning exercise. Run a short private round to identify broad surfaces and sightlines before relying on any shared hiding idea.',
+	},
+	{
+		id: 'v1-6-1',
+		version: 'v1.6.1',
+		date: '2026-06-22',
+		type: 'fix',
+		typeLabel: 'Fix',
+		title: 'Cloud save and BGM fixes',
+		summary: 'Fixes infinite loading on the cloud-save screen and an issue where BGM did not play.',
+		links: [],
+		impact: 'If cloud saves or background music fail after an update, restart the game first and test a simple private room before changing local files.',
+	},
+	{
+		id: 'v1-6-0',
+		version: 'v1.6.0',
+		date: '2026-06-21',
+		type: 'feature',
+		typeLabel: 'Feature',
+		title: 'Hider size option and cloud-save work',
+		summary: 'Adds an option to change Hider size and implements measures for a cloud-save error.',
+		links: [],
+		impact: 'Hosts can use the new Hider-size option for a room rule, but should confirm every player is on the same build before comparing results.',
+	},
+	{
+		id: 'v1-5-1',
+		version: 'v1.5.1',
+		date: '2026-06-21',
+		type: 'fix',
+		typeLabel: 'Fix',
+		title: 'Found-player and map-load fixes',
+		summary: 'Fixes a found player reappearing mid-match and Seeker clipping into the map while it loads.',
+		links: [],
+		impact: 'A found-player reappearance or map-load clipping report is worth retesting on the current build before treating it as a live strategy.',
+	},
+	{
+		id: 'v1-5-0',
+		version: 'v1.5.0',
+		date: '2026-06-21',
+		type: 'feature',
+		typeLabel: 'Feature',
+		title: 'Reveal likes and movement rule fix',
+		summary:
+			'One like per player per match for hidden players, movement-block scoring fixes, and answer-reveal colour tweaks.',
+		links: [],
+		impact: 'Likes and reveal presentation affect round feedback rather than map knowledge; review a completed round before changing your group rules.',
+	},
+	{
+		id: 'v1-4-1',
+		version: 'v1.4.1',
+		date: '2026-06-19',
+		type: 'fix',
+		typeLabel: 'Fix',
+		title: 'Player-state and Workshop API fixes',
+		summary:
+			'Fixes detected-player deletion, Steam Workshop API limit issues, server-status display, and player nameplates.',
+		links: [],
+		impact: 'When Workshop or lobby display problems appear, test one official map first so a subscription issue is not mistaken for a game-wide issue.',
+	},
+	{
+		id: 'v1-4-0',
+		version: 'v1.4.0',
+		date: '2026-06-18',
+		type: 'maps',
+		typeLabel: 'Maps',
+		title: 'Sugarland and Penguin Hotel expansion',
+		summary:
+			'Adds Sugarland, expands Penguin Hotel, improves server search, fixes Paint Mode traps, and adjusts language tags and voice-chat icons.',
+		links: [
+			{ href: '/wiki/maps/sugarland', label: 'Sugarland map note' },
+			{ href: '/wiki/maps/penguin-hotel', label: 'Penguin Hotel map note' },
+		],
+		impact: 'Sugarland and the Penguin Hotel expansion change what players need to learn. Use the linked map notes as scene-reading practice, not permanent hiding guarantees.',
+	},
+	{
+		id: 'v1-2-0',
+		version: 'v1.2.0',
+		date: '2026-06-13',
+		type: 'maps',
+		typeLabel: 'Maps',
+		title: 'Ranking, Penguin Hotel, and poses',
+		summary:
+			'Adds ranking (distance and line-of-sight time), Penguin Hotel, two new poses, a Backrooms wall-stuck fix, and says mod integration no longer requires recreating the server.',
+		links: [{ href: '/wiki/maps/penguin-hotel', label: 'Penguin Hotel map note' }],
+		impact: 'Ranking feedback is most useful after a full round: compare exposure, distance, and the first visible clue instead of copying an old route exactly.',
+	},
+];
+---
+
+<BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={pageJsonLd}>
+	<div class="UpdatesPage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Updates</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Patch Radar</span>
+					<h1>MECCHA CHAMELEON Updates</h1>
+					<p class="page-intro">
+						Version history for new maps, multiplayer features, and fixes. Use this page when a clip or route
+						no longer matches your build.
+					</p>
+					<div class="inner-hero-meta">
+						<span>Latest {siteStats.currentVersion}</span>
+						<span>{patches.length} tracked patches</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="anchored-page-body">
+			<div class="anchored-page-content">
+				<section class="updates-main" aria-labelledby="updates-timeline-title">
+					<div class="container">
+						<h2 id="updates-timeline-title" class="visually-hidden">Patch timeline</h2>
+						<ol class="updates-timeline">
+							{
+								patches.map((patch, index) => (
+									<li class:list={['patch-card', { 'patch-card--latest': index === 0 }]}>
+										<div class="patch-card-marker" aria-hidden="true"></div>
+										<article class="patch-card-body">
+											<div class="patch-card-head">
+												<span class="patch-version">{patch.version}</span>
+												<span class={`patch-type patch-type--${patch.type}`}>{patch.typeLabel}</span>
+												<time class="patch-date" datetime={patch.date}>{patch.date}</time>
+											</div>
+											<h2 id={patch.id}>{patch.title}</h2>
+											<p class="patch-summary">{patch.summary}</p>
+											<p class="patch-impact"><strong>What to check in a match:</strong> {patch.impact}</p>
+											{patch.links.length > 0 && (
+												<div class="patch-actions">
+													{patch.links.map((link) => (
+														<a class="patch-action patch-action--internal" href={link.href}>
+															{link.label}
+														</a>
+													))}
+												</div>
+											)}
+
+										</article>
+									</li>
+								))
+							}
+						</ol>
+					</div>
+				</section>
+			</div>
+			<ContentAnchorSidebar />
+		</div>
+	</div>
+</BaseLayout>

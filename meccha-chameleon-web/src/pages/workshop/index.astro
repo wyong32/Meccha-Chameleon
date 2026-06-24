@@ -1,0 +1,90 @@
+---
+// Workshop Maps 列表页
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { workshopMaps } from '../../data/workshop-maps.js';
+import { pageSeo } from '../../seo/pages.js';
+import { buildWebPageJsonLd } from '../../seo/meta.js';
+import '../../styles/pages/ListPage.css';
+
+const hasWorkshopMaps = workshopMaps.length > 0;
+const seo = hasWorkshopMaps
+	? pageSeo.workshopIndex
+	: {
+		title: 'MECCHA CHAMELEON Workshop Maps',
+		description: 'No MECCHA CHAMELEON Workshop map notes have been published yet. Browse official map notes and multiplayer setup help instead.',
+		keywords: 'meccha chameleon workshop, workshop maps, multiplayer setup',
+	};
+---
+
+<BaseLayout
+	title={seo.title}
+	description={seo.description}
+	keywords={seo.keywords}
+	robots={hasWorkshopMaps ? 'index, follow' : 'noindex, follow'}
+	jsonLd={buildWebPageJsonLd({
+		name: seo.title,
+		description: seo.description,
+		path: '/workshop',
+	})}
+>
+	<div class="ListPage WorkshopListPage">
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Workshop Maps</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Steam Workshop</span>
+					<h1>MECCHA CHAMELEON Workshop Maps</h1>
+					<p class="page-intro">{hasWorkshopMaps ? <>Steam Workshop listings with practical hosting checklists for community stages. We link to each item and focus on fair setup instead of inventing permanent “best spots.” Official-map facts are in the <a href="/wiki#wiki-maps">Wiki map notes</a>.</> : 'Workshop map notes will be listed here once they are published.'}</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="list-section" aria-labelledby="workshop-list-title">
+			<div class="container">
+				<div class="list-content">
+					<header class="list-section-header">
+						<h2 id="workshop-list-title">Community Workshop stages</h2>
+					</header>
+					{
+						hasWorkshopMaps ? (
+							<div class="workshop-list">
+								{workshopMaps.map((item) => (
+									<a class="workshop-row" href={`/workshop/${item.addressBar}`}>
+										<div class="workshop-row__media">
+											<img
+												class="workshop-row__image"
+												src={item.imageUrl}
+												alt={item.imageAlt}
+												width="800"
+												height="500"
+												loading="lazy"
+											/>
+										</div>
+										<div class="workshop-row__body">
+											<time class="workshop-row__meta" datetime={item.publishDate}>{item.publishDate}</time>
+											<h3 class="workshop-row__title">{item.title}</h3>
+											<p class="workshop-row__desc">{item.description}</p>
+											<div class="workshop-row__tags">
+												{item.tag.map((label) => (
+													<span class="workshop-row__tag">{label}</span>
+												))}
+											</div>
+										</div>
+										<span class="workshop-row__arrow" aria-hidden="true">→</span>
+									</a>
+								))}
+							</div>
+						) : (
+							<p class="list-empty-message">Sorry, there are no Workshop maps available yet.</p>
+						)
+					}
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

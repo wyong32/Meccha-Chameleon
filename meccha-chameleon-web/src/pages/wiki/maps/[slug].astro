@@ -1,0 +1,137 @@
+---
+// Camouflage Database 详情页
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { wikiMaps } from '../../../data/wiki-maps.js';
+import '../../../styles/pages/DetailPage.css';
+import ContentAnchorSidebar from '../../../components/ContentAnchorSidebar.astro';
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, shortenBreadcrumbLabel } from '../../../seo/meta.js';
+
+export function getStaticPaths() {
+	return wikiMaps.map((item) => ({
+		params: { slug: item.addressBar },
+		props: { item },
+	}));
+}
+
+const { item } = Astro.props;
+const mapShortName = item.title.replace(/^MECCHA CHAMELEON /, '').split(' — ')[0];
+const galleryExt = item.gallery?.ext ?? 'jpg';
+const screenshotGallery = item.gallery
+	? Array.from(
+		{ length: item.gallery.count },
+		(_, index) =>
+			`/camouflage-guides/${item.gallery.folder}/${String(index + 1).padStart(2, '0')}.${galleryExt}`,
+	)
+	: [];
+const pagePath = `/wiki/maps/${item.addressBar}`;
+const breadcrumbLabel = shortenBreadcrumbLabel(item.title);
+const articleJsonLd = buildArticleJsonLd({
+	headline: item.title,
+	description: item.seo.description,
+	path: pagePath,
+	datePublished: item.publishDate,
+	dateModified: item.publishDate,
+});
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+	{ name: 'Home', path: '/' },
+	{ name: 'Wiki', path: '/wiki' },
+	{ name: breadcrumbLabel, path: pagePath },
+]);
+---
+
+<BaseLayout
+	title={item.seo.title}
+	description={item.seo.description}
+	keywords={item.seo.keywords}
+	ogType="article"
+	jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+>
+	<div class="DetailPage CamouflageDetailPage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content inner-hero-content--split">
+					<div class="inner-hero-copy">
+						<nav class="breadcrumb" aria-label="Breadcrumb">
+							<ol class="breadcrumb-list">
+								<li><a href="/">Home</a></li>
+								<li><a href="/wiki">Wiki</a></li>
+								<li><span aria-current="page" title={item.title}>{breadcrumbLabel}</span></li>
+							</ol>
+						</nav>
+						<h1>{item.title}</h1>
+						<p class="detail-lead">{item.description}</p>
+						<div class="inner-hero-meta">
+							<span class="entry-tag">{item.tag}</span>
+							<time datetime={item.publishDate}>{item.publishDate}</time>
+						</div>
+					</div>
+					<div class="detail-featured-image">
+						<img src={item.imageUrl} alt={item.imageAlt} width="800" height="500" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="detail-body-section">
+			<div class="container">
+				<div class="detail-layout">
+					<article class="detail-main detail-prose">
+						<p>{item.overview}</p>
+						<div class="inner-callout">
+							<div class="inner-callout-title">Before you queue</div>
+							<p>Read the route, identify the likely approach angle, then test paint, pose, and outline in the room you are playing.</p>
+						</div>
+
+						<h2>What to practice here</h2>
+						<p>{item.practice}</p>
+
+						<h2>Landmark prompts</h2>
+						<p>Use these prompts to inspect the room from both the Hider and Seeker point of view.</p>
+						<table>
+							<thead><tr><th>Landmark</th><th>Hider question</th><th>Seeker question</th><th>Note</th></tr></thead>
+							<tbody>
+								{item.landmarks.map((landmark) => <tr><td>{landmark.landmark}</td><td>{landmark.hider}</td><td>{landmark.seeker}</td><td>{landmark.confidence}</td></tr>)}
+							</tbody>
+						</table>
+
+						{screenshotGallery.length ? (
+							<section class="community-screenshot-gallery">
+								<div class="community-gallery-heading">
+									<span>Scene study gallery</span>
+									<h2>Study routes on {mapShortName}</h2>
+									<p>Use these examples to identify prop families, approach angles, and outline breaks, then adapt the idea to the room you are playing.</p>
+								</div>
+								<div class="community-gallery-tips">
+									<h3>How to turn a study into a usable hide</h3>
+									<ul>{item.screenshotTips?.map((tip) => <li>{tip}</li>)}</ul>
+								</div>
+								<div class="community-screenshot-grid">
+									{screenshotGallery.map((src, index) => <figure class="community-screenshot-card"><a href={src} target="_blank" rel="noopener noreferrer"><img src={src} alt={`${item.title} scene study ${index + 1}`} loading="lazy" decoding="async" /></a><figcaption>Study {index + 1} · confirm the current layout before copying.</figcaption></figure>)}
+								</div>
+							</section>
+						) : null}
+
+						<h2>Hider decision rule</h2>
+						<ol><li>Choose the backdrop before opening the paint tools.</li><li>Match the largest visible surface first, then use pose to reduce the body outline.</li><li>Spend the last moments checking the edges a Seeker will see first, not adding tiny decoration.</li><li>Stop adjusting once the hunt begins; movement can undo a convincing disguise.</li></ol>
+						<h2>Seeker reading rule</h2>
+						<p>{item.seeker}</p>
+						<h2>Three-round practice plan</h2>
+						<ol><li><strong>Round one:</strong> choose one broad backdrop and judge only whether the silhouette is the wrong height, width, or direction.</li><li><strong>Round two:</strong> keep the same area but compare a local light and shadow tone; avoid adding a complicated pattern.</li><li><strong>Round three:</strong> approach the area as a Seeker from the opposite direction and name the first visual clue that breaks the disguise.</li></ol>
+						<h2>Common failure patterns</h2>
+						<ul><li>Copying a clip or landmark without checking the current layout.</li><li>Matching a colour from another part of the room instead of the final local surface.</li><li>Adding detail before the pose and broad outline make sense.</li><li>Treating one spot as permanently safe without retesting it.</li></ul>
+						<h2>Post-round review questions</h2>
+						<ul><li>What did the Seeker see first: movement, an outline, scale, or colour?</li><li>Would the same idea survive a reverse approach angle?</li><li>Did the current map layout differ from what you expected?</li></ul>
+						<h2>Patch note</h2>
+						<p>{item.caution}</p>
+					</article>
+					<aside class="detail-sidebar">
+						<ContentAnchorSidebar />
+					</aside>
+				</div>
+				<div class="detail-back">
+					<a class="btn btn-outline" href="/wiki#wiki-maps">← Back to Wiki maps</a>
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

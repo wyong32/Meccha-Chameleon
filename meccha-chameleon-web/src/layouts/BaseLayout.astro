@@ -1,0 +1,92 @@
+---
+// 全站基础布局：TDK、canonical、JSON-LD、OG/Twitter、Header/Footer
+import AppHeader from '../components/AppHeader.astro';
+import AppFooter from '../components/AppFooter.astro';
+import '../styles/global.css';
+import '../styles/pages/InnerPage.css';
+import { seoConfig } from '../seo/config.js';
+import { toAbsoluteUrl, buildWebSiteJsonLd } from '../seo/meta.js';
+
+interface Props {
+	title: string;
+	description: string;
+	keywords?: string;
+	ogImage?: string;
+	ogType?: string;
+	robots?: string;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+	title,
+	description,
+	keywords,
+	ogImage = seoConfig.defaultOgImage,
+	ogType = 'website',
+	robots = 'index, follow',
+	jsonLd,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const absoluteOgImage = toAbsoluteUrl(ogImage, Astro.site?.href || seoConfig.fullDomain);
+const websiteJsonLd = buildWebSiteJsonLd();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		{keywords && <meta name="keywords" content={keywords} />}
+		<meta name="author" content={seoConfig.publisher.name} />
+		<meta name="robots" content={robots} />
+		<meta name="googlebot" content={robots} />
+		<link rel="canonical" href={canonicalURL.href} />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content={seoConfig.siteName} />
+		<meta property="og:locale" content={seoConfig.defaults.locale} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:image" content={absoluteOgImage} />
+		<meta property="og:image:alt" content="MECCHA CHAMELEON Guide & Wiki logo" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteOgImage} />
+		<meta name="twitter:url" content={canonicalURL.href} />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+		{
+			jsonLdItems.map((item) => (
+				<script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
+			))
+		}
+		<!-- Google tag (gtag.js) -->
+		<script is:inline>
+			setTimeout(function () {
+				var s = document.createElement('script');
+				s.async = true;
+				s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1J1FTXVN5P';
+				document.head.appendChild(s);
+				window.dataLayer = window.dataLayer || [];
+				function gtag() {
+					dataLayer.push(arguments);
+				}
+				gtag('js', new Date());
+				gtag('config', 'G-1J1FTXVN5P');
+			}, 2000);
+		</script>
+	</head>
+	<body>
+		<AppHeader />
+		<main id="main-content">
+			<slot />
+		</main>
+		<AppFooter />
+	</body>
+</html>

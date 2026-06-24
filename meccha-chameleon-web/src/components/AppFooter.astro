@@ -1,0 +1,203 @@
+---
+// 全站页脚 — 页脚导航与版权文本只在此组件使用。
+const mainNavItems = [
+	{ label: 'Home', href: '/' }, { label: "Beginner's Hub", href: '/beginners-hub' },
+	{ label: 'Wiki', href: '/wiki' }, { label: 'Online', href: '/online' },
+	{ label: 'Guides', href: '/guides' },
+	{ label: 'Simulator', href: '/camouflage-simulator' }, { label: 'Workshop', href: '/workshop' }, { label: 'Updates', href: '/updates' },
+];
+const legalNavItems = [
+	{ label: 'Privacy Policy', href: '/legal/privacy-policy' }, { label: 'Terms of Service', href: '/legal/terms-of-service' },
+	{ label: 'Copyright', href: '/legal/copyright' }, { label: 'About Us', href: '/legal/about-us' }, { label: 'Contact Us', href: '/legal/contact-us' },
+];
+const footerCopyrightLines = [
+	`© ${new Date().getFullYear()} MECCHA CHAMELEON Guide & Wiki. All rights reserved.`,
+	'MECCHA CHAMELEON Guide is an unofficial fan website and is not affiliated with LEMORION (lemorion_1224) or Valve Corporation.',
+];
+---
+
+<footer class="site-footer">
+	<div class="container">
+		<section class="site-footer-section site-footer-brand-block">
+			<div class="site-footer-brand">
+				<img
+					src="/images/logo.webp"
+					alt="MECCHA CHAMELEON logo"
+					width="40"
+					height="40"
+					class="site-footer-logo"
+				/>
+				<div>
+					<p class="site-footer-title">MECCHA CHAMELEON</p>
+					<p class="site-footer-subtitle">Wiki & Community Hub</p>
+				</div>
+			</div>
+			<p class="site-footer-desc">
+				Map reading notes, paint practice, patch summaries, and practical multiplayer tips for
+				MECCHA CHAMELEON (めっちゃカメレオン).
+			</p>
+		</section>
+
+		<section class="site-footer-section">
+			<h2 class="site-footer-heading">Navigate</h2>
+			<ul class="site-footer-links">
+				{
+					mainNavItems.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section class="site-footer-section">
+			<h2 class="site-footer-heading">Legal</h2>
+			<ul class="site-footer-links">
+				{
+					legalNavItems.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+	</div>
+
+	<div class="site-footer-bottom">
+		<div class="container">
+			<div class="site-footer-copyright">
+				{
+					footerCopyrightLines.map((line) => (
+						<p>{line}</p>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</footer>
+
+<style is:global>
+	.site-footer {
+		margin-top: 2.5rem;
+		background:
+			radial-gradient(circle at 82% 12%, rgba(200, 239, 98, 0.16), transparent 20rem),
+			linear-gradient(135deg, #26142f, #482253);
+		border-top: 2px solid rgba(200, 239, 98, 0.34);
+		color: var(--color-dark-text);
+	}
+
+	.site-footer > .container {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		gap: 2rem;
+		padding-block: 2.25rem;
+	}
+
+	.site-footer-brand {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+	}
+
+	.site-footer-logo {
+		border-radius: var(--radius-sm);
+	}
+
+	.site-footer-title {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.site-footer-subtitle {
+		font-size: 0.8125rem;
+		color: var(--color-text-muted);
+		margin: 0;
+	}
+
+	.site-footer-desc {
+		font-size: 0.9375rem;
+		color: var(--color-dark-muted);
+		max-width: 36ch;
+	}
+
+	.site-footer-heading {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.site-footer-heading,
+	.site-footer-title {
+		color: var(--color-primary);
+	}
+
+	.site-footer-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.site-footer-links li {
+		margin-bottom: 0.5rem;
+	}
+
+	.site-footer-links a {
+		text-decoration: none;
+		font-size: 0.9375rem;
+		color: var(--color-dark-muted);
+	}
+
+	.site-footer-links a:hover {
+		color: var(--color-primary);
+	}
+
+	.site-footer-bottom {
+		border-top: 1px solid var(--color-dark-border);
+		padding-block: 1.25rem;
+	}
+
+	.site-footer-copyright {
+		max-width: 72ch;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.site-footer-copyright p {
+		font-size: 0.8125rem;
+		line-height: 1.6;
+		color: var(--color-dark-muted);
+		margin: 0 0 0.45rem;
+	}
+
+	.site-footer-copyright p:last-child {
+		margin-bottom: 0;
+	}
+
+	.site-footer-copyright a {
+		color: var(--color-primary);
+		text-decoration: none;
+	}
+
+	.site-footer-copyright a:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 1024px) {
+		.site-footer > .container {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.site-footer-brand-block {
+			grid-column: 1 / -1;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.site-footer > .container {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

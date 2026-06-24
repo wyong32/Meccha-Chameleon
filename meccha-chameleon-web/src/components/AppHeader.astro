@@ -1,0 +1,285 @@
+---
+// 全站头部导航 — 导航只在此组件使用，直接维护在组件内。
+const navItems = [
+	{ label: 'Home', href: '/' },
+	{ label: "Beginner's Hub", href: '/beginners-hub' },
+	{ label: 'Wiki', href: '/wiki' },
+	{ label: 'Online', href: '/online' },
+	{ label: 'Guides', href: '/guides' },
+	{ label: 'Simulator', href: '/camouflage-simulator' },
+	{ label: 'Workshop', href: '/workshop' },
+	{ label: 'Updates', href: '/updates' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+	<div class="container site-header-inner">
+		<a class="site-logo" href="/" aria-label="MECCHA CHAMELEON Wiki and Community Hub home">
+			<img
+				class="site-logo-icon"
+				src="/images/logo.webp"
+				alt="MECCHA CHAMELEON logo"
+				width="44"
+				height="44"
+			/>
+			<span class="site-logo-text">
+				<span class="site-logo-title">MECCHA CHAMELEON</span>
+				<span class="site-logo-subtitle">Wiki & Community Hub</span>
+			</span>
+		</a>
+
+		<nav class="site-nav" aria-label="Main navigation">
+			<button
+				class="site-nav-toggle"
+				type="button"
+				aria-expanded="false"
+				aria-controls="site-nav-menu"
+				id="site-nav-toggle"
+			>
+				<span class="site-nav-toggle-bar"></span>
+				<span class="site-nav-toggle-bar"></span>
+				<span class="site-nav-toggle-bar"></span>
+				<span class="visually-hidden">Toggle menu</span>
+			</button>
+			<ul class="site-nav-list" id="site-nav-menu">
+				{
+					navItems.map((item) => {
+						const isActive =
+							item.href === '/'
+								? currentPath === '/'
+								: currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+						return (
+							<li>
+								<a
+									href={item.href}
+									class:list={['site-nav-link', { 'is-active': isActive }]}
+									aria-current={isActive ? 'page' : undefined}
+								>
+									{item.label}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<style is:global>
+	.site-header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		max-width: 100%;
+		z-index: 200;
+		margin: 0;
+		background: rgba(38, 20, 47, 0.91);
+		backdrop-filter: blur(14px) saturate(0.9);
+		border-bottom: 1px solid rgba(232, 239, 193, 0.18);
+	}
+
+	.site-header::after {
+		content: '';
+		position: absolute;
+		inset: auto 0 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--color-accent-hot), var(--color-primary) 42%, transparent 72%);
+		opacity: 0.95;
+	}
+
+	.site-header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		min-height: 74px;
+	}
+
+	.site-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.85rem;
+		text-decoration: none;
+		color: inherit;
+		flex-shrink: 0;
+	}
+
+	.site-logo:hover {
+		color: inherit;
+	}
+
+	.site-logo-icon {
+		border-radius: 2px;
+		border: 1px solid rgba(232, 239, 193, 0.4);
+		box-shadow: 3px 3px 0 rgba(202, 220, 85, 0.25);
+	}
+
+	.site-logo-text {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.15;
+	}
+
+	.site-logo-title {
+		font-family: var(--font-heading);
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: #fff;
+		letter-spacing: 0.02em;
+	}
+
+	.site-logo-subtitle {
+		font-size: 0.6875rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-primary);
+	}
+
+	.site-nav-toggle {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		width: 44px;
+		height: 44px;
+		padding: 10px;
+		background: var(--color-dark-elevated);
+		border: 1px solid var(--color-dark-border);
+		border-radius: var(--radius-sm);
+		cursor: pointer;
+	}
+
+	.site-nav-toggle-bar {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background: #ecf5f0;
+		border-radius: 2px;
+	}
+
+	.site-nav-list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.15rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.site-nav-link {
+		display: block;
+		padding: 0.5rem 0.7rem;
+		font-size: 0.8125rem;
+		font-weight: 600;
+		text-decoration: none;
+		color: var(--color-dark-muted);
+		border-radius: 3px;
+		transition:
+			background-color var(--transition),
+			color var(--transition);
+	}
+
+	.site-nav-link:hover {
+		color: var(--color-primary);
+		background: rgba(210, 250, 81, 0.11);
+	}
+
+	.site-nav-link.is-active {
+		background: rgba(202, 220, 85, 0.17);
+		color: #f6ffcf;
+	}
+
+	@media (max-width: 1024px) {
+		.site-nav-toggle {
+			display: flex;
+		}
+
+		.site-nav-list {
+			display: none;
+			position: fixed;
+			top: 74px;
+			left: 0;
+			right: 0;
+			width: 100%;
+			max-height: calc(100vh - 74px);
+			overflow-y: auto;
+			flex-direction: column;
+			align-items: stretch;
+			padding: 1rem;
+			background: var(--color-dark-bg);
+			border-bottom: 1px solid var(--color-dark-border);
+			box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+			z-index: 199;
+		}
+
+		.site-nav-list.is-open {
+			display: flex;
+		}
+
+		.site-nav-link {
+			padding: 0.65rem 0.85rem;
+			font-size: 0.875rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.site-header-inner {
+			min-height: 64px;
+			gap: 0.75rem;
+		}
+
+		.site-logo {
+			gap: 0.65rem;
+		}
+
+		.site-logo-icon {
+			width: 40px;
+			height: 40px;
+		}
+
+		.site-logo-title {
+			font-size: 0.8125rem;
+		}
+
+		.site-logo-subtitle {
+			display: none;
+		}
+
+		.site-nav-list {
+			top: 64px;
+			max-height: calc(100vh - 64px);
+			padding: 0.75rem 1rem 1rem;
+		}
+	}
+</style>
+
+<script>
+	const toggle = document.getElementById('site-nav-toggle');
+	const menu = document.getElementById('site-nav-menu');
+
+	const closeMenu = () => {
+		menu?.classList.remove('is-open');
+		toggle?.setAttribute('aria-expanded', 'false');
+	};
+
+	toggle?.addEventListener('click', () => {
+		const isOpen = menu?.classList.toggle('is-open');
+		toggle.setAttribute('aria-expanded', String(!!isOpen));
+	});
+
+	menu?.querySelectorAll('.site-nav-link').forEach((link) => {
+		link.addEventListener('click', closeMenu);
+	});
+
+	window.addEventListener('resize', () => {
+		if (window.innerWidth > 1024) closeMenu();
+	});
+</script>

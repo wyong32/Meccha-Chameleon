@@ -1,0 +1,83 @@
+---
+// Guides 详情页
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { guides } from '../../data/guides.js';
+import '../../styles/pages/DetailPage.css';
+import '../../styles/pages/GuidesDetailPage.css';
+import ContentAnchorSidebar from '../../components/ContentAnchorSidebar.astro';
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, shortenBreadcrumbLabel } from '../../seo/meta.js';
+
+export function getStaticPaths() {
+	return guides.map((item) => ({
+		params: { slug: item.addressBar },
+		props: { item },
+	}));
+}
+
+const { item } = Astro.props;
+const pagePath = `/guides/${item.addressBar}`;
+const breadcrumbLabel = shortenBreadcrumbLabel(item.title);
+const articleJsonLd = buildArticleJsonLd({
+	headline: item.title,
+	description: item.seo.description,
+	path: pagePath,
+	datePublished: item.publishDate,
+	dateModified: item.publishDate,
+});
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+	{ name: 'Home', path: '/' },
+	{ name: 'Guides', path: '/guides' },
+	{ name: item.title, path: pagePath },
+]);
+---
+
+<BaseLayout
+	title={item.seo.title}
+	description={item.seo.description}
+	keywords={item.seo.keywords}
+	ogType="article"
+	jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+>
+	<div class="DetailPage GuidesDetailPage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content inner-hero-content--split">
+					<div class="inner-hero-copy">
+						<nav class="breadcrumb" aria-label="Breadcrumb">
+							<ol class="breadcrumb-list">
+								<li><a href="/">Home</a></li>
+								<li><a href="/guides">Guides</a></li>
+								<li><span aria-current="page" title={item.title}>{breadcrumbLabel}</span></li>
+							</ol>
+						</nav>
+						<h1>{item.title}</h1>
+						<p class="detail-lead">{item.description}</p>
+						<div class="inner-hero-meta">
+							{item.tag.map((label) => (
+								<span class="entry-tag">{label}</span>
+							))}
+							<time datetime={item.publishDate}>{item.publishDate}</time>
+						</div>
+					</div>
+					<div class="detail-featured-image">
+						<img src={item.imageUrl} alt={item.imageAlt} width="800" height="500" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="detail-body-section">
+			<div class="container">
+				<div class="detail-layout">
+					<div class="detail-main detail-prose" set:html={item.detailsHtml} />
+					<aside class="detail-sidebar">
+						<ContentAnchorSidebar />
+					</aside>
+				</div>
+				<div class="detail-back">
+					<a class="btn btn-outline" href="/guides">← Back to Guides</a>
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

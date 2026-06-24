@@ -1,0 +1,26 @@
+{
+  "name": "meccha-chameleon-web",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "sitemap": "npm run generate-sitemap",
+    "prebuild": "npm run generate-sitemap",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^6.4.7",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@types/three": "^0.184.1",
+    "typescript": "^6.0.3"
+  }
+}

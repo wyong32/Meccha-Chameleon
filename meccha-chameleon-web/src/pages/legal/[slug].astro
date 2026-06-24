@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildWebPageJsonLd, buildBreadcrumbJsonLd, shortenBreadcrumbLabel } from '../../seo/meta.js';
+import { seoConfig } from '../../seo/config.js';
+import '../../styles/pages/LegalPage.css';
+
+export const LEGAL_EMAIL = 'wyong@meccachameleon.com';
+export const SITE_NAME = 'MECCHA CHAMELEON Guide & Wiki';
+export const SITE_URL = seoConfig.fullDomain;
+export const LEGAL_LAST_UPDATED = '2026-06-23';
+export const footerCopyrightLines = [
+	`© ${new Date().getFullYear()} MECCHA CHAMELEON Guide & Wiki. All rights reserved.`,
+	'MECCHA CHAMELEON Guide is an unofficial fan website and is not affiliated with LEMORION (lemorion_1224) or Valve Corporation.',
+	'MECCHA CHAMELEON (めっちゃカメレオン) and related game assets are trademarks or copyrights of their respective owners.',
+	`For permissions, corrections, or takedown requests: ${LEGAL_EMAIL}`,
+];
+
+export const legalPages = [
+	{
+		addressBar: 'privacy-policy', title: 'Privacy Policy', lead: 'How MECCHA CHAMELEON Guide handles information when you browse this unofficial fan site. We collect only what is typical for a static guide website.', lastUpdated: LEGAL_LAST_UPDATED,
+		seo: { title: 'Privacy Policy | MECCHA CHAMELEON Guide', description: 'Privacy Policy for MECCHA CHAMELEON Guide: what data may be collected when you browse our fan wiki, how cookies and analytics work, and how to contact us about privacy questions.', keywords: 'meccha chameleon guide privacy policy, fan site privacy, cookies, data collection' },
+		sections: [
+			{ heading: '1. Introduction', paragraphs: [`This Privacy Policy explains what information may be processed when you visit ${SITE_URL} (“${SITE_NAME}”, “we”, “us”, or “our”). ${SITE_NAME} is an independent fan-made resource for players of MECCHA CHAMELEON on Steam. We are not LEMORION, Valve, or any official representative of the game.`, 'By using this website, you acknowledge that you have read this policy. If you do not agree, please discontinue use of the site.'] },
+			{ heading: '2. Information we collect', paragraphs: ['We do not require account registration and we do not operate checkout, billing, or on-site contact forms. Information we may receive falls into the following categories:'], list: ['Technical data automatically sent by your browser, such as IP address, browser type, device type, operating system, referring URL, pages viewed, and approximate access times.', 'Cookies and similar technologies used for basic site operation, analytics, or advertising if enabled on our hosting or CDN.', `Information you voluntarily send by email if you contact us at ${LEGAL_EMAIL}.`] },
+			{ heading: '3. How we use information', paragraphs: ['We use collected information to operate, secure, and improve the website; understand aggregate traffic patterns; respond to correction or copyright requests; and comply with applicable law or lawful requests.'] },
+			{ heading: '4. Cookies, analytics, and external links', paragraphs: ['Like most websites, we or our service providers may place cookies on your device. You can control cookies through browser settings; disabling cookies may affect some features.', 'Our pages link to services such as Steam, Steam Workshop, YouTube trailers, and official news posts. Those services have their own terms and privacy practices, which we do not control.'] },
+			{ heading: '5. Camouflage Simulator and browser-local data', paragraphs: ['The Camouflage Simulator processes uploaded background images locally in your browser for practice sessions. Those uploads are not sent to our servers by design. Exported PNG files are created on your device; review any image you choose to share publicly.'] },
+			{ heading: '6. Retention, children, and your choices', paragraphs: ['Server logs and analytics records are retained only as long as needed for security, troubleshooting, and aggregate reporting, then deleted or anonymized according to our hosting provider’s schedule. We do not knowingly collect personal information from children under 13 (or the minimum age required in your region).', `Depending on where you live, you may have rights to access, correct, delete, or restrict certain processing. To ask about this policy or make a request, contact ${LEGAL_EMAIL}.`] },
+			{ heading: '7. Changes to this policy', paragraphs: ['We may update this Privacy Policy when our practices, tools, or legal requirements change. The “Last updated” date at the top of the page will reflect the latest revision.'] },
+		],
+	},
+	{
+		addressBar: 'terms-of-service', title: 'Terms of Service', lead: 'Rules for using MECCHA CHAMELEON Guide — an unofficial player wiki and community hub. By accessing the site you agree to these terms.', lastUpdated: LEGAL_LAST_UPDATED,
+		seo: { title: 'Terms of Service | MECCHA CHAMELEON Guide', description: 'Terms of Service for MECCHA CHAMELEON Guide: acceptable use, disclaimers, liability limits, and rules for this unofficial Steam hide-and-seek fan website and its guides.', keywords: 'meccha chameleon guide terms of service, fan site terms, acceptable use, disclaimer' },
+		sections: [
+			{ heading: '1. Agreement to terms', paragraphs: [`These Terms of Service (“Terms”) govern your access to and use of ${SITE_URL} operated as ${SITE_NAME}. If you do not agree, do not use the website.`, 'We may modify these Terms at any time. Material changes will be posted on this page with an updated date.'] },
+			{ heading: '2. Nature of the service', paragraphs: ['MECCHA CHAMELEON Guide provides unofficial gameplay information, including wiki articles, beginner guides, map reading notes, strategy guides, Workshop hosting checklists, patch summaries, and browser-based practice tools.', 'All content is offered for general information only. We are not the developer, publisher, or distributor of MECCHA CHAMELEON. Game mechanics, maps, prices, and availability can change without notice.'] },
+			{ heading: '3. Acceptable use', paragraphs: ['You agree to use the site lawfully and respectfully. You must not:'], list: ['Attempt to disrupt, scrape at abusive rates, probe, or compromise site infrastructure.', 'Use automated tools to harvest content for republication that violates our Copyright notice.', 'Misrepresent MECCHA CHAMELEON Guide as an official LEMORION or Valve property.', 'Upload malware, post unauthorized personal data of others, or engage in harassment through any channel linked from this site.', 'Circumvent technical measures or access areas not intended for public use.'] },
+			{ heading: '4. Intellectual property and third-party services', paragraphs: ['MECCHA CHAMELEON, めっちゃカメレオン, and related game assets are trademarks or copyrights of their respective owners. Our original text, layout, and curated presentation are protected as described in our Copyright page.', 'Links to Steam, Workshop items, YouTube, and community resources are provided for convenience. Purchases, refunds, account recovery, and platform bans are handled solely by Steam or the developer through official channels.'] },
+			{ heading: '5. Disclaimers and limitation of liability', paragraphs: ['THE SITE AND ALL CONTENT ARE PROVIDED “AS IS” AND “AS AVAILABLE” WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.', 'TO THE MAXIMUM EXTENT PERMITTED BY LAW, MECCHA CHAMELEON GUIDE AND ITS OPERATORS WILL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SITE.'] },
+			{ heading: '6. Contact', paragraphs: [`Questions about these Terms may be sent to ${LEGAL_EMAIL}.`] },
+		],
+	},
+	{
+		addressBar: 'copyright', title: 'Copyright Notice', lead: 'Ownership, permitted use, and takedown guidance for content published on MECCHA CHAMELEON Guide.', lastUpdated: LEGAL_LAST_UPDATED,
+		seo: { title: 'Copyright Notice | MECCHA CHAMELEON Guide', description: 'Copyright notice for MECCHA CHAMELEON Guide: site ownership, permitted use of our original writing, game trademark attribution, and how to send takedown or permission requests by email.', keywords: 'meccha chameleon guide copyright, fan site copyright, dmca notice, permitted use' },
+		sections: [
+			{ heading: '1. Site ownership', paragraphs: [`Unless otherwise stated, the compilation, original writing, page design, and selection of materials on ${SITE_URL} are owned by ${SITE_NAME} and its contributors.`, `Copyright © ${new Date().getFullYear()} MECCHA CHAMELEON Guide & Wiki. All rights reserved.`] },
+			{ heading: '2. Game and third-party materials', paragraphs: ['MECCHA CHAMELEON, めっちゃカメレオン, and related names, logos, artwork, and game screenshots are the property of LEMORION and/or other rights holders. Steam and the Steam logo are trademarks of Valve Corporation.', 'We use game references, descriptive names, and limited imagery under nominative fair use to identify the game and help players navigate guides. We do not claim ownership of game assets.'] },
+			{ heading: '3. Permitted use', paragraphs: ['You may:'], list: ['View pages for personal, non-commercial gameplay reference.', 'Share links to our articles with accurate attribution to MECCHA CHAMELEON Guide.', 'Quote brief excerpts with a clear link back to the source page.'], paragraphsAfter: ['You may not without prior written permission:'], listAfter: ['Republish full articles, tables, or map notes in bulk on competing sites.', 'Sell, license, or mirror our content for commercial gain.', 'Remove copyright notices or imply endorsement by LEMORION or Valve.', 'Use our branding to suggest an official partnership.'] },
+			{ heading: '4. Copyright complaints', paragraphs: ['If you believe content on this site infringes your copyright, send a notice with identification of the copyrighted work, the exact URL, your contact information, a good-faith statement, an accuracy statement, and your physical or electronic signature.', `Send notices to ${LEGAL_EMAIL} with the subject line “Copyright Notice”. We may remove or disable access to disputed material and notify the contributor when applicable.`] },
+			{ heading: '5. Trademarks and updates', paragraphs: ['All trademarks referenced on this site belong to their respective owners. Use of third-party marks is for identification only and does not imply sponsorship or affiliation.', 'This Copyright notice may be revised as the site grows. The latest version is always available at this URL.'] },
+		],
+		copyrightBlock: { heading: 'Copyright', lines: footerCopyrightLines },
+	},
+	{
+		addressBar: 'about-us', title: 'About Us', lead: 'Who runs MECCHA CHAMELEON Guide, why we built this wiki, and how we write for players on Steam.', lastUpdated: LEGAL_LAST_UPDATED,
+		seo: { title: 'About Us | MECCHA CHAMELEON Guide', description: 'About MECCHA CHAMELEON Guide: our mission as an unofficial player wiki, editorial standards for map notes and patch summaries, independence from LEMORION, and how to send corrections.', keywords: 'about meccha chameleon guide, fan wiki team, editorial standards, unofficial guide' },
+		sections: [
+			{ heading: 'Our mission', paragraphs: ['MECCHA CHAMELEON Guide exists to help players enjoy hide-and-seek rounds with clearer routes, better camouflage practice, and fewer lobby setup mistakes. We translate Steam announcements, in-game testing, and community discoveries into readable wiki pages, map notes, strategy guides, and the Camouflage Simulator.', 'We are players first. When a patch changes a map or feature, we update the relevant page and note the review date so you know what to double-check in your own lobby.'] },
+			{ heading: 'What we publish', paragraphs: ['Core sections on this site include:'], list: ['Beginner and multiplayer guides for first matches and private lobbies.', 'Wiki topics covering rules, tools, modes, scoring, and patch history.', 'Camouflage map notes focused on scene reading rather than fixed “best spots.”', 'Strategy guides for Seekers, Hiders, paint workflow, and Infection mode.', 'Workshop hosting checklists, patch summaries, and the Camouflage Simulator.'] },
+			{ heading: 'Editorial standards', paragraphs: ['We write in plain player language, cite official sources when discussing patch facts, and keep Steam Workshop stage notes separate from official Wiki map reading pages. We do not publish paid reviews disguised as guides, and we do not claim access to private developer builds.', `If you spot an error, email us at ${LEGAL_EMAIL}. Corrections make the site better for everyone.`] },
+			{ heading: 'Independence and funding', paragraphs: ['MECCHA CHAMELEON Guide is not owned, operated, or endorsed by LEMORION or Valve. We do not speak for the developer, handle refunds, or provide official technical support.', 'The site may display advertising or use analytics to cover hosting costs. Ads do not influence which Workshop maps we list or which guide corrections we publish. Sponsored content, if ever introduced, will be clearly labeled.'] },
+		],
+	},
+	{
+		addressBar: 'contact-us', title: 'Contact Us', lead: 'How to reach the MECCHA CHAMELEON Guide team for corrections, copyright notices, and general questions. We respond by email — no on-site forms.', lastUpdated: LEGAL_LAST_UPDATED,
+		seo: { title: 'Contact Us | MECCHA CHAMELEON Guide', description: 'Contact MECCHA CHAMELEON Guide by email for wiki corrections, copyright notices, press questions, and general feedback. No on-site forms — write to wyong@meccachameleon.com with page URLs.', keywords: 'contact meccha chameleon guide, fan site contact, corrections email, copyright notice' },
+		sections: [
+			{ heading: 'Email', paragraphs: [`The primary contact address for MECCHA CHAMELEON Guide is ${LEGAL_EMAIL}.`, 'We read messages regularly but operate as a small fan project, so allow several business days for a reply. Complex copyright or legal notices receive priority when properly documented.'] },
+			{ heading: 'What to include', paragraphs: ['Help us route your email quickly by providing:'], list: ['A clear subject line (for example: “Wiki correction”, “Copyright notice”, or “Press inquiry”).', 'The full URL of the page you are referencing.', 'A concise description of the issue or request.', 'For gameplay disputes, your platform and approximate patch version if known.', 'For copyright claims, the information listed on our Copyright page.'] },
+			{ heading: 'Topics we can help with', paragraphs: ['MECCHA CHAMELEON Guide can assist with factual corrections to wiki tables, guide steps, or map notes; broken links and typographical errors; copyright or trademark concerns about our original writing or layout; press or collaboration questions; and general feedback on site organization.'] },
+			{ heading: 'Topics we cannot resolve', paragraphs: ['We cannot reset Steam accounts, issue refunds, ban appeals, or provide official LEMORION support. For those matters, contact Steam Support or the developer through official channels.', 'We cannot troubleshoot mod or Workshop conflicts inside your game installation beyond general hosting advice published on our Workshop pages.'] },
+			{ heading: 'Privacy', paragraphs: ['Information you send by email is used only to handle your request and is not sold to third parties. See our Privacy Policy for retention and rights information.'] },
+		],
+	},
+];
+
+const legalNavItems = [
+	{ label: 'Privacy Policy', href: '/legal/privacy-policy' },
+	{ label: 'Terms of Service', href: '/legal/terms-of-service' },
+	{ label: 'Copyright', href: '/legal/copyright' },
+	{ label: 'About Us', href: '/legal/about-us' },
+	{ label: 'Contact Us', href: '/legal/contact-us' },
+];
+
+export function getStaticPaths() {
+	return legalPages.map((page) => ({
+		params: { slug: page.addressBar },
+		props: { page },
+	}));
+}
+
+interface LegalSection {
+	heading: string;
+	paragraphs?: string[];
+	list?: string[];
+	paragraphsAfter?: string[];
+	listAfter?: string[];
+}
+
+interface CopyrightBlock {
+	heading: string;
+	lines: string[];
+}
+
+interface LegalPageData {
+	addressBar: string;
+	title: string;
+	lead: string;
+	lastUpdated: string;
+	seo: { title: string; description: string; keywords: string };
+	sections: LegalSection[];
+	copyrightBlock?: CopyrightBlock;
+}
+
+interface Props {
+	page: LegalPageData;
+}
+
+const { page } = Astro.props as Props;
+const pagePath = `/legal/${page.addressBar}`;
+const breadcrumbLabel = shortenBreadcrumbLabel(page.title);
+const otherLegalLinks = legalNavItems.filter((link) => link.href !== pagePath);
+
+function formatText(text: string) {
+	if (!text) return '';
+	const escaped = String(text)
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
+	const emailPattern = LEGAL_EMAIL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	return escaped.replace(
+		new RegExp(emailPattern, 'g'),
+		`<a href="mailto:${LEGAL_EMAIL}">${LEGAL_EMAIL}</a>`,
+	);
+}
+
+const pageJsonLd = buildWebPageJsonLd({
+	name: page.seo.title,
+	description: page.seo.description,
+	path: pagePath,
+});
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+	{ name: 'Home', path: '/' },
+	{ name: 'Legal', path: '/legal/privacy-policy' },
+	{ name: page.title, path: pagePath },
+]);
+---
+
+<BaseLayout
+	title={page.seo.title}
+	description={page.seo.description}
+	keywords={page.seo.keywords}
+	jsonLd={[pageJsonLd, breadcrumbJsonLd]}
+>
+	<div class="LegalPage">
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><a href="/legal/privacy-policy">Legal</a></li>
+							<li><span aria-current="page" title={page.title}>{breadcrumbLabel}</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Legal</span>
+					<h1>{page.title}</h1>
+					<p class="page-intro">{page.lead}</p>
+					<div class="inner-hero-meta">
+						<span>Unofficial fan site</span>
+						<time datetime={page.lastUpdated}>Last updated {page.lastUpdated}</time>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="legal-body-section">
+			<div class="container">
+				<article class="legal-article">
+					<p class="legal-updated">
+						Last updated: <time datetime={page.lastUpdated}>{page.lastUpdated}</time>
+					</p>
+
+					{
+						page.sections.map((section) => (
+							<section class="legal-section">
+								<h2>{section.heading}</h2>
+								{section.paragraphs?.map((para) => <p set:html={formatText(para)} />)}
+								{section.list?.length ? (
+									<ul>
+										{section.list.map((item) => (
+											<li set:html={formatText(item)} />
+										))}
+									</ul>
+								) : null}
+								{section.paragraphsAfter?.map((para) => <p set:html={formatText(para)} />)}
+								{section.listAfter?.length ? (
+									<ul>
+										{section.listAfter.map((item) => (
+											<li set:html={formatText(item)} />
+										))}
+									</ul>
+								) : null}
+							</section>
+						))
+					}
+
+					{
+						page.copyrightBlock ? (
+							<section class="legal-copyright-block">
+								<h2>{page.copyrightBlock.heading}</h2>
+								{page.copyrightBlock.lines.map((line) => (
+									<p set:html={formatText(line)} />
+								))}
+							</section>
+						) : null
+					}
+
+					<nav class="legal-related" aria-label="Other legal pages">
+						<h2>Other legal pages</h2>
+						<ul>
+							{otherLegalLinks.map((link) => (
+								<li>
+									<a href={link.href}>{link.label}</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</article>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

@@ -1,0 +1,209 @@
+---
+// Wiki 首页 — 内嵌地图列表
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { wikiMaps } from '../../data/wiki-maps.js';
+import { siteStats } from '../../data/site-meta.js';
+import '../../styles/pages/WikiPage.css';
+import { pageSeo } from '../../seo/pages.js';
+import { buildWebPageJsonLd } from '../../seo/meta.js';
+import ContentAnchorSidebar from '../../components/ContentAnchorSidebar.astro';
+
+const seo = pageSeo.wiki;
+const wikiJsonLd = buildWebPageJsonLd({
+	name: seo.title,
+	description: seo.description,
+	path: '/wiki',
+});
+---
+
+<BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={wikiJsonLd}>
+	<div class="WikiPage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Wiki</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Reference Hub</span>
+					<h1>MECCHA CHAMELEON Wiki</h1>
+					<p class="page-intro">
+						Rules, mechanics, map reading notes, and version context for your next lobby. Tutorials live in
+						<a href="/beginners-hub">Beginner's Hub</a>; patch summaries live in
+						<a href="/updates">Updates</a>.
+					</p>
+					<div class="inner-hero-meta">
+						<span>{siteStats.currentVersion}</span>
+						<span>{wikiMaps.length} map notes</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="anchored-page-body">
+			<div class="anchored-page-content">
+				<section class="inner-content-section">
+					<div class="container">
+						<div class="inner-content-block">
+							<h2 id="game-overview">Game overview</h2>
+							<p>
+								<strong>MECCHA CHAMELEON</strong> (めっちゃカメレオン) is a paid Steam hide-and-seek party game
+								by {siteStats.developer}. Hiders hand-paint camouflage each round; Seekers hunt in first person
+								with no flashlight. Success depends on <strong>spot</strong>, <strong>pose</strong>, and
+								<strong>local colour</strong> — not preset prop skins.
+							</p>
+							<table class="inner-data-table">
+								<thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
+								<tbody>
+									<tr><td>Platform</td><td>{siteStats.platform}</td></tr>
+									<tr><td>Players</td><td>{siteStats.playerRange} recommended</td></tr>
+									<tr><td>Release</td><td>{siteStats.releaseDate}</td></tr>
+									<tr><td>Languages</td><td>{siteStats.languages} on Steam</td></tr>
+									<tr><td>Store price</td><td>{siteStats.priceUsd} — check Steam for regional pricing</td></tr>
+									<tr><td>Community content</td><td>Steam Workshop supported from v1.2.0 onward</td></tr>
+									<tr><td>Not on</td><td>Roblox, mobile, or consoles at launch</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+
+				<section class="inner-content-section">
+					<div class="container">
+						<div class="inner-content-block is-wide">
+							<h2 id="round-structure">Standard round structure</h2>
+							<ol class="inner-steps">
+								<li><strong>Lobby</strong> — Host selects map, mode, privacy, and optional Workshop stage.</li>
+								<li><strong>Role split</strong> — Hiders vs Seekers (dynamic in Infection mode).</li>
+								<li><strong>Prep</strong> — Hiders move, pose, Spoid, and paint; Seekers are locked out.</li>
+								<li><strong>Hunt</strong> — Seekers tag Hiders; timer or full tags end the round.</li>
+								<li><strong>Results</strong> — Full reveal of every hide spot for learning.</li>
+							</ol>
+						</div>
+					</div>
+				</section>
+
+				<section class="inner-content-section is-alt">
+					<div class="container">
+						<div class="inner-content-block is-wide">
+							<h2 id="modes-mechanics">Modes, mechanics & controls</h2>
+							<p>
+								Community coverage commonly labels lobby formats as <strong>Normal (通常)</strong>,
+								<strong>Infection (増え鬼)</strong>, and <strong>Double (ダブル)</strong>. Confirm win
+								conditions in your current lobby before the room starts.
+							</p>
+							<table class="inner-data-table">
+								<thead><tr><th>Topic</th><th>Summary</th><th>Check in your lobby</th></tr></thead>
+								<tbody>
+									<tr><td>Lobby modes</td><td>Normal, Infection, and Double are the familiar three formats.</td><td>Exact win conditions, role switching, and room limits.</td></tr>
+									<tr><td>Paint and pose</td><td>Hand-painted camouflage is core; v1.2.0 added two new poses.</td><td>Pose names, keybinds, and map-specific interactions.</td></tr>
+									<tr><td>Ranking</td><td>v1.2.0 cites distance and time in a Hunter’s line of sight.</td><td>Compare routes by exposure and round outcome.</td></tr>
+									<tr><td>Platform</td><td>Steam lists Windows and recommends groups of 2–10.</td><td>Regional price and unlisted platform support.</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+
+				<section class="wiki-map-section" id="wiki-maps" aria-labelledby="wiki-maps-title">
+					<div class="container">
+						<div class="section-header-row">
+							<div>
+								<h2 id="wiki-maps-title">Map reading notes</h2>
+								<p class="section-intro">
+									Seven official stages with scene-reading prompts and study galleries where available.
+									Each page teaches how to read the room — not fixed hiding coordinates.
+								</p>
+							</div>
+						</div>
+
+						<table class="inner-data-table">
+							<thead><tr><th>What you see</th><th>Hider decision</th><th>Seeker check</th></tr></thead>
+							<tbody>
+								<tr><td>Repeated tiles, frames, or panels</td><td>Continue the rhythm with a low silhouette.</td><td>Look for a missing gap or an extra width.</td></tr>
+								<tr><td>One broad wall or floor</td><td>Match the nearby surface and reduce depth first.</td><td>Look for a body-shaped edge in the colour field.</td></tr>
+								<tr><td>Low props or furniture</td><td>Match height before detail.</td><td>Compare top lines with neighbouring objects.</td></tr>
+								<tr><td>Busy object clusters</td><td>Pick one material family and stay compact.</td><td>Find the object with the wrong scale or outline.</td></tr>
+							</tbody>
+						</table>
+
+						<div class="wiki-map-grid">
+							{
+								wikiMaps.map((item) => (
+									<a class="wiki-map-card" href={`/wiki/maps/${item.addressBar}`}>
+										<img src={item.imageUrl} alt={item.imageAlt} width="800" height="500" loading="lazy" />
+										<div class="wiki-map-card-body">
+											<span class="wiki-map-card-tag">{item.tag}</span>
+											<h3>{item.title.replace('MECCHA CHAMELEON ', '')}</h3>
+											<p>{item.description}</p>
+											<span class="wiki-map-card-meta">
+												<time datetime={item.publishDate}>{item.publishDate}</time>
+											</span>
+										</div>
+									</a>
+								))
+							}
+						</div>
+					</div>
+				</section>
+
+				<section class="inner-content-section">
+					<div class="container">
+						<div class="inner-content-block is-wide">
+							<h2 id="find-next-read">Find your next read</h2>
+							<table class="inner-data-table">
+								<thead><tr><th>If your next match problem is…</th><th>Read this first</th><th>Then continue to</th></tr></thead>
+								<tbody>
+									<tr><td>“I need a quick first-round plan.”</td><td><a href="/beginners-hub">Beginner's Hub</a></td><td>One practice round in a private lobby</td></tr>
+									<tr><td>“My colour looks close but I still stand out.”</td><td><a href="/camouflage-simulator">Camouflage Simulator</a></td><td>A map note for the stage in your queue</td></tr>
+									<tr><td>“I keep missing people as a Seeker.”</td><td><a href="#wiki-maps">Map notes</a></td><td>Read the Seeker column, then test a reverse angle</td></tr>
+									<tr><td>“Our group cannot get a room running.”</td><td><a href="/online">Online guide</a></td><td>Change one setting at a time until the lobby loads</td></tr>
+									<tr><td>“A clip shows a trick I cannot reproduce.”</td><td><a href="/updates">Updates</a></td><td>Current map note and a private test</td></tr>
+								</tbody>
+							</table>
+							<div class="wiki-link-grid">
+								<a class="wiki-link-card" href="/beginners-hub">
+									<h3>Beginner's Hub</h3>
+									<p>First match plan, controls, and role basics.</p>
+								</a>
+								<a class="wiki-link-card" href="/camouflage-simulator">
+									<h3>Camouflage Simulator</h3>
+									<p>Browser practice for colour and silhouette.</p>
+								</a>
+								<a class="wiki-link-card" href="/updates">
+									<h3>Patch notes</h3>
+									<p>Version history with player-impact checks.</p>
+								</a>
+								<a class="wiki-link-card" href="/online">
+									<h3>Online guide</h3>
+									<p>Lobbies, voice chat, and troubleshooting.</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="inner-content-section is-alt">
+					<div class="container">
+						<div class="inner-content-block">
+							<h2 id="core-skills">Core skills for a better round</h2>
+							<ol class="inner-steps">
+								<li><strong>Scene reading:</strong> pick one wall edge, pattern, or lighting change before opening paint.</li>
+								<li><strong>Shape control:</strong> pose to reduce an obvious human outline before the final colour pass.</li>
+								<li><strong>Local paint:</strong> sample the surface beside your final position; cover broad planes first.</li>
+								<li><strong>Route reading:</strong> as a Seeker, revisit the scene from more than one angle.</li>
+							</ol>
+							<div class="inner-callout">
+								<p class="inner-callout-title">Spot → Pose → Paint</p>
+								<p>Commit to a backdrop before opening the palette. Silhouette and local colour beat decorative detail every time.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<ContentAnchorSidebar />
+		</div>
+	</div>
+</BaseLayout>

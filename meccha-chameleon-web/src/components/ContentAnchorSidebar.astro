@@ -1,0 +1,172 @@
+---
+interface Props {
+	title?: string;
+}
+
+const { title = 'On this page' } = Astro.props;
+---
+
+<aside class="content-anchor-sidebar" data-anchor-sidebar aria-label={title}>
+	<p class="content-anchor-eyebrow">{title}</p>
+	<nav class="content-anchor-nav" aria-label={title}></nav>
+</aside>
+
+<style is:global>
+	.anchored-page {
+		position: relative;
+		--anchor-scroll-offset: 104px;
+		overflow-x: clip;
+		max-width: 100%;
+	}
+
+	.anchored-page h2 {
+		scroll-margin-top: var(--anchor-scroll-offset);
+	}
+
+	.content-anchor-sidebar {
+		--anchor-accent: var(--color-primary);
+		width: 220px;
+		padding: 1rem 0.95rem 1.1rem;
+		background: color-mix(in srgb, var(--color-surface) 94%, var(--color-primary) 6%);
+		border: 1px solid var(--color-border);
+		border-radius: 0.85rem;
+		box-shadow: 0 14px 32px rgba(14, 34, 25, 0.1);
+	}
+
+	.content-anchor-eyebrow {
+		margin: 0 0 0.65rem;
+		font-size: 0.6875rem;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-primary-deep);
+	}
+
+	.content-anchor-nav {
+		display: grid;
+		gap: 0.1rem;
+		max-height: min(58vh, 520px);
+		overflow: auto;
+		scrollbar-width: thin;
+	}
+
+	.content-anchor-button {
+		width: 100%;
+		padding: 0.48rem 0.5rem 0.48rem 0.75rem;
+		background: transparent;
+		border: 0;
+		border-left: 2px solid transparent;
+		border-radius: 0 0.35rem 0.35rem 0;
+		color: var(--color-text-muted);
+		font: inherit;
+		font-size: 0.8125rem;
+		line-height: 1.35;
+		text-align: left;
+		cursor: pointer;
+		transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+	}
+
+	.content-anchor-button:hover,
+	.content-anchor-button:focus-visible {
+		color: var(--color-primary-deep);
+		background: color-mix(in srgb, var(--color-primary) 11%, transparent);
+		outline: none;
+	}
+
+	.content-anchor-button.is-current {
+		border-left-color: var(--anchor-accent);
+		background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+		color: var(--color-primary-deep);
+		font-weight: 700;
+	}
+
+	.detail-sidebar .content-anchor-sidebar {
+		width: auto;
+	}
+
+	.anchored-page:not(.DetailPage) .anchored-page-body {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 220px;
+		gap: 2.5rem;
+		max-width: var(--container-width);
+		margin-inline: auto;
+		padding-inline: 2rem;
+		align-items: start;
+	}
+
+	.anchored-page:not(.DetailPage) .anchored-page-content {
+		min-width: 0;
+	}
+
+	.anchored-page:not(.DetailPage) .anchored-page-content .container {
+		max-width: none;
+		padding-inline: 0;
+	}
+
+	.anchored-page:not(.DetailPage) .anchored-page-body > .content-anchor-sidebar {
+		position: sticky;
+		top: 96px;
+		align-self: start;
+		margin-top: 2.5rem;
+	}
+
+	@media (max-width: 1024px) {
+		.anchored-page:not(.DetailPage) .anchored-page-body {
+			display: block;
+			padding-inline: 0;
+		}
+
+		.anchored-page:not(.DetailPage) .anchored-page-content .container {
+			max-width: var(--container-width);
+			padding-inline: clamp(1rem, 3vw, 1.25rem);
+		}
+
+		.anchored-page:not(.DetailPage) .anchored-page-body > .content-anchor-sidebar {
+			display: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.anchored-page:not(.DetailPage) .anchored-page-content .container {
+			padding-inline: 1rem;
+		}
+	}
+</style>
+
+<script>
+	const setupContentAnchors = (sidebar: HTMLElement) => {
+		const root = sidebar.closest<HTMLElement>('[data-anchor-page]');
+		const nav = sidebar.querySelector<HTMLElement>('.content-anchor-nav');
+		if (!root || !nav) return;
+
+		const headings = Array.from(root.querySelectorAll<HTMLElement>('h2')).filter(
+			(heading) => !heading.closest('[data-anchor-sidebar]') && heading.textContent?.trim(),
+		);
+		if (headings.length < 2) {
+			sidebar.hidden = true;
+			return;
+		}
+
+		const entries = headings.map((heading, index) => {
+			const button = document.createElement('button');
+			button.type = 'button';
+			button.className = 'content-anchor-button';
+			button.textContent = heading.textContent?.trim() || `Section ${index + 1}`;
+			button.addEventListener('click', () => heading.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+			nav.append(button);
+			return { heading, button };
+		});
+
+		const updateCurrent = () => {
+			const marker = (document.querySelector('header')?.getBoundingClientRect().height || 0) + 132;
+			let current = entries[0];
+			for (const entry of entries) if (entry.heading.getBoundingClientRect().top <= marker) current = entry;
+			entries.forEach((entry) => entry.button.classList.toggle('is-current', entry === current));
+		};
+
+		window.addEventListener('scroll', updateCurrent, { passive: true });
+		updateCurrent();
+	};
+
+	document.querySelectorAll<HTMLElement>('[data-anchor-sidebar]').forEach(setupContentAnchors);
+</script>

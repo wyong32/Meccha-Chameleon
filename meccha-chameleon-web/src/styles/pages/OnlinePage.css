@@ -1,0 +1,82 @@
+/* Play Together — 局部样式 */
+
+.PlayTogetherPage .lobby-steps {
+	list-style: none;
+	padding: 0;
+	counter-reset: lobby;
+	display: grid;
+	gap: 0.85rem;
+}
+
+.PlayTogetherPage .lobby-steps li {
+	counter-increment: lobby;
+	padding: 1.15rem 1.25rem 1.15rem 3.25rem;
+	position: relative;
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+}
+
+.PlayTogetherPage .lobby-steps li::before {
+	content: counter(lobby);
+	position: absolute;
+	left: 1rem;
+	top: 1.15rem;
+	width: 1.65rem;
+	height: 1.65rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--color-primary);
+	color: #0a1210;
+	font-family: var(--font-heading);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	border-radius: 50%;
+}
+
+.PlayTogetherPage .lobby-img {
+	margin-top: 1.5rem;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-border);
+}
+
+.PlayTogetherPage .faq-section {
+	padding-block: 3rem 4rem;
+}
+
+.PlayTogetherPage .faq-list {
+	display: grid;
+	gap: 1rem;
+}
+
+.PlayTogetherPage .faq-item {
+	padding: 1.25rem 1.5rem;
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+}
+
+.PlayTogetherPage .faq-question {
+	font-family: var(--font-heading);
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.PlayTogetherPage .faq-answer {
+	font-size: 0.9375rem;
+	color: var(--color-text-muted);
+	margin: 0;
+}
+
+.PlayTogetherPage .trouble-box {
+	margin-top: 1.5rem;
+	padding: 1.25rem;
+	background: #eef8f2;
+	border: 1px solid #c8e6d0;
+	border-radius: var(--radius-md);
+}
+
+.PlayTogetherPage .modes-link {
+	margin-top: 1rem;
+}

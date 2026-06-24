@@ -1,0 +1,269 @@
+/* Updates — patch timeline */
+
+.UpdatesPage .updates-main {
+	padding-block: clamp(2.5rem, 5vw, 3.5rem) clamp(3rem, 6vw, 4.5rem);
+	background:
+		radial-gradient(circle at 100% 0, rgba(200, 239, 98, 0.08), transparent 28rem),
+		var(--color-bg);
+}
+
+.UpdatesPage .updates-timeline {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 1.15rem;
+	position: relative;
+}
+
+.UpdatesPage .patch-card {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 1rem;
+	align-items: start;
+}
+
+.UpdatesPage .patch-card-marker {
+	position: relative;
+	width: 2.75rem;
+	display: flex;
+	justify-content: center;
+	padding-top: 1.35rem;
+}
+
+.UpdatesPage .patch-card-marker::before {
+	content: '';
+	width: 0.85rem;
+	height: 0.85rem;
+	border-radius: 50%;
+	background: var(--color-primary);
+	border: 3px solid var(--color-bg);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 55%, transparent);
+	z-index: 1;
+}
+
+.UpdatesPage .patch-card:not(:last-child) .patch-card-marker::after {
+	content: '';
+	position: absolute;
+	top: 2rem;
+	bottom: -1.35rem;
+	left: 50%;
+	width: 2px;
+	transform: translateX(-50%);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-primary) 70%, var(--color-border)),
+		var(--color-border)
+	);
+}
+
+.UpdatesPage .patch-card-body {
+	min-width: 0;
+	padding: clamp(1.15rem, 2.5vw, 1.45rem);
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+	transition:
+		border-color var(--transition),
+		box-shadow var(--transition);
+}
+
+.UpdatesPage .patch-card:hover .patch-card-body {
+	border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+	box-shadow: var(--shadow-md);
+}
+
+.UpdatesPage .patch-card--latest .patch-card-body {
+	border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+	background:
+		linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 7%, var(--color-surface)), var(--color-surface));
+}
+
+.UpdatesPage .patch-card--latest .patch-card-marker::before {
+	background: var(--color-accent-hot);
+	box-shadow:
+		0 0 0 2px color-mix(in srgb, var(--color-accent-hot) 45%, transparent),
+		0 0 18px color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.UpdatesPage .patch-card-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem 0.75rem;
+	margin-bottom: 0.65rem;
+}
+
+.UpdatesPage .patch-version {
+	font-family: var(--font-heading);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	padding: 0.28rem 0.65rem;
+	border-radius: var(--radius-sm);
+	color: #26142f;
+	background: var(--color-primary);
+}
+
+.UpdatesPage .patch-type {
+	font-size: 0.6875rem;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: 0.28rem 0.55rem;
+	border-radius: 999px;
+}
+
+.UpdatesPage .patch-type--fix {
+	color: #7a3a28;
+	background: color-mix(in srgb, var(--color-accent-hot) 22%, #fff);
+}
+
+.UpdatesPage .patch-type--feature {
+	color: var(--color-primary-deep);
+	background: color-mix(in srgb, var(--color-primary) 24%, #fff);
+}
+
+.UpdatesPage .patch-type--maps {
+	color: #5c3d12;
+	background: color-mix(in srgb, var(--color-accent) 35%, #fff);
+}
+
+.UpdatesPage .patch-date {
+	margin-left: auto;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--color-text-muted);
+}
+
+.UpdatesPage .patch-card h2 {
+	margin: 0 0 0.55rem;
+	padding: 0;
+	border: 0;
+	font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+	line-height: 1.3;
+	color: var(--color-primary-deep);
+}
+
+.UpdatesPage .patch-summary {
+	margin: 0;
+	line-height: 1.65;
+	color: var(--color-text);
+}
+
+.UpdatesPage .patch-impact {
+	margin: 0.8rem 0 0;
+	padding: 0.7rem 0.85rem;
+	background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+	border-radius: var(--radius-sm);
+	font-size: 0.9rem;
+	line-height: 1.55;
+	color: var(--color-text);
+}
+
+.UpdatesPage .patch-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+	margin-top: 1rem;
+	padding-top: 0.95rem;
+	border-top: 1px dashed var(--color-border);
+}
+
+.UpdatesPage .patch-action {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.45rem 0.85rem;
+	font-size: 0.8125rem;
+	font-weight: 700;
+	text-decoration: none;
+	border-radius: var(--radius-sm);
+	transition:
+		background-color var(--transition),
+		border-color var(--transition),
+		color var(--transition);
+}
+
+.UpdatesPage .patch-action--internal {
+	color: var(--color-text-muted);
+	background: transparent;
+	border: 1px solid var(--color-border);
+	text-decoration: none;
+}
+
+.UpdatesPage .patch-action--internal:hover {
+	color: var(--color-primary-deep);
+	border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+	background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.UpdatesPage .patch-card {
+		animation: updates-patch-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+
+	.UpdatesPage .patch-card:nth-child(1) {
+		animation-delay: 0.04s;
+	}
+	.UpdatesPage .patch-card:nth-child(2) {
+		animation-delay: 0.08s;
+	}
+	.UpdatesPage .patch-card:nth-child(3) {
+		animation-delay: 0.12s;
+	}
+	.UpdatesPage .patch-card:nth-child(4) {
+		animation-delay: 0.16s;
+	}
+	.UpdatesPage .patch-card:nth-child(5) {
+		animation-delay: 0.2s;
+	}
+	.UpdatesPage .patch-card:nth-child(6) {
+		animation-delay: 0.24s;
+	}
+	.UpdatesPage .patch-card:nth-child(7) {
+		animation-delay: 0.28s;
+	}
+}
+
+@keyframes updates-patch-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 1024px) {
+	.UpdatesPage .patch-date {
+		margin-left: 0;
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.UpdatesPage .patch-card {
+		grid-template-columns: 1fr;
+		gap: 0.35rem;
+	}
+
+	.UpdatesPage .patch-card-marker {
+		width: auto;
+		justify-content: flex-start;
+		padding-top: 0;
+		padding-left: 0.15rem;
+	}
+
+	.UpdatesPage .patch-card:not(:last-child) .patch-card-marker::after {
+		display: none;
+	}
+
+	.UpdatesPage .patch-card-head {
+		gap: 0.4rem;
+	}
+}

@@ -1,0 +1,254 @@
+---
+// Play Together — 开黑与 FAQ
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/OnlinePage.css';
+import { pageSeo } from '../seo/pages.js';
+import { buildWebPageJsonLd } from '../seo/meta.js';
+import ContentAnchorSidebar from '../components/ContentAnchorSidebar.astro';
+import { siteStats } from '../data/site-meta.js';
+
+const seo = pageSeo.online;
+const pageJsonLd = buildWebPageJsonLd({
+	name: seo.title,
+	description: seo.description,
+	path: '/online',
+});
+
+const faqItems = [
+	{
+		q: 'How do I play with friends?',
+		a: 'Host a private lobby from the in-game menu and share the room code, or send Steam invites. Public matchmaking fills random lobbies when you do not need a fixed group.',
+	},
+	{
+		q: 'How many players should we invite?',
+		a: 'The Steam listing recommends 2–10 players, with the practical room cap depending on host network conditions. Use the mode table below as a starting point, then adjust for your lobby.',
+	},
+	{
+		q: 'Can stream viewers join my game?',
+		a: 'Yes — hosts can open non-private servers so viewers can join from Steam. Set expectations in chat before the hunt starts.',
+	},
+	{
+		q: 'Is there voice chat?',
+		a: 'Proximity voice chat is supported in matches. v1.4.0 adjusted voice icons for clarity; confirm behaviour in your current build.',
+	},
+	{
+		q: 'Workshop maps not loading?',
+		a: 'Open the original Steam Workshop item, wait for the download to finish, restart if needed, and test a short private round. Every player must subscribe to the same map.',
+	},
+	{
+		q: 'Cloud save infinite loading (v1.6.x)?',
+		a: 'Update to v1.6.1 or later, restart Steam and the game, then verify game files. Disable cloud only as a last resort — see v1.6.1 in the patch archive.',
+	},
+	{
+		q: 'Version mismatch in lobby?',
+		a: 'All players must run the same game version. Restart Steam clients after an update if someone lagged behind.',
+	},
+];
+---
+
+<BaseLayout
+	title={seo.title}
+	description={seo.description}
+	keywords={seo.keywords}
+	jsonLd={pageJsonLd}
+>
+	<div class="PlayTogetherPage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Online</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Online Multiplayer Guide</span>
+					<h1>MECCHA CHAMELEON Online</h1>
+					<p class="page-intro">
+						Host private lobbies, invite friends on Steam, pick modes for your group size, and fix the
+						setup issues that waste queue time. The checklists below focus on what actually breaks friend
+						nights: version mismatch, untested maps, and unclear room rules.
+					</p>
+					<div class="inner-hero-meta">
+						<span>10 min read</span>
+						<span>{siteStats.currentVersion}</span>
+						<span>{siteStats.playerRange} players</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="anchored-page-body">
+			<div class="anchored-page-content">
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block">
+					<h2>Playing online</h2>
+					<p>
+						MECCHA CHAMELEON supports private and public Steam lobbies for {siteStats.playerRange} players.
+						The host picks map and mode; everyone needs the same game version before the hunt starts. Exact
+						room limits can still vary with host network conditions.
+					</p>
+					<p>
+						Most failed sessions come from setup problems — wrong build, untested Workshop maps, or house rules
+						nobody heard — not from hiding skill. Confirm menu labels and voice settings in your current build
+						before a stream or tournament night. Game rules live in the <a href="/wiki">Wiki</a>; custom stages
+						in <a href="/workshop">Workshop Maps</a>.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Lobby Setup & First Game Night</h2>
+					<h3>Create a friend lobby</h3>
+					<ol class="lobby-steps">
+						<li>Launch MECCHA CHAMELEON from your Steam library.</li>
+						<li>Choose <strong>Create Room</strong> (or the equivalent host option in your build).</li>
+						<li>Pick map, mode (Normal / Infection / Double), and player limit.</li>
+						<li>Share the room code or invite friends through Steam.</li>
+						<li>For Workshop maps, subscribe first and select the stage in lobby settings.</li>
+					</ol>
+					<h3>Run a smooth first session</h3>
+					<p>Most failed friend nights are organisational — wrong build, unclear room details, or an untested custom map. Change one variable at a time.</p>
+					<ol class="inner-steps">
+						<li><strong>Five minutes before:</strong> ask everyone to restart Steam and the game; pick one host with a stable connection.</li>
+						<li><strong>First room:</strong> create a private lobby on a familiar official map. Share name, privacy, password, and mode in one message.</li>
+						<li><strong>First round:</strong> confirm everyone can load, hear, and understand the loop — no extra rules yet.</li>
+						<li><strong>Second round:</strong> announce one house rule (for example, whether found players may call out nearby Hiders).</li>
+						<li><strong>Only then:</strong> add a Workshop map, viewers, unusual settings, or a larger party.</li>
+					</ol>
+					<div class="inner-callout">
+						<p class="inner-callout-title">Why this order works</p>
+						<p>When something breaks after a new variable, you know where to look — much easier than changing version, voice, map, password, and host at once.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Modes, Group Size & Room Planning</h2>
+					<p>These group sizes are practical starting points. The broader {siteStats.playerRange} range on Steam lets hosts adjust around the current lobby settings.</p>
+					<table class="inner-data-table">
+						<thead>
+							<tr><th>Mode</th><th>UI (JP)</th><th>Players</th><th>Why this range</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>Normal</td><td>通常</td><td>2–4</td><td>One Seeker can cover the map without chaos</td></tr>
+							<tr><td>Infection</td><td>増え鬼</td><td>6–10</td><td>Tagged Hiders joining the hunt needs a larger pool</td></tr>
+							<tr><td>Double</td><td>ダブル</td><td>4–8</td><td>Balanced hide-then-hunt race</td></tr>
+						</tbody>
+					</table>
+					<h3>Pick a room goal before you host</h3>
+					<table class="inner-data-table">
+						<thead><tr><th>Room type</th><th>Best use</th><th>Host priorities</th><th>Common mistake</th></tr></thead>
+						<tbody>
+							<tr><td>Learning room</td><td>New players on a first shared map</td><td>Private, simple rules, time to review results</td><td>Starting with a difficult custom map</td></tr>
+							<tr><td>Friend party</td><td>Fast laughs and role rotation</td><td>Visible room details; easy rejoin method</td><td>Enforcing a rule nobody heard beforehand</td></tr>
+							<tr><td>Practice room</td><td>Testing paint, pose, or a map route</td><td>Allow result review and spot repeats</td><td>Treating every found route as permanent meta</td></tr>
+							<tr><td>Viewer room</td><td>Creator sessions with turnover</td><td>State privacy, chat, map requirements upfront</td><td>Sharing room details before the host tests the build</td></tr>
+						</tbody>
+					</table>
+					<p><a href="/wiki">Mode notes and round structure in Wiki →</a></p>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Voice, Streaming & Room Rules</h2>
+					<p>
+						Proximity voice chat is enabled in matches — Hiders near a Seeker can be heard. Many groups mute
+						during prep and unmute after the hunt starts. v1.4.0 adjusted voice icons for clarity.
+					</p>
+					<table class="inner-data-table">
+						<thead><tr><th>Scenario</th><th>Practical setup</th></tr></thead>
+						<tbody>
+							<tr><td>Private friend night</td><td>Discord for chat; in-game proximity voice for immersion during the hunt</td></tr>
+							<tr><td>Stream or viewer lobby</td><td>Open a non-private server; state chat and spoiler rules before the round</td></tr>
+							<tr><td>Controller or Steam Deck</td><td>Confirm support on the current Steam page and in Settings before the session</td></tr>
+						</tbody>
+					</table>
+					<h3>Announce these before round one</h3>
+					<ul>
+						<li><strong>Found-player behaviour:</strong> may a tagged player call out nearby Hiders, stay silent, or only use in-game comms?</li>
+						<li><strong>Map learning:</strong> is the group testing a stage or playing normally?</li>
+						<li><strong>Voice:</strong> proximity voice, external call, or quiet hunt phases?</li>
+						<li><strong>Custom content:</strong> share the original Workshop link; confirm every player subscribed.</li>
+						<li><strong>Version:</strong> pause the event if clients are on different builds.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block">
+					<h2>Workshop Maps in Multiplayer</h2>
+					<p>Every player must subscribe to the same Workshop stage before joining. Subscribe on Steam, restart if the map does not appear, then select it in host settings.</p>
+					<ol class="inner-steps">
+						<li><strong>Share the source link:</strong> host picks a map from <a href="/workshop">Workshop spotlights</a> and sends the Steam Workshop URL.</li>
+						<li><strong>Confirm downloads:</strong> all players subscribe and wait for the download to finish.</li>
+						<li><strong>Test privately:</strong> run one short official-map room, then one Workshop test, before going public.</li>
+					</ol>
+					<p>See <a href="/workshop/meeting-room">Meeting room Workshop guide</a> for subscribe-and-host steps on this popular interior map.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Troubleshooting & Patch Context</h2>
+					<p>Follow this order and stop once the room works. Match symptoms to the patch notes below before changing local files.</p>
+					<ol class="inner-steps">
+						<li><strong>Check the build:</strong> every player restarts Steam and confirms the game updated.</li>
+						<li><strong>Check the room:</strong> confirm host, privacy, name, password, and filters.</li>
+						<li><strong>Remove custom content:</strong> test an official map before debugging Workshop downloads.</li>
+						<li><strong>Recreate once:</strong> if the basic room still fails, make one fresh lobby instead of editing the old one repeatedly.</li>
+						<li><strong>Check patch notes:</strong> if cloud save or load issues are active, see whether your build includes the listed fix.</li>
+					</ol>
+					<h3>Common patch-related symptoms</h3>
+					<table class="inner-data-table">
+						<thead><tr><th>Symptom</th><th>Patch context</th><th>First check</th></tr></thead>
+						<tbody>
+							<tr><td>Cloud-save screen keeps loading or BGM missing</td><td>v1.6.1 names fixes for both</td><td>Update, restart, verify game files</td></tr>
+							<tr><td>Found player reappears; Seeker clips into map on load</td><td>v1.5.1 names both fixes</td><td>Same build; reproduce in a fresh private room</td></tr>
+							<tr><td>Workshop or server display issues</td><td>v1.4.1 — API limit, server status, nameplate fixes</td><td>Official map first; confirm matching Workshop subscriptions</td></tr>
+						</tbody>
+					</table>
+					<p>Full version history and what to retest in a private room: <a href="/updates">patch archive</a>.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section faq-section">
+			<div class="container">
+				<div class="faq-content">
+					<h2>Multiplayer FAQ</h2>
+					<div class="faq-list">
+						{
+							faqItems.map((item) => (
+								<article class="faq-item">
+									<h3 class="faq-question">{item.q}</h3>
+									<p class="faq-answer">{item.a}</p>
+								</article>
+							))
+						}
+					</div>
+					<div class="trouble-box">
+						<p><strong>Still stuck?</strong> Re-run the troubleshooting sequence above, then check the <a href="/updates">patch archive</a> or Steam Community discussions. MECCHA CHAMELEON is a paid PC Steam title only — not on mobile or Roblox.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+			</div>
+			<ContentAnchorSidebar />
+		</div>
+	</div>
+</BaseLayout>

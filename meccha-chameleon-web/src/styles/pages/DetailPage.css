@@ -1,0 +1,180 @@
+/* 详情页 — 基于 InnerPage 统一风格 */
+
+/* 详情页 — 左文右图 Hero（flex，全站详情页统一） */
+.DetailPage .inner-hero-section {
+	text-align: left;
+	padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.DetailPage .inner-hero-section::before {
+	background:
+		radial-gradient(circle at 18% 12%, rgba(200, 239, 98, 0.26), transparent 16rem),
+		radial-gradient(circle at 82% 28%, rgba(200, 239, 98, 0.14), transparent 14rem),
+		linear-gradient(135deg, var(--color-dark-bg), #452052 55%, #31163c);
+}
+
+.DetailPage .inner-hero-content--split {
+	display: flex;
+	align-items: flex-start;
+	gap: clamp(1.25rem, 2.5vw, 2rem);
+	max-width: none;
+	margin-inline: 0;
+	min-width: 0;
+}
+
+.DetailPage .inner-hero-copy {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+.DetailPage .inner-hero-section .breadcrumb-list {
+	justify-content: flex-start;
+}
+
+.DetailPage .inner-hero-copy h1 {
+	margin-inline: 0;
+	font-size: clamp(1.65rem, 2.6vw, 2.2rem);
+	line-height: 1.15;
+}
+
+.DetailPage .inner-hero-copy .detail-lead {
+	margin-inline: 0;
+	max-width: 62ch;
+	margin-top: 0;
+}
+
+.DetailPage .inner-hero-copy .inner-hero-meta {
+	justify-content: flex-start;
+	margin-top: 0.85rem;
+}
+
+.DetailPage .inner-hero-meta .entry-tag {
+	background: var(--color-primary);
+	color: #26142f;
+	border: none;
+	font-weight: 700;
+}
+
+.DetailPage .inner-hero-content--split .detail-featured-image {
+	flex: 0 0 clamp(200px, 32vw, 340px);
+	width: clamp(200px, 32vw, 340px);
+	margin: 0;
+	max-width: none;
+}
+
+.DetailPage .detail-lead {
+	font-size: 1.0625rem;
+	color: #e0e4fb;
+	max-width: 58ch;
+	margin-top: 0.75rem;
+	line-height: 1.7;
+}
+
+.DetailPage .detail-body-section {
+	padding-block: 3rem 4rem;
+	background: var(--color-bg);
+}
+
+.DetailPage .detail-prose {
+	font-size: 1rem;
+	line-height: 1.75;
+	min-width: 0;
+	max-width: 100%;
+	overflow-x: clip;
+}
+
+.DetailPage .detail-back {
+	margin-top: 2.5rem;
+	padding-top: 2rem;
+	border-top: 1px solid var(--color-border);
+}
+
+.DetailPage .detail-sidebar {
+	border-left: 1px solid rgba(24, 49, 30, 0.12);
+	padding-left: 1.25rem;
+}
+
+.DetailPage .community-screenshot-gallery {
+	margin: clamp(2.5rem, 6vw, 4rem) 0;
+	padding: clamp(1.25rem, 3vw, 2rem);
+	background:
+		linear-gradient(135deg, rgba(210, 250, 81, 0.13), transparent 38%),
+		#e9f0df;
+	border: 1px solid rgba(24, 49, 30, 0.14);
+	border-radius: 1rem;
+	box-shadow: 8px 8px 0 rgba(24, 49, 30, 0.07);
+}
+
+.DetailPage .community-gallery-heading > span {
+	display: inline-flex;
+	margin-bottom: 0.55rem;
+	padding: 0.22rem 0.5rem;
+	background: #18311e;
+	color: #e7ff8a;
+	font-size: 0.67rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	border-radius: 0.25rem;
+}
+
+.DetailPage .community-gallery-heading h2 {
+	margin-top: 0;
+}
+
+.DetailPage .community-gallery-tips {
+	margin: 1.5rem 0 1.75rem;
+	padding: 1rem 1.1rem;
+	background: rgba(251, 252, 245, 0.8);
+	border-left: 4px solid var(--color-accent-hot);
+	border-radius: 0 0.6rem 0.6rem 0;
+}
+
+.DetailPage .community-gallery-tips h3 {
+	margin: 0 0 0.45rem;
+	font-size: 1rem;
+}
+
+.DetailPage .community-gallery-tips ul {
+	margin: 0;
+}
+
+.DetailPage .community-screenshot-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+	gap: 0.85rem;
+	max-width: 100%;
+}
+
+.DetailPage .community-screenshot-card {
+	margin: 0;
+	background: #172018;
+	border: 1px solid rgba(210, 250, 81, 0.28);
+	border-radius: 0.6rem;
+	overflow: hidden;
+	box-shadow: 3px 4px 0 rgba(24, 49, 30, 0.12);
+}
+
+.DetailPage .community-screenshot-card a {
+	display: block;
+	text-decoration: none;
+	background: #10150f;
+}
+
+.DetailPage .community-screenshot-card img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	transition: transform 220ms ease;
+}
+
+.DetailPage .community-screenshot-card:hover img {
+	transform: scale(1.045);
+}
+
+.DetailPage .community-screenshot-card figcaption {
+	padding: 0.6rem 0.65rem;
+	color: #dbe4d1;
+	font-size: 0.72rem;
+	line-height: 1.4;
+}

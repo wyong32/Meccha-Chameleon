@@ -1,0 +1,221 @@
+---
+// Beginner's Hub — 新手完整入门
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/BeginnersHubPage.css';
+import { pageSeo } from '../seo/pages.js';
+import { buildWebPageJsonLd } from '../seo/meta.js';
+import ContentAnchorSidebar from '../components/ContentAnchorSidebar.astro';
+
+import { siteStats } from '../data/site-meta.js';
+
+const seo = pageSeo.beginnersHub;
+const pageJsonLd = buildWebPageJsonLd({
+	name: seo.title,
+	description: seo.description,
+	path: '/beginners-hub',
+});
+---
+
+<BaseLayout
+	title={seo.title}
+	description={seo.description}
+	keywords={seo.keywords}
+	jsonLd={pageJsonLd}
+>
+	<div class="BeginnersHubPage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Beginner's Hub</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Start Here</span>
+					<h1>MECCHA CHAMELEON Beginner's Hub — Your First Match</h1>
+					<p class="page-intro">
+						A structured first-session plan for MECCHA CHAMELEON (めっちゃカメレオン): paint, pose, hide, and hunt in
+						{siteStats.playerRange}-player Steam lobbies. The routines below turn the core loop into repeatable
+						practice.
+					</p>
+					<div class="inner-hero-meta">
+						<span>12 min read</span>
+						<span>{siteStats.currentVersion}</span>
+						<span>{siteStats.playerRange} players</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="anchored-page-body">
+			<div class="anchored-page-content">
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block">
+					<h2>How the game works</h2>
+					<p>
+						Each round is short and different from the last. Hiders paint a humanoid chameleon with the in-game
+						palette and Spoid eyedropper; Seekers hunt in first person with no flashlight. Success depends on
+						spot choice, silhouette (poses), and local colour layers — not preset skins.
+					</p>
+					<p>
+						Before a serious session, confirm controls and mode labels in Settings — patch updates can change
+						defaults. Deeper rules live in the <a href="/wiki">Wiki</a>; map-specific drills in the
+						<a href="/wiki#wiki-maps">map notes</a>.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block">
+					<h2>Match Flow — Four Phases</h2>
+					<ol class="inner-steps">
+						<li><strong>Lobby</strong> — Host picks map, mode (通常 / 増え鬼 / ダブル), and privacy. Join via public browse or invite code.</li>
+						<li><strong>Role assignment</strong> — Split into Hiders (chameleons) and Seekers (Oni). Ratio depends on mode and player count.</li>
+						<li><strong>Preparation</strong> — Hiders choose a spot, set pose (<kbd>R</kbd>), Spoid colours, paint (<kbd>F</kbd>). Seekers wait.</li>
+						<li><strong>Hunt</strong> — Seekers enter, search, and tag with left click. Round ends when all Hiders are tagged or the timer expires.</li>
+					</ol>
+					<div class="inner-callout">
+						<p class="inner-callout-title">Results screen = free coaching</p>
+						<p>Every round reveals all hiding spots and paint jobs. Review it whether you won or lost — consistent players treat it as mandatory feedback.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section">
+			<div class="container"><div class="inner-content-block is-wide">
+				<h2>Your First 30 Minutes</h2>
+				<p>Goal: one repeatable loop — backdrop → pose → local colour → stillness — not a win streak. A private room is ideal; a public match works if you keep the plan simple.</p>
+				<table class="inner-data-table"><thead><tr><th>Round</th><th>Practise one thing</th><th>Ignore for now</th></tr></thead><tbody>
+					<tr><td>1</td><td>Commit to one wall, floor edge, or prop cluster before opening paint.</td><td>Complex patterns, score, or clever routes.</td></tr>
+					<tr><td>2</td><td>Use pose so the outline fits the backdrop.</td><td>Perfect coverage on every body part.</td></tr>
+					<tr><td>3</td><td>Sample a lit tone and a darker shadow on the same material.</td><td>Moving after the hunt starts.</td></tr>
+					<tr><td>4</td><td>Play one Seeker round slowly; name the clue that exposed each Hider.</td><td>Memorising an entire map.</td></tr>
+				</tbody></table>
+				<p>Then open the matching <a href="/wiki#wiki-maps">map note</a> or try the browser <a href="/camouflage-simulator">Camouflage Simulator</a> before learning every stage at once.</p>
+			</div></div>
+		</section>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Roles, Controls & Modes</h2>
+					<h3>Hider vs Seeker</h3>
+					<table class="inner-data-table">
+						<thead><tr><th></th><th>Hider (Chameleon)</th><th>Seeker (Oni)</th></tr></thead>
+						<tbody>
+							<tr><th>Goal</th><td>Survive until time runs out</td><td>Tag every Hider before timer</td></tr>
+							<tr><th>View</th><td>Third person during prep</td><td>First person during hunt</td></tr>
+							<tr><th>Tools</th><td>Paint palette, Spoid, poses</td><td>Tag gun, eyes, patience</td></tr>
+							<tr><th>Core skill</th><td>Spot + pose + colour layers</td><td>Pattern recognition, sweep order</td></tr>
+							<tr><th>Common mistake</th><td>Roaming prep, flat one-colour paint</td><td>Sprinting centre map first</td></tr>
+						</tbody>
+					</table>
+					<h3>PC controls (confirm in Settings after patches)</h3>
+					<table class="inner-data-table">
+						<thead><tr><th>Action</th><th>Default</th><th>Notes</th></tr></thead>
+						<tbody>
+							<tr><td>Move</td><td>W A S D</td><td>Rebind if needed</td></tr>
+							<tr><td>Camera</td><td>Mouse</td><td>Lower sensitivity helps Seeker scans</td></tr>
+							<tr><td>Paint menu</td><td>F</td><td>Open before a live round</td></tr>
+							<tr><td>Pose menu</td><td>R</td><td>Choose shape before colour work</td></tr>
+							<tr><td>Paint / Tag</td><td>Mouse input</td><td>Role-dependent; follow in-game prompt</td></tr>
+						</tbody>
+					</table>
+					<h3>Pick a mode for your group</h3>
+					<table class="inner-data-table">
+						<thead><tr><th>Mode</th><th>UI (JP)</th><th>Players</th><th>Summary</th></tr></thead>
+						<tbody>
+							<tr><td>Normal</td><td>通常</td><td>2–4</td><td>Classic one Seeker; best for learning</td></tr>
+							<tr><td>Infection</td><td>増え鬼</td><td>6–10</td><td>Tagged Hiders join the hunt</td></tr>
+							<tr><td>Double</td><td>ダブル</td><td>4–8</td><td>Everyone hides, then everyone hunts</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Hider Playbook</h2>
+					<ol class="inner-steps">
+						<li><strong>Commit early</strong> — Within ~15 seconds, pick a wall edge, clutter zone, or prop cluster; stop roaming.</li>
+						<li><strong>Pose first</strong> — Open poses (<kbd>R</kbd>); curl, crouch, or flatten against the backdrop.</li>
+						<li><strong>Two-tone paint</strong> — Spoid the lit surface, fill large zones; Spoid a shadow tone for the dark side.</li>
+						<li><strong>Freeze on hunt</strong> — Audio and motion expose you before bad paint does.</li>
+					</ol>
+					<div class="inner-callout is-warn">
+						<p class="inner-callout-title">Golden order</p>
+						<p><strong>Spot → Pose → Paint.</strong> Silhouette and backdrop come before detail work.</p>
+					</div>
+					<h3>Choosing a backdrop</h3>
+					<table class="inner-data-table"><thead><tr><th>Backdrop</th><th>Match this</th><th>What exposes you</th></tr></thead><tbody>
+						<tr><td>Flat wall or poster</td><td>Width, edge direction, flatter pose</td><td>Standing silhouette or hard outline</td></tr>
+						<tr><td>Floor edge or tile</td><td>Local tone and surface seam</td><td>Colour blob ignoring the seam</td></tr>
+						<tr><td>Low furniture</td><td>Height first, then nearest face colour</td><td>Head or limbs above the prop</td></tr>
+						<tr><td>Busy prop cluster</td><td>One material family, compact shape</td><td>Mixing unrelated colours</td></tr>
+						<tr><td>Repeated pattern</td><td>Rhythm and spacing, not every detail</td><td>Extra stripe, tile, or gap</td></tr>
+					</tbody></table>
+				</div>
+			</div>
+		</section>
+
+		<section class="inner-content-section is-alt">
+			<div class="container"><div class="inner-content-block">
+				<h2>Seeker Playbook</h2>
+				<p>Random sprinting feels fast but teaches little. Use three deliberate passes instead:</p>
+				<ol class="inner-steps">
+					<li><strong>Pass one — large shapes</strong> — Open edges, tall props, wrong-scale objects.</li>
+					<li><strong>Pass two — repeated surfaces</strong> — Shelves, tiles, frames, stripes, object rows.</li>
+					<li><strong>Pass three — return angle</strong> — Walk back along the main route; look for outlines visible only from the other side.</li>
+				</ol>
+				<p>Quick habits: start at the perimeter; count repeating props; pause on flat colour blobs without shadow gradient. Since v1.2.0, ranking considers distance and line-of-sight time — keep main paths in your sweep.</p>
+			</div></div>
+		</section>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Common Mistakes & FAQ</h2>
+					<table class="inner-data-table">
+						<thead><tr><th>Mistake</th><th>Why it fails</th><th>Fix</th></tr></thead>
+						<tbody>
+							<tr><td>Late spot choice</td><td>No time to pose + two-layer paint</td><td>Commit in ~15s</td></tr>
+							<tr><td>Paint before pose</td><td>Colours misalign after curl/flatten</td><td>Pose first</td></tr>
+							<tr><td>Single flat colour</td><td>Obvious under map lighting</td><td>Lit + shadow Spoid</td></tr>
+							<tr><td>Moving during hunt</td><td>Audio/motion tells</td><td>Freeze completely</td></tr>
+							<tr><td>Skipping results</td><td>Repeat the same bad hides</td><td>Review every round</td></tr>
+						</tbody>
+					</table>
+					<h3>Should I copy a viral hiding clip?</h3>
+					<p>Use it to learn an idea — tile line, lower silhouette — then adapt to your room. Popular clips also tell Seekers where to look.</p>
+					<h3>When should I read a map guide?</h3>
+					<p>After one full match loop. Open the map you are about to play, read landmark prompts only, test one idea per round.</p>
+					<h3>What if controls differ from this page?</h3>
+					<p>Trust your Settings menu. Patch notes may change defaults; this page tracks {siteStats.currentVersion} as of {siteStats.lastVerified}.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta-section">
+			<div class="container">
+				<h2>Next Steps</h2>
+				<p>Move to map data, role deep dives, and lobby setup once the basic loop feels familiar.</p>
+				<div class="cta-actions">
+					<a class="btn btn-primary" href="/camouflage-simulator">Camouflage Simulator</a>
+					<a class="btn btn-outline btn-outline-light" href="/wiki#wiki-maps">Wiki Maps</a>
+					<a class="btn btn-outline btn-outline-light" href="/guides">Strategy Guides</a>
+					<a class="btn btn-outline btn-outline-light" href="/online">Play Online</a>
+				</div>
+			</div>
+		</section>
+			</div>
+			<ContentAnchorSidebar />
+		</div>
+	</div>
+</BaseLayout>

@@ -1,0 +1,281 @@
+/* 列表页 — Guides / Workshop 分区样式 */
+
+.ListPage .list-section {
+	padding-block: clamp(2.5rem, 5vw, 3.5rem) clamp(3rem, 6vw, 4.5rem);
+	background:
+		linear-gradient(90deg, rgba(210, 250, 81, 0.07), transparent 36%),
+		var(--color-bg);
+}
+
+.ListPage .list-section-header {
+	margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.ListPage .list-section-header h2 {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+	line-height: 1.2;
+	color: var(--color-primary-deep);
+}
+
+.ListPage .list-section-header h2::before {
+	content: '';
+	display: block;
+	width: 2.4rem;
+	height: 3px;
+	margin-bottom: 0.65rem;
+	border-radius: 999px;
+	background: linear-gradient(90deg, var(--color-primary), var(--color-accent-hot));
+}
+
+.list-empty-message {
+	margin: 0;
+	color: var(--color-text-muted);
+}
+
+/* —— Guides：上图下文卡片 —— */
+
+.GuidesListPage .guide-card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1.5rem;
+}
+
+.GuidesListPage .guide-list-card {
+	display: flex;
+	flex-direction: column;
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: 3px 4px 0 rgba(23, 54, 45, 0.06);
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	transition:
+		transform var(--transition),
+		box-shadow var(--transition),
+		border-color var(--transition);
+}
+
+.GuidesListPage .guide-list-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 5px 7px 0 rgba(23, 54, 45, 0.12);
+	border-color: var(--color-primary-dark);
+	color: inherit;
+}
+
+.GuidesListPage .guide-list-card__image {
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	width: 100%;
+	background: linear-gradient(135deg, var(--color-accent), #c8e6d0);
+}
+
+.GuidesListPage .guide-list-card__body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1.15rem 1.25rem 1.25rem;
+	flex: 1;
+	min-height: 0;
+}
+
+.GuidesListPage .guide-list-card__title {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: 1.0625rem;
+	line-height: 1.35;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.GuidesListPage .guide-list-card__desc {
+	margin: 0;
+	font-size: 0.9375rem;
+	line-height: 1.55;
+	color: var(--color-text-muted);
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+.GuidesListPage .guide-list-card__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem;
+	/* 2 行：单行 = 字号×行高 + 上下 padding */
+	max-height: calc(2 * (0.6875rem * 1.35 + 0.24rem) + 0.3rem);
+	overflow: hidden;
+	margin-top: 0.15rem;
+}
+
+.GuidesListPage .guide-list-card__tag {
+	padding: 0.12rem 0.45rem;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	line-height: 1.35;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: var(--color-primary-deep);
+	background: color-mix(in srgb, var(--color-primary) 28%, var(--color-surface));
+	border-radius: 999px;
+}
+
+.GuidesListPage .guide-list-card__meta {
+	margin-top: auto;
+	padding-top: 0.35rem;
+	font-size: 0.8125rem;
+	color: var(--color-text-muted);
+}
+
+/* —— Workshop：横向条目列表 —— */
+
+.WorkshopListPage .workshop-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.WorkshopListPage .workshop-row {
+	display: grid;
+	grid-template-columns: clamp(7.5rem, 18vw, 11.5rem) minmax(0, 1fr) auto;
+	align-items: center;
+	gap: clamp(0.85rem, 2vw, 1.35rem);
+	padding: 0.85rem 1rem 0.85rem 0.85rem;
+	background:
+		linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58)),
+		var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: 4px 4px 0 rgba(38, 20, 47, 0.05);
+	text-decoration: none;
+	color: inherit;
+	transition:
+		transform var(--transition),
+		border-color var(--transition),
+		box-shadow var(--transition);
+}
+
+.WorkshopListPage .workshop-row:hover {
+	transform: translateX(4px);
+	border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+	box-shadow: 6px 6px 0 rgba(38, 20, 47, 0.08);
+	color: inherit;
+}
+
+.WorkshopListPage .workshop-row__media {
+	overflow: hidden;
+	border-radius: calc(var(--radius-md) - 4px);
+	border: 1px solid rgba(38, 20, 47, 0.08);
+}
+
+.WorkshopListPage .workshop-row__image {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: linear-gradient(135deg, #dfe8f0, #c8d4e8);
+}
+
+.WorkshopListPage .workshop-row__body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	min-width: 0;
+}
+
+.WorkshopListPage .workshop-row__meta {
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--color-text-muted);
+}
+
+.WorkshopListPage .workshop-row__title {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: clamp(0.98rem, 1.6vw, 1.125rem);
+	line-height: 1.35;
+	color: var(--color-primary-deep);
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.WorkshopListPage .workshop-row__desc {
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.55;
+	color: var(--color-text-muted);
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.WorkshopListPage .workshop-row__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.28rem;
+	max-height: calc(2 * (0.625rem * 1.35 + 0.2rem) + 0.28rem);
+	overflow: hidden;
+	margin-top: 0.2rem;
+}
+
+.WorkshopListPage .workshop-row__tag {
+	padding: 0.1rem 0.4rem;
+	font-size: 0.625rem;
+	font-weight: 700;
+	line-height: 1.35;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #26142f;
+	background: color-mix(in srgb, var(--color-accent-hot) 22%, white);
+	border: 1px solid color-mix(in srgb, var(--color-accent-hot) 35%, transparent);
+	border-radius: 999px;
+}
+
+.WorkshopListPage .workshop-row__arrow {
+	flex-shrink: 0;
+	width: 2rem;
+	height: 2rem;
+	display: grid;
+	place-items: center;
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: var(--color-primary-deep);
+	background: color-mix(in srgb, var(--color-primary) 18%, white);
+	border-radius: 999px;
+	transition: transform var(--transition);
+}
+
+.WorkshopListPage .workshop-row:hover .workshop-row__arrow {
+	transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+	.GuidesListPage .guide-card-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.WorkshopListPage .workshop-row {
+		grid-template-columns: 6.5rem minmax(0, 1fr);
+		grid-template-rows: auto auto;
+	}
+
+	.WorkshopListPage .workshop-row__arrow {
+		grid-column: 2;
+		grid-row: 1;
+		justify-self: end;
+		align-self: start;
+		width: 1.75rem;
+		height: 1.75rem;
+		font-size: 1rem;
+	}
+}

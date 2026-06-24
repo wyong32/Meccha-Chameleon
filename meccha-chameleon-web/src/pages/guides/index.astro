@@ -1,0 +1,87 @@
+---
+// Guides 列表页
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { guides } from '../../data/guides.js';
+import { pageSeo } from '../../seo/pages.js';
+import { buildWebPageJsonLd } from '../../seo/meta.js';
+import '../../styles/pages/ListPage.css';
+
+const hasGuides = guides.length > 0;
+const seo = hasGuides
+	? pageSeo.guidesIndex
+	: {
+		title: 'MECCHA CHAMELEON Guides',
+		description: 'No MECCHA CHAMELEON strategy guides have been published yet. Browse the Beginner’s Hub, map notes, and Camouflage Simulator instead.',
+		keywords: 'meccha chameleon guides, beginner guide, camouflage map notes',
+	};
+---
+
+<BaseLayout
+	title={seo.title}
+	description={seo.description}
+	keywords={seo.keywords}
+	robots={hasGuides ? 'index, follow' : 'noindex, follow'}
+	jsonLd={buildWebPageJsonLd({
+		name: seo.title,
+		description: seo.description,
+		path: '/guides',
+	})}
+>
+	<div class="ListPage GuidesListPage">
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Guides</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Strategy Library</span>
+					<h1>MECCHA CHAMELEON Guides</h1>
+					<p class="page-intro">{hasGuides ? <>Role-specific deep dives for Hiders and Seekers — paint workflows, mode tactics, scoring meta, and lobby habits that win repeated rounds. Start at the <a href="/beginners-hub">Beginner's Hub</a> if you are new.</> : 'Strategy guides will be listed here once they are published.'}</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="list-section" aria-labelledby="guides-list-title">
+			<div class="container">
+				<div class="list-content">
+					<header class="list-section-header">
+						<h2 id="guides-list-title">All strategy guides</h2>
+					</header>
+					{
+						hasGuides ? (
+							<div class="guide-card-grid">
+								{guides.map((item) => (
+									<a class="guide-list-card" href={`/guides/${item.addressBar}`}>
+										<img
+											class="guide-list-card__image"
+											src={item.imageUrl}
+											alt={item.imageAlt}
+											width="800"
+											height="500"
+											loading="lazy"
+										/>
+										<div class="guide-list-card__body">
+											<h3 class="guide-list-card__title">{item.title}</h3>
+											<p class="guide-list-card__desc">{item.description}</p>
+											<div class="guide-list-card__tags">
+												{item.tag.map((label) => (
+													<span class="guide-list-card__tag">{label}</span>
+												))}
+											</div>
+											<time class="guide-list-card__meta" datetime={item.publishDate}>{item.publishDate}</time>
+										</div>
+									</a>
+								))}
+							</div>
+						) : (
+							<p class="list-empty-message">Sorry, there are no guides available yet.</p>
+						)
+					}
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

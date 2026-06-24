@@ -1,0 +1,65 @@
+/**
+ * MECCHA CHAMELEON Guide — canonical domain, OG defaults, sitemap weights.
+ * Update fullDomain before production deploy.
+ */
+export const seoConfig = {
+	domain: 'meccachameleon.com',
+	fullDomain: 'https://meccachameleon.com',
+	siteName: 'MECCHA CHAMELEON Guide & Wiki',
+	defaultOgImage: '/images/logo.webp',
+	publisher: {
+		name: 'MECCHA CHAMELEON Guide Team',
+		type: 'Organization',
+	},
+	defaults: {
+		title: 'MECCHA CHAMELEON Game Wiki, Online & Simulator',
+		description:
+			'MECCHA CHAMELEON game hub with a beginner guide, Wiki Maps, online multiplayer help, a 3D Camouflage Simulator, and verified Steam patch notes.',
+		keywords:
+			'MECCHA CHAMELEON game, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes, めっちゃカメレオン',
+		locale: 'en_US',
+		type: 'website',
+	},
+	priorities: {
+		home: 1.0,
+		'beginners-hub': 0.95,
+		wiki: 0.92,
+		online: 0.9,
+		'camouflage-simulator': 0.88,
+		'wiki-maps': 0.9,
+		'wiki-map-detail': 0.82,
+		guides: 0.9,
+		'guide-detail': 0.82,
+		workshop: 0.88,
+		'workshop-detail': 0.78,
+		updates: 0.9,
+		'update-detail': 0.8,
+		'legal-privacy': 0.35,
+		'legal-terms': 0.35,
+		'legal-copyright': 0.35,
+		'legal-about': 0.45,
+		'legal-contact': 0.45,
+		search: 0.75,
+	},
+	changefreq: {
+		home: 'weekly',
+		'beginners-hub': 'monthly',
+		wiki: 'weekly',
+		online: 'monthly',
+		'camouflage-simulator': 'monthly',
+		'wiki-maps': 'weekly',
+		'wiki-map-detail': 'monthly',
+		guides: 'weekly',
+		'guide-detail': 'monthly',
+		workshop: 'weekly',
+		'workshop-detail': 'monthly',
+		updates: 'weekly',
+		'update-detail': 'monthly',
+		'legal-privacy': 'yearly',
+		'legal-terms': 'yearly',
+		'legal-copyright': 'yearly',
+		'legal-about': 'yearly',
+		'legal-contact': 'yearly',
+		search: 'monthly',
+	},
+};

@@ -1,0 +1,43 @@
+---
+// 404 页面
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/NotFoundPage.css';
+import { pageSeo } from '../seo/pages.js';
+
+const seo = pageSeo.notFound;
+---
+
+<BaseLayout
+	title={seo.title}
+	description={seo.description}
+	keywords={seo.keywords}
+	robots={seo.robots}
+>
+	<div class="NotFoundPage">
+		<section class="notfound-section">
+			<div class="container">
+				<div class="notfound-content">
+					<div class="notfound-visual">
+						<img
+							src="/images/logo.webp"
+							alt="MECCHA CHAMELEON logo"
+							width="200"
+							height="200"
+						/>
+					</div>
+					<p class="notfound-code" aria-hidden="true">404</p>
+					<h1 class="notfound-title">MECCHA CHAMELEON — Wrong Hiding Spot</h1>
+					<p class="notfound-desc">
+						This page does not exist — maybe it moved after a patch, or the URL is wrong. Head back and
+						try another route.
+					</p>
+					<div class="notfound-actions">
+						<a class="btn btn-primary" href="/">Back to Home</a>
+						<a class="btn btn-outline" href="/beginners-hub">Beginner's Hub</a>
+						<a class="btn btn-outline" href="/wiki">Wiki</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

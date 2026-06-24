@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pageSeo } from '../seo/pages.js';
+import { buildWebPageJsonLd } from '../seo/meta.js';
+import '../styles/pages/SearchPage.css';
+
+const searchSeo = pageSeo.search;
+const popularQueries = ['penguin', 'spoid', 'infection', 'workshop', 'sugarland', 'simulator'];
+---
+
+<BaseLayout
+	title={searchSeo.title}
+	description={searchSeo.description}
+	keywords={searchSeo.keywords}
+	robots="noindex, follow"
+	jsonLd={buildWebPageJsonLd({
+		name: searchSeo.title,
+		description: searchSeo.description,
+		path: '/search',
+	})}
+>
+	<div class="SearchPage">
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Search</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Site Search</span>
+					<h1>Search MECCHA CHAMELEON Guides</h1>
+					<p class="page-intro">
+						Find map reading notes, strategy guides, Workshop stages, patch notes, and tools across the
+						MECCHA CHAMELEON wiki.
+					</p>
+
+					<form class="search-form" id="search-form" action="/search" method="get" role="search">
+						<label class="search-form-label" for="search-query">Search maps, guides, or paint tips</label>
+						<div class="search-form-box">
+							<input
+								type="search"
+								id="search-query"
+								name="q"
+								class="search-form-input"
+								placeholder="Try penguin, spoid, infection…"
+								autocomplete="off"
+								autofocus
+							/>
+							<button type="submit" class="search-form-btn" aria-label="Search">
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path
+										d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"></path>
+								</svg>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<section class="search-results-section" aria-labelledby="search-results-title">
+			<div class="container">
+				<div class="search-results-content">
+					<p class="search-summary" id="search-summary" hidden></p>
+
+					<div class="search-suggestions" id="search-suggestions">
+						<p class="search-suggestions-label">Popular searches</p>
+						<div class="search-suggestion-chips">
+							{
+								popularQueries.map((term) => (
+									<a class="search-suggestion-chip" href={`/search?q=${encodeURIComponent(term)}`}>
+										{term}
+									</a>
+								))
+							}
+						</div>
+					</div>
+
+					<div class="search-empty" id="search-empty" hidden>
+						<p>No matches found. Try a shorter keyword or browse by category:</p>
+						<ul class="search-empty-links">
+							<li><a href="/wiki#wiki-maps">Wiki map notes</a></li>
+							<li><a href="/guides">Strategy guides</a></li>
+							<li><a href="/workshop">Workshop maps</a></li>
+							<li><a href="/updates">Patch notes</a></li>
+						</ul>
+					</div>
+
+					<h2 id="search-results-title" class="visually-hidden">Search results</h2>
+					<div class="search-results-list" id="search-results" hidden></div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script>
+		import { filterSearchIndex } from '../data/search-index.js';
+
+		const form = document.getElementById('search-form');
+		const input = document.getElementById('search-query') as HTMLInputElement | null;
+		const resultsEl = document.getElementById('search-results');
+		const summaryEl = document.getElementById('search-summary');
+		const emptyEl = document.getElementById('search-empty');
+		const suggestionsEl = document.getElementById('search-suggestions');
+
+		function escapeHtml(text: string) {
+			return text
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;');
+		}
+
+		function renderResults(query: string) {
+			const q = query.trim();
+			const hits = filterSearchIndex(q);
+
+			if (summaryEl) {
+				if (q.length >= 2) {
+					summaryEl.textContent = hits.length
+						? `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`
+						: `No results for “${q}”`;
+					summaryEl.hidden = false;
+				} else if (q.length > 0) {
+					summaryEl.textContent = 'Type at least 2 characters to search.';
+					summaryEl.hidden = false;
+				} else {
+					summaryEl.hidden = true;
+				}
+			}
+
+			if (emptyEl) emptyEl.hidden = !(q.length >= 2 && hits.length === 0);
+			if (suggestionsEl) suggestionsEl.hidden = q.length >= 2;
+
+			if (!resultsEl) return;
+
+			if (q.length < 2 || hits.length === 0) {
+				resultsEl.innerHTML = '';
+				resultsEl.hidden = true;
+				return;
+			}
+
+			resultsEl.hidden = false;
+			resultsEl.innerHTML = hits
+				.map(
+					(item) =>
+						`<a class="search-result-card" href="${item.url}"><span class="search-result-cat">${escapeHtml(item.category)}</span><h3 class="search-result-title">${escapeHtml(item.title)}</h3><p class="search-result-desc">${escapeHtml(item.description)}</p></a>`
+				)
+				.join('');
+		}
+
+		function syncUrl(query: string) {
+			const params = new URLSearchParams(window.location.search);
+			const trimmed = query.trim();
+
+			if (trimmed) params.set('q', trimmed);
+			else params.delete('q');
+
+			const next = params.toString();
+			history.replaceState(null, '', next ? `/search?${next}` : '/search');
+		}
+
+		function handleSearch() {
+			const q = input?.value || '';
+			syncUrl(q);
+			renderResults(q);
+		}
+
+		const initial = new URLSearchParams(window.location.search).get('q') || '';
+		if (input) input.value = initial;
+		renderResults(initial);
+
+		form?.addEventListener('submit', (event) => {
+			event.preventDefault();
+			handleSearch();
+		});
+		input?.addEventListener('input', handleSearch);
+	</script>
+</BaseLayout>

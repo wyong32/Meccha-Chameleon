@@ -1,0 +1,465 @@
+---
+// Home 首页 — Wiki & Community Hub
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/HomePage.css';
+import { wikiMaps } from '../data/wiki-maps.js';
+import { guides } from '../data/guides.js';
+import { siteStats, verifiedStoreSnapshot } from '../data/site-meta.js';
+import { pageSeo } from '../seo/pages.js';
+import { buildFaqJsonLd, buildWebPageJsonLd, toAbsoluteUrl } from '../seo/meta.js';
+import { seoConfig } from '../seo/config.js';
+
+const corePillars = [
+	{ title: 'Wiki Maps', tag: 'Map Library', desc: 'Read patch-linked map notes and practical scene-reading prompts in the Wiki.', href: '/wiki#wiki-maps' },
+	{ title: 'Hide & Seek Loop', tag: 'Game Mode', desc: 'Prep time to disguise, then a timed hunt. Hand-painted camouflage means no two rounds play alike.', href: '/wiki' },
+	{ title: 'Pose System', tag: 'Silhouette Break', desc: 'Use a pose before painting so your body reads like part of the scene instead of an extra outline.', href: '/wiki' },
+	{ title: 'Online Matches', tag: 'Social', desc: 'Private friend rooms, public lobbies, and group rules for party sessions.', href: '/online' },
+	{ title: 'Workshop Maps', tag: 'Community', desc: 'Browse community stages, then set up a short private test before hosting.', href: '/workshop' },
+	{ title: 'Scoring & Rankings', tag: 'Competitive', desc: 'Use post-round feedback to refine routes, camouflage, and Seeker reads.', href: '/wiki' },
+];
+const playerJourney = [
+	{ step: '01', title: 'Learn the Basics', desc: 'Understand roles, match phases, and a repeatable first-match plan.', href: '/beginners-hub', cta: "Beginner's Hub" },
+	{ step: '02', title: 'Practise Colour & Silhouette', desc: 'Test backdrop matching, pose scale, and two-tone sampling.', href: '/camouflage-simulator', cta: 'Open Simulator' },
+	{ step: '03', title: 'Map-Specific Data', desc: 'Read landmark prompts, scene drills, and Seeker sweep habits.', href: '/wiki#wiki-maps', cta: 'Wiki Maps' },
+	{ step: '04', title: 'Stay Patch-Ready', desc: 'Track map, feature, and stability changes after updates.', href: '/updates', cta: 'Patch Notes' },
+];
+
+const latestUpdates = [
+	{ version: 'v1.8.1', title: 'Update Notice and Rollback', date: '2026-06-24', href: '/updates' },
+	{ version: 'v1.8.0', title: '11 Emotes and Osaka Fixes', date: '2026-06-24', href: '/updates' },
+	{ version: 'v1.7.0', title: 'Osaka Map and Report Feature', date: '2026-06-22', href: '/updates' },
+];
+const featuredCamo = [...wikiMaps]
+	.sort((a, b) => b.publishDate.localeCompare(a.publishDate))
+	.slice(0, 3);
+const featuredGuides = [...guides]
+	.sort((a, b) => b.publishDate.localeCompare(a.publishDate))
+	.slice(0, 3);
+const heroVideoId = 'X-65m9poaSY';
+
+const faqItems = [
+	{
+		q: 'What is MECCHA CHAMELEON?',
+		a: 'A Steam multiplayer hide-and-seek party game by LEMORION (lemorion_1224). Hiders paint their white chameleon body to blend into each stage; Seekers hunt in first person before the timer ends. The Japanese title めっちゃカメレオン means "super chameleon."',
+	},
+	{
+		q: 'How do you pronounce MECCHA CHAMELEON?',
+		a: 'MECCHA is like "meh-cha" (Kansai slang for "very"). CHAMELEON is standard English. Japanese players often say meccha kame-reon.',
+	},
+	{
+		q: 'What is the Camouflage Simulator?',
+		a: 'It is this site’s browser-based practice tool, not the full game. Upload a background, rotate and paint a 3D figure, then use the exercise to test colour matching and silhouette choices before a live round.',
+	},
+	{
+		q: 'How do you hide effectively?',
+		a: 'Pick your spot fast, pose first, Spoid two tones (lit + shadow), paint visible surfaces, stay still. Spot, pose, and paint skill beat perfect art in prep-limited rounds.',
+	},
+	{
+		q: 'What platforms is it on?',
+		a: 'PC via Steam (App ID 4704690). The Steam store currently lists Windows; it does not list native macOS or Linux support. Not on Roblox, mobile, or consoles at launch.',
+	},
+	{
+		q: 'How many players per lobby?',
+		a: 'Designed for 2–10. Normal suits 2–4; Infection (増え鬼) shines at 6–10; Double works for 4–8.',
+	},
+	{
+		q: 'How does the paint system work?',
+		a: 'Press F for the palette, use Spoid to sample stage colors, left-click to apply, R for poses. No preset skins — freehand camouflage every round.',
+	},
+	{
+		q: 'Can you create custom maps?',
+		a: 'Yes — official modding tools and Steam Workshop support community stages. Subscribe in Steam, enable in lobby, test privately first.',
+	},
+	{
+		q: 'Is this the official website?',
+		a: 'No — this is an unofficial player guide. If a clip or route stops working, check the Updates page for your build version.',
+	},
+];
+
+const homeSeo = pageSeo.home;
+const faqJsonLd = buildFaqJsonLd(faqItems);
+const homePageJsonLd = buildWebPageJsonLd({
+	name: homeSeo.title,
+	description: homeSeo.description,
+	path: '/',
+});
+const orgJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: seoConfig.siteName,
+	description: 'Player-maintained guide and wiki for MECCHA CHAMELEON on Steam.',
+	url: Astro.site?.href,
+	logo: toAbsoluteUrl(seoConfig.defaultOgImage, Astro.site?.href),
+};
+---
+
+<BaseLayout
+	title={homeSeo.title}
+	description={homeSeo.description}
+	keywords={homeSeo.keywords}
+	jsonLd={[homePageJsonLd, faqJsonLd, orgJsonLd]}
+>
+	<div class="HomePage">
+		<!-- Hero：品牌 + 搜索 + 动图占位 -->
+		<section class="hero-section" aria-labelledby="hero-title">
+			<div class="container">
+				<div class="hero-content">
+					<div class="hero-text">
+						<div class="hero-eyebrow">
+							<span class="hero-eyebrow-dot" aria-hidden="true"></span>
+							FIELD NOTES · REVIEWED {siteStats.lastVerified}
+						</div>
+						<h1 id="hero-title" class="hero-title">MECCHA CHAMELEON Game, Beginner's, Wiki, Online & Camouflage Simulator</h1>
+						<p class="hero-desc">
+							Find map reading notes, the 3D Camouflage Simulator, multiplayer help, and verified patch notes —
+							all organised around your next better round.
+						</p>
+
+						<form class="hero-search-form" action="/search" method="get" role="search">
+							<label class="hero-search-label" for="site-search">Find a route, map, or paint workflow</label>
+							<div class="hero-search-box">
+								<input
+									type="search"
+									id="site-search"
+									name="q"
+									class="hero-search-input"
+									placeholder="Search maps, guides, or paint tips..."
+									autocomplete="off"
+								/>
+								<button type="submit" class="hero-search-btn" aria-label="Search">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+										<path
+											d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"></path>
+									</svg>
+								</button>
+							</div>
+						</form>
+
+						<div class="hero-actions">
+							<a class="btn btn-primary" href="/beginners-hub">Build your first disguise</a>
+							<a class="btn btn-outline btn-outline-light" href="/camouflage-simulator">Open Camouflage Simulator</a>
+						</div>
+					</div>
+
+					<div class="hero-visual">
+						<div class="hero-visual-frame hero-video-frame">
+							<span class="hero-visual-label">TRAILER / 01</span>
+							<div class="hero-video" id="hero-video">
+								<div class="hero-video-player" id="hero-video-player"></div>
+								<button
+									type="button"
+									class="hero-video-poster"
+									id="hero-video-trigger"
+									aria-label="Play MECCHA CHAMELEON trailer"
+								>
+									<img
+										src="/images/home-hero-img.webp"
+										alt="MECCHA CHAMELEON trailer preview"
+										width="480"
+										height="270"
+										loading="eager"
+									/>
+									<span class="hero-video-play" aria-hidden="true">
+										<svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+											<circle cx="36" cy="36" r="36" fill="rgba(38, 20, 47, 0.72)"></circle>
+											<circle cx="36" cy="36" r="33" stroke="rgba(255, 255, 255, 0.85)" stroke-width="2"></circle>
+											<path d="M30 24v24l18-12-18-12z" fill="#fff"></path>
+										</svg>
+									</span>
+								</button>
+							</div>
+						</div>
+						<span class="hero-stat-chip">PAINT · POSE · HIDE</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Official-store snapshot -->
+		<section class="stats-section" aria-label="Official Steam store snapshot">
+			<div class="container">
+				<div class="stats-content">
+					<div class="stats-panel">
+						<div class="stat-item">
+							<span class="stat-value">{verifiedStoreSnapshot.totalReviews}</span>
+							<span class="stat-label">All-language reviews</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-value">{verifiedStoreSnapshot.positiveRate}</span>
+							<span class="stat-label">Positive reviews</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-value">{verifiedStoreSnapshot.reviewLabel}</span>
+							<span class="stat-label">Steam review summary</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-value">{verifiedStoreSnapshot.price}</span>
+							<span class="stat-label">US store price</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-value">{verifiedStoreSnapshot.releaseDate}</span>
+							<span class="stat-label">Steam release date</span>
+						</div>
+					</div>
+					<p class="stats-source-note">Steam store figures as of {verifiedStoreSnapshot.checkedOn}. Prices and review totals change over time.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- 玩家路径 -->
+		<section class="journey-section" aria-labelledby="journey-title">
+			<div class="container">
+				<div class="journey-content">
+					<header class="section-header">
+						<span class="section-label">Your Journey</span>
+						<h2 id="journey-title">From First Round to Lobby Legend</h2>
+						<p class="section-intro">
+							Follow the same path most successful lobbies use: learn the rules, master both roles, then
+							lean on map-specific data when the meta shifts.
+						</p>
+					</header>
+					<div class="journey-grid">
+						{
+							playerJourney.map((item) => (
+								<a class="journey-card" href={item.href}>
+									<span class="journey-step">{item.step}</span>
+									<h3 class="journey-title">{item.title}</h3>
+									<p class="journey-desc">{item.desc}</p>
+									<span class="journey-cta">{item.cta} →</span>
+								</a>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 六大支柱 -->
+		<section class="pillars-section" aria-labelledby="pillars-title">
+			<div class="container">
+				<div class="pillars-content">
+					<header class="section-header">
+						<span class="section-label">Core Systems</span>
+						<h2 id="pillars-title">What Makes MECCHA CHAMELEON Unique</h2>
+					</header>
+					<div class="pillars-grid">
+						{
+							corePillars.map((pillar) => (
+								<article class="pillar-card">
+									<span class="pillar-tag">{pillar.tag}</span>
+									<h3 class="pillar-title">{pillar.title}</h3>
+									<p class="pillar-desc">{pillar.desc}</p>
+									<a class="pillar-link" href={pillar.href}>
+										Read more →
+									</a>
+								</article>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 更新列表 -->
+		<section class="updates-section" aria-labelledby="updates-title">
+			<div class="container">
+				<div class="updates-content">
+					<header class="section-header section-header--dark">
+						<span class="section-label">Patch Radar</span>
+						<h2 id="updates-title">Latest Game Updates</h2>
+					</header>
+					<div class="updates-list">
+						{
+							latestUpdates.map((item) => (
+								<a class="update-row" href={item.href}>
+									<span class="update-version">{item.version}</span>
+									<span class="update-title-text">{item.title}</span>
+									<span class="update-date">{item.date}</span>
+								</a>
+							))
+						}
+					</div>
+						<a class="btn btn-outline btn-outline-light" href="/updates">Browse all patch notes</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- 游戏概览 -->
+		<section class="glance-section" aria-labelledby="glance-title">
+			<div class="container">
+				<div class="glance-content">
+					<div class="glance-grid">
+						<div>
+							<header class="section-header">
+								<span class="section-label">At a Glance</span>
+								<h2 id="glance-title">What Is MECCHA CHAMELEON?</h2>
+							</header>
+							<p>
+								Every round splits <strong>Hiders</strong> and <strong>Seekers</strong>. Hiders get
+								prep time to paint and pose; Seekers sweep in first person with no flashlight. Unlike
+								classic Prop Hunt, you never become a preset box — your body is the canvas.
+							</p>
+							<p>
+								Success comes from three skills working together: choosing a strong spot, breaking
+								your silhouette with poses, and matching local colors with the Spoid tool. Our guides
+								track the live meta after {siteStats.currentVersion} across {siteStats.playerRange}-player
+								lobbies.
+							</p>
+							<a class="btn btn-primary" href="/wiki">Open Full Wiki</a>
+						</div>
+						<div>
+							<table class="glance-table">
+								<tbody>
+									<tr><th>Developer</th><td>{siteStats.developer}</td></tr>
+									<tr><th>Platform</th><td>{siteStats.platform}</td></tr>
+									<tr><th>Release</th><td>{siteStats.releaseDate}</td></tr>
+									<tr><th>Players</th><td>{siteStats.playerRange} recommended</td></tr>
+									<tr><th>Languages</th><td>{siteStats.languages} on Steam</td></tr>
+									<tr><th>Modding</th><td>Official tools + Workshop</td></tr>
+									<tr><th>Genre</th><td>Casual party / hide-and-seek</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 精选内容 -->
+		<section class="featured-section" aria-labelledby="featured-camo-title">
+			<div class="container">
+				<div class="featured-block">
+					<header class="section-header section-header--row">
+						<div class="section-header-text">
+							<span class="section-label">Wiki Maps</span>
+							<h2 id="featured-camo-title">Official Map Reading & Camouflage Notes</h2>
+						</div>
+						<a class="btn btn-outline" href="/wiki#wiki-maps">All maps</a>
+					</header>
+					<div class="card-grid">
+						{
+							featuredCamo.map((item) => (
+								<a class="list-card" href={`/wiki/maps/${item.addressBar}`}>
+									<img class="list-card-image" src={item.imageUrl} alt={item.imageAlt} width="800" height="500" loading="lazy" />
+									<div class="list-card-body">
+										<h3 class="list-card-title">{item.title}</h3>
+										<p class="list-card-desc">{item.description}</p>
+										<span class="list-card-meta">
+											<span class="list-card-tag">{item.tag}</span>
+											<time datetime={item.publishDate}>{item.publishDate}</time>
+										</span>
+									</div>
+								</a>
+							))
+						}
+					</div>
+				</div>
+
+				<div class="featured-block">
+					<header class="section-header section-header--row">
+						<div class="section-header-text">
+							<span class="section-label">Strategy Guides</span>
+							<h2 id="featured-guides-title">Player-Written Deep Dives</h2>
+						</div>
+						<a class="btn btn-outline" href="/guides">All guides</a>
+					</header>
+					{
+						featuredGuides.length ? (
+							<div class="card-grid">
+								{featuredGuides.map((item) => (
+								<a class="list-card" href={`/guides/${item.addressBar}`}>
+									<img class="list-card-image" src={item.imageUrl} alt={item.imageAlt} width="800" height="500" loading="lazy" />
+									<div class="list-card-body">
+										<h3 class="list-card-title">{item.title}</h3>
+										<p class="list-card-desc">{item.description}</p>
+										<span class="list-card-meta">{item.publishDate}</span>
+									</div>
+								</a>
+								))}
+							</div>
+						) : (
+							<p>Sorry, there are no guides available yet.</p>
+						)
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="simulator-promo" aria-labelledby="simulator-title">
+			<div class="container">
+				<div class="simulator-promo__grid">
+					<div class="simulator-promo__copy">
+						<span class="section-label">Practice Tool</span>
+						<h2 id="simulator-title">MECCHA CHAMELEON Camouflage Simulator</h2>
+						<p>
+							Upload a background screenshot, rotate a 3D practice figure, and test colour matching and
+							silhouette before you commit to a hide in a live lobby.
+						</p>
+						<ul class="simulator-promo__features">
+							<li>Background upload with scale and pan</li>
+							<li>Paint mode and rotate mode on the same figure</li>
+							<li>Colour wheel, brush size, undo, and PNG export</li>
+						</ul>
+						<a class="btn btn-primary" href="/camouflage-simulator">Open Camouflage Simulator</a>
+					</div>
+					<div class="simulator-promo__visual" aria-hidden="true">
+						<div class="simulator-promo__panel">
+							<span class="simulator-promo__badge">Browser practice</span>
+							<p class="simulator-promo__panel-title">Test the disguise idea first</p>
+							<ul class="simulator-promo__steps">
+								<li><strong>1.</strong> Upload your backdrop</li>
+								<li><strong>2.</strong> Match local colour on the figure</li>
+								<li><strong>3.</strong> Rotate and check the outline</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FAQ -->
+		<section class="faq-section" aria-labelledby="faq-title">
+			<div class="container">
+				<div class="faq-content">
+					<header class="section-header">
+						<span class="section-label">FAQ</span>
+						<h2 id="faq-title">Questions Players Actually Ask</h2>
+					</header>
+					<div class="faq-grid">
+						{
+							faqItems.map((item) => (
+								<article class="faq-item">
+									<h3 class="faq-question">{item.q}</h3>
+									<p class="faq-answer">{item.a}</p>
+								</article>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script is:inline define:vars={{ heroVideoId }}>
+		const heroVideoTrigger = document.getElementById('hero-video-trigger');
+		const heroVideoPlayer = document.getElementById('hero-video-player');
+
+		heroVideoTrigger?.addEventListener('click', () => {
+			if (!heroVideoPlayer) return;
+
+			const iframe = document.createElement('iframe');
+			iframe.src = `https://www.youtube.com/embed/${heroVideoId}?autoplay=1&rel=0`;
+			iframe.title = 'MECCHA CHAMELEON trailer';
+			iframe.allow =
+				'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+			iframe.allowFullscreen = true;
+			iframe.loading = 'lazy';
+
+			heroVideoPlayer.appendChild(iframe);
+			heroVideoTrigger.remove();
+		});
+	</script>
+</BaseLayout>

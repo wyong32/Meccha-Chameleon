@@ -1,0 +1,32 @@
+/* Beginner's Hub — 页面特有样式（Hero 用 InnerPage 全局） */
+
+.BeginnersHubPage .cta-section {
+	padding-block: 3.5rem 4.5rem;
+	text-align: center;
+	background: var(--color-dark-bg);
+	color: var(--color-dark-text);
+}
+
+.BeginnersHubPage .cta-section h2 {
+	color: #fff;
+}
+
+.BeginnersHubPage .cta-section p {
+	color: var(--color-dark-muted);
+	max-width: 48ch;
+	margin-inline: auto;
+}
+
+.BeginnersHubPage .cta-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+
+.BeginnersHubPage .inline-img {
+	margin-top: 1.5rem;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-border);
+}
