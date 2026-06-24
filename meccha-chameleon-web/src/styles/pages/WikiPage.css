@@ -1,4 +1,4 @@
-/* Wiki 页面 — 参考布局与地图列表 */
+/* Wiki page — field-guide map library */
 
 .WikiPage .wiki-link-grid {
 	display: grid;
@@ -40,37 +40,160 @@
 }
 
 .WikiPage .wiki-map-section {
-	padding-block: clamp(2.75rem, 5vw, 4rem);
-	background: #eef5f1;
+	position: relative;
+	padding-block: clamp(3rem, 5.5vw, 5rem);
+	background:
+		radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--color-primary) 21%, transparent) 0 9rem, transparent 9.2rem),
+		radial-gradient(circle at 0% 100%, rgba(255, 124, 98, 0.2) 0 10rem, transparent 10.2rem),
+		#fff9ee;
+	overflow: hidden;
 }
 
-.WikiPage .wiki-map-section .section-header-row {
+.WikiPage .wiki-map-section::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: radial-gradient(color-mix(in srgb, var(--color-primary-deep) 18%, transparent) 1px, transparent 1.5px);
+	background-size: 15px 15px;
+	opacity: 0.26;
+	pointer-events: none;
+}
+
+.WikiPage .wiki-map-section .container {
+	position: relative;
+}
+
+.WikiPage .wiki-map-header {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: flex-end;
+	align-items: end;
 	justify-content: space-between;
-	gap: 1rem;
-	margin-bottom: 1.25rem;
+	gap: 1.5rem 2.5rem;
+	margin-bottom: 1.9rem;
 }
 
 .WikiPage .wiki-map-section h2 {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+	max-width: 17ch;
+	font-size: clamp(1.9rem, 4vw, 3.15rem);
+	line-height: 0.98;
+	letter-spacing: -0.045em;
+	color: var(--color-primary-deep);
+}
+
+.WikiPage .wiki-map-kicker {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.8rem;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--color-primary-deep);
+}
+
+.WikiPage .wiki-map-kicker::before {
+	content: '';
+	width: 0.75rem;
+	height: 0.75rem;
+	border-radius: 50%;
+	background: #ff7c62;
+	box-shadow: 0 0 0 4px rgba(255, 124, 98, 0.16);
 }
 
 .WikiPage .wiki-map-section .section-intro {
-	max-width: 62ch;
-	margin: 0.5rem 0 0;
+	max-width: 58ch;
+	margin: 0.85rem 0 0;
+	color: color-mix(in srgb, var(--color-primary-deep) 74%, var(--color-text-muted));
+	line-height: 1.7;
+}
+
+.WikiPage .wiki-map-source {
+	width: min(100%, 21rem);
+	padding: 1rem 1.1rem 1.05rem;
+	background: color-mix(in srgb, var(--color-surface) 84%, #fff9ee);
+	border: 1px solid color-mix(in srgb, var(--color-primary-deep) 22%, transparent);
+	border-radius: 0.75rem;
+	box-shadow: 5px 5px 0 color-mix(in srgb, #ff7c62 34%, transparent);
+}
+
+.WikiPage .wiki-map-source span,
+.WikiPage .wiki-map-card-cues > span {
+	display: block;
+	font-size: 0.64rem;
+	font-weight: 800;
+	letter-spacing: 0.11em;
+	text-transform: uppercase;
+	color: #a04e3f;
+}
+
+.WikiPage .wiki-map-source strong {
+	display: block;
+	margin-top: 0.2rem;
+	font-family: var(--font-heading);
+	font-size: 1rem;
+	color: var(--color-primary-deep);
+}
+
+.WikiPage .wiki-map-source p {
+	margin: 0.55rem 0 0;
+	font-size: 0.78rem;
+	line-height: 1.5;
 	color: var(--color-text-muted);
-	line-height: 1.65;
+}
+
+.WikiPage .wiki-map-source a {
+	color: var(--color-primary-deep);
+	font-weight: 700;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.15em;
+}
+
+.WikiPage .wiki-reading-rules {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	margin: 1.5rem 0 2.25rem;
+	border-top: 1px solid color-mix(in srgb, var(--color-primary-deep) 22%, transparent);
+	border-bottom: 1px solid color-mix(in srgb, var(--color-primary-deep) 22%, transparent);
+}
+
+.WikiPage .wiki-reading-rule {
+	padding: 1.2rem 1.35rem 1.25rem;
+	border-right: 1px solid color-mix(in srgb, var(--color-primary-deep) 18%, transparent);
+}
+
+.WikiPage .wiki-reading-rule:last-child {
+	border-right: 0;
+}
+
+.WikiPage .wiki-reading-rule > span {
+	font-family: var(--font-heading);
+	font-size: 0.8rem;
+	font-weight: 800;
+	color: #ff6f55;
+}
+
+.WikiPage .wiki-reading-rule h3 {
+	margin: 0.3rem 0 0.35rem;
+	font-size: 1rem;
+	line-height: 1.2;
+	color: var(--color-primary-deep);
+}
+
+.WikiPage .wiki-reading-rule p {
+	margin: 0;
+	font-size: 0.83rem;
+	line-height: 1.55;
+	color: var(--color-text-muted);
 }
 
 .WikiPage .wiki-map-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-	gap: 1.25rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.15rem;
 }
 
 .WikiPage .wiki-map-card {
@@ -80,9 +203,9 @@
 	color: inherit;
 	background: var(--color-surface);
 	border: 1px solid var(--color-border);
-	border-radius: var(--radius-lg);
+	border-radius: 0.9rem;
 	overflow: hidden;
-	box-shadow: var(--shadow-sm);
+	box-shadow: 0 9px 0 rgba(36, 57, 44, 0.08);
 	transition:
 		border-color var(--transition),
 		box-shadow var(--transition),
@@ -90,10 +213,16 @@
 }
 
 .WikiPage .wiki-map-card:hover {
-	border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
-	box-shadow: var(--shadow-md);
-	transform: translateY(-3px);
+	border-color: color-mix(in srgb, #ff7c62 65%, var(--color-border));
+	box-shadow: 0 13px 0 rgba(36, 57, 44, 0.12);
+	transform: translateY(-4px) rotate(-0.15deg);
 	color: inherit;
+}
+
+.WikiPage .wiki-map-card-media {
+	position: relative;
+	overflow: hidden;
+	background: var(--color-primary-deep);
 }
 
 .WikiPage .wiki-map-card img {
@@ -101,13 +230,32 @@
 	height: auto;
 	aspect-ratio: 16 / 10;
 	object-fit: cover;
+	transition: transform 280ms ease;
+}
+
+.WikiPage .wiki-map-card:hover img {
+	transform: scale(1.035);
+}
+
+.WikiPage .wiki-map-card-number {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	padding: 0.3rem 0.5rem;
+	border-radius: 0.35rem;
+	background: rgba(31, 46, 37, 0.88);
+	color: #fffdf4;
+	font-size: 0.65rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 
 .WikiPage .wiki-map-card-body {
 	display: flex;
 	flex-direction: column;
-	gap: 0.45rem;
-	padding: 1rem 1.1rem 1.15rem;
+	gap: 0.6rem;
+	padding: 1rem 1.1rem 1.05rem;
 	flex: 1;
 }
 
@@ -119,32 +267,91 @@
 	letter-spacing: 0.08em;
 	padding: 0.22rem 0.5rem;
 	border-radius: 999px;
-	color: var(--color-primary-deep);
-	background: color-mix(in srgb, var(--color-primary) 22%, #fff);
+	color: #6a452e;
+	background: #f6d27b;
 }
 
 .WikiPage .wiki-map-card h3 {
 	margin: 0;
-	font-size: 1.05rem;
-	line-height: 1.35;
+	font-size: 1.18rem;
+	line-height: 1.15;
 	color: var(--color-primary-deep);
 }
 
-.WikiPage .wiki-map-card p {
+.WikiPage .wiki-map-card-overview {
 	margin: 0;
-	font-size: 0.875rem;
+	font-size: 0.83rem;
 	line-height: 1.55;
 	color: var(--color-text-muted);
 	flex: 1;
 }
 
-.WikiPage .wiki-map-card-meta {
-	font-size: 0.8125rem;
-	font-weight: 600;
+.WikiPage .wiki-map-card-cues {
+	padding-top: 0.65rem;
+	border-top: 1px dashed color-mix(in srgb, var(--color-primary-deep) 30%, transparent);
+}
+
+.WikiPage .wiki-map-card-cues p {
+	margin: 0.25rem 0 0;
+	font-size: 0.78rem;
+	line-height: 1.45;
+	color: var(--color-primary-deep);
+}
+
+.WikiPage .wiki-map-card-link {
+	margin-top: 0.1rem;
+	font-size: 0.8rem;
+	font-weight: 800;
+	color: #b04f3d;
+}
+
+.WikiPage .wiki-map-card-link span {
+	display: inline-block;
+	transition: transform 160ms ease;
+}
+
+.WikiPage .wiki-map-card:hover .wiki-map-card-link span {
+	transform: translate(2px, -2px);
+}
+
+.WikiPage .wiki-map-editorial-note {
+	max-width: 74ch;
+	margin: 2rem auto 0;
+	padding: 0.8rem 1rem;
+	border-left: 3px solid #ff7c62;
+	background: rgba(255, 255, 255, 0.62);
+	font-size: 0.78rem;
+	line-height: 1.55;
 	color: var(--color-text-muted);
 }
 
+.WikiPage .wiki-map-editorial-note strong {
+	color: var(--color-primary-deep);
+}
+
 @media (max-width: 768px) {
+	.WikiPage .wiki-map-header {
+		align-items: flex-start;
+	}
+
+	.WikiPage .wiki-map-section h2 {
+		font-size: clamp(1.75rem, 9vw, 2.45rem);
+	}
+
+	.WikiPage .wiki-reading-rules {
+		grid-template-columns: 1fr;
+	}
+
+	.WikiPage .wiki-reading-rule,
+	.WikiPage .wiki-reading-rule:last-child {
+		border-right: 0;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-primary-deep) 18%, transparent);
+	}
+
+	.WikiPage .wiki-reading-rule:last-child {
+		border-bottom: 0;
+	}
+
 	.WikiPage .wiki-map-grid {
 		grid-template-columns: 1fr;
 	}

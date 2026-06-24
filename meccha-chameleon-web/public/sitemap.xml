@@ -120,18 +120,6 @@
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://meccachameleon.com/guides/seeker-scan-patterns</loc>
-    <lastmod>2026-06-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-  <url>
-    <loc>https://meccachameleon.com/guides/infection-mode-survival</loc>
-    <lastmod>2026-06-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-  <url>
     <loc>https://meccachameleon.com/workshop/meeting-room</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>

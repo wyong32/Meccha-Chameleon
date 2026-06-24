@@ -16,7 +16,7 @@ export const seoConfig = {
 		description:
 			'MECCHA CHAMELEON game hub with a beginner guide, Wiki Maps, online multiplayer help, a 3D Camouflage Simulator, and verified Steam patch notes.',
 		keywords:
-			'MECCHA CHAMELEON game, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes, めっちゃカメレオン',
+			'MECCHA CHAMELEON game, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes',
 		locale: 'en_US',
 		type: 'website',
 	},

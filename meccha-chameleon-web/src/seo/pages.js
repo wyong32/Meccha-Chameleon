@@ -7,21 +7,21 @@ export const pageSeo = {
 		description:
 			'MECCHA CHAMELEON game hub with a beginner guide, Wiki Maps, online multiplayer help, a 3D Camouflage Simulator, and verified Steam patch notes.',
 		keywords:
-			'MECCHA CHAMELEON game, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes, めっちゃカメレオン',
+			'MECCHA CHAMELEON game, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes',
 	},
 	beginnersHub: {
 		title: "Beginner's Hub — How to Play MECCHA CHAMELEON",
 		description:
 			'Complete MECCHA CHAMELEON beginner guide for Steam: controls, Hider vs Seeker roles, match phases, game modes, and a first-match plan you can repeat in private lobbies.',
 		keywords:
-			'meccha chameleon how to play, beginner guide, steam tutorial, controls spoid pose, first match guide, めっちゃカメレオン',
+			'meccha chameleon how to play, beginner guide, steam tutorial, controls spoid pose, first match guide',
 	},
 	wiki: {
 		title: 'MECCHA CHAMELEON Wiki — Rules & Mechanics',
 		description:
-			'MECCHA CHAMELEON wiki covering game overview, 通常/増え鬼/ダブル modes, paint tools, scoring, platforms, patch history, and links to map reading and strategy guides.',
+			'MECCHA CHAMELEON wiki covering game overview, Normal, Infection, and Double modes, paint tools, scoring, platforms, patch history, and links to map reading and strategy guides.',
 		keywords:
-			'meccha chameleon wiki, めっちゃカメレオン, game rules, mechanics, modes, patch notes, steam party game',
+			'meccha chameleon wiki, game rules, mechanics, modes, patch notes, steam party game',
 	},
 	online: {
 		title: 'MECCHA CHAMELEON Online — Multiplayer Guide',

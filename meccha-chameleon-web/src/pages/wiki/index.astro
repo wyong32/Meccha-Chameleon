@@ -14,6 +14,9 @@ const wikiJsonLd = buildWebPageJsonLd({
 	description: seo.description,
 	path: '/wiki',
 });
+
+const officialMapCount = wikiMaps.length;
+const mapSourceChecked = 'June 24, 2026';
 ---
 
 <BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={wikiJsonLd}>
@@ -44,12 +47,81 @@ const wikiJsonLd = buildWebPageJsonLd({
 
 		<div class="anchored-page-body">
 			<div class="anchored-page-content">
+				<section class="wiki-map-section" id="wiki-maps" aria-labelledby="wiki-maps-title">
+					<div class="container">
+						<div class="wiki-map-header">
+							<div class="wiki-map-heading">
+								<span class="wiki-map-kicker">Map library · {officialMapCount} stages</span>
+								<h2 id="wiki-maps-title">Official Maps in MECCHA CHAMELEON</h2>
+								<p class="section-intro">
+									Pick the stage in your next lobby, learn its recurring materials and sightlines, then test one
+									idea in a private round. These notes are built for scene reading, not permanent “best spot” claims.
+								</p>
+							</div>
+							<aside class="wiki-map-source" aria-label="Map roster source">
+								<span>Roster checked</span>
+								<strong>{mapSourceChecked}</strong>
+								<p>
+									Map names and public location context cross-checked with
+									<a href="https://www.ign.com/wikis/meccha-chameleon/All_Maps_in_Meccha_Chameleon:_Best_Hiding_Spots" target="_blank" rel="noreferrer">IGN’s map guide</a>.
+								</p>
+							</aside>
+						</div>
+
+						<div class="wiki-reading-rules" aria-label="How to read a map">
+							<div class="wiki-reading-rule">
+								<span>01</span>
+								<h3>Choose one material family</h3>
+								<p>Start with one repeatable cue: hay, hotel plush, office furniture, painted wall, or a shadowed truck surface.</p>
+							</div>
+							<div class="wiki-reading-rule">
+								<span>02</span>
+								<h3>Match shape before detail</h3>
+								<p>Height, width, and silhouette have to belong to the scene before a colour match can rescue the position.</p>
+							</div>
+							<div class="wiki-reading-rule">
+								<span>03</span>
+								<h3>Audit the approach route</h3>
+								<p>Walk the likely Seeker angle once. A disguise that works from close up can fail from the doorway or far lane.</p>
+							</div>
+						</div>
+
+						<div class="wiki-map-grid">
+							{
+								wikiMaps.map((item, index) => (
+									<a class="wiki-map-card" href={`/wiki/maps/${item.addressBar}`}>
+										<div class="wiki-map-card-media">
+											<img src={item.imageUrl} alt={item.imageAlt} width="800" height="500" loading={index < 2 ? 'eager' : 'lazy'} />
+											<span class="wiki-map-card-number">Map {String(index + 1).padStart(2, '0')}</span>
+										</div>
+										<div class="wiki-map-card-body">
+											<span class="wiki-map-card-tag">{item.tag}</span>
+											<h3>{item.title.replace('MECCHA CHAMELEON ', '').replace(/ — .+$/, '')}</h3>
+											<p class="wiki-map-card-overview">{item.overview}</p>
+											<div class="wiki-map-card-cues">
+												<span>Start scouting</span>
+												<p>{item.landmarks.slice(0, 2).map((entry) => entry.landmark).join(' · ')}</p>
+											</div>
+											<span class="wiki-map-card-link">Open map note <span aria-hidden="true">↗</span></span>
+										</div>
+									</a>
+								))
+							}
+						</div>
+
+						<p class="wiki-map-editorial-note">
+							<strong>How these notes are maintained:</strong> stage names and public map context are source-checked;
+							spot, pose, paint, and sweep advice is original practice guidance that should be retested after patches.
+						</p>
+					</div>
+				</section>
+
 				<section class="inner-content-section">
 					<div class="container">
 						<div class="inner-content-block">
 							<h2 id="game-overview">Game overview</h2>
 							<p>
-								<strong>MECCHA CHAMELEON</strong> (めっちゃカメレオン) is a paid Steam hide-and-seek party game
+								<strong>MECCHA CHAMELEON</strong> is a paid Steam hide-and-seek party game
 								by {siteStats.developer}. Hiders hand-paint camouflage each round; Seekers hunt in first person
 								with no flashlight. Success depends on <strong>spot</strong>, <strong>pose</strong>, and
 								<strong>local colour</strong> — not preset prop skins.
@@ -90,8 +162,8 @@ const wikiJsonLd = buildWebPageJsonLd({
 						<div class="inner-content-block is-wide">
 							<h2 id="modes-mechanics">Modes, mechanics & controls</h2>
 							<p>
-								Community coverage commonly labels lobby formats as <strong>Normal (通常)</strong>,
-								<strong>Infection (増え鬼)</strong>, and <strong>Double (ダブル)</strong>. Confirm win
+								Community coverage commonly labels lobby formats as <strong>Normal</strong>,
+								<strong>Infection</strong>, and <strong>Double</strong>. Confirm win
 								conditions in your current lobby before the room starts.
 							</p>
 							<table class="inner-data-table">
@@ -107,48 +179,6 @@ const wikiJsonLd = buildWebPageJsonLd({
 					</div>
 				</section>
 
-				<section class="wiki-map-section" id="wiki-maps" aria-labelledby="wiki-maps-title">
-					<div class="container">
-						<div class="section-header-row">
-							<div>
-								<h2 id="wiki-maps-title">Map reading notes</h2>
-								<p class="section-intro">
-									Seven official stages with scene-reading prompts and study galleries where available.
-									Each page teaches how to read the room — not fixed hiding coordinates.
-								</p>
-							</div>
-						</div>
-
-						<table class="inner-data-table">
-							<thead><tr><th>What you see</th><th>Hider decision</th><th>Seeker check</th></tr></thead>
-							<tbody>
-								<tr><td>Repeated tiles, frames, or panels</td><td>Continue the rhythm with a low silhouette.</td><td>Look for a missing gap or an extra width.</td></tr>
-								<tr><td>One broad wall or floor</td><td>Match the nearby surface and reduce depth first.</td><td>Look for a body-shaped edge in the colour field.</td></tr>
-								<tr><td>Low props or furniture</td><td>Match height before detail.</td><td>Compare top lines with neighbouring objects.</td></tr>
-								<tr><td>Busy object clusters</td><td>Pick one material family and stay compact.</td><td>Find the object with the wrong scale or outline.</td></tr>
-							</tbody>
-						</table>
-
-						<div class="wiki-map-grid">
-							{
-								wikiMaps.map((item) => (
-									<a class="wiki-map-card" href={`/wiki/maps/${item.addressBar}`}>
-										<img src={item.imageUrl} alt={item.imageAlt} width="800" height="500" loading="lazy" />
-										<div class="wiki-map-card-body">
-											<span class="wiki-map-card-tag">{item.tag}</span>
-											<h3>{item.title.replace('MECCHA CHAMELEON ', '')}</h3>
-											<p>{item.description}</p>
-											<span class="wiki-map-card-meta">
-												<time datetime={item.publishDate}>{item.publishDate}</time>
-											</span>
-										</div>
-									</a>
-								))
-							}
-						</div>
-					</div>
-				</section>
-
 				<section class="inner-content-section">
 					<div class="container">
 						<div class="inner-content-block is-wide">
@@ -158,7 +188,7 @@ const wikiJsonLd = buildWebPageJsonLd({
 								<tbody>
 									<tr><td>“I need a quick first-round plan.”</td><td><a href="/beginners-hub">Beginner's Hub</a></td><td>One practice round in a private lobby</td></tr>
 									<tr><td>“My colour looks close but I still stand out.”</td><td><a href="/camouflage-simulator">Camouflage Simulator</a></td><td>A map note for the stage in your queue</td></tr>
-									<tr><td>“I keep missing people as a Seeker.”</td><td><a href="#wiki-maps">Map notes</a></td><td>Read the Seeker column, then test a reverse angle</td></tr>
+									<tr><td>“I keep missing people as a Seeker.”</td><td>Official map notes above</td><td>Read the Seeker cues, then test a reverse angle</td></tr>
 									<tr><td>“Our group cannot get a room running.”</td><td><a href="/online">Online guide</a></td><td>Change one setting at a time until the lobby loads</td></tr>
 									<tr><td>“A clip shows a trick I cannot reproduce.”</td><td><a href="/updates">Updates</a></td><td>Current map note and a private test</td></tr>
 								</tbody>
