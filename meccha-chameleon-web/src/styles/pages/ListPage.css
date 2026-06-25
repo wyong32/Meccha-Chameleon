@@ -1,4 +1,4 @@
-/* 列表页 — Guides / Workshop 分区样式 */
+/* List pages — Guides / Workshop section styles */
 
 .ListPage .list-section {
 	padding-block: clamp(2.5rem, 5vw, 3.5rem) clamp(3rem, 6vw, 4.5rem);
@@ -34,7 +34,7 @@
 	color: var(--color-text-muted);
 }
 
-/* —— Guides：上图下文卡片 —— */
+/* Guides: image-over-copy cards */
 
 .GuidesListPage .guide-card-grid {
 	display: grid;
@@ -107,7 +107,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.3rem;
-	/* 2 行：单行 = 字号×行高 + 上下 padding */
+	/* Two-line clamp: one line equals font size times line-height plus vertical padding. */
 	max-height: calc(2 * (0.6875rem * 1.35 + 0.24rem) + 0.3rem);
 	overflow: hidden;
 	margin-top: 0.15rem;
@@ -132,7 +132,7 @@
 	color: var(--color-text-muted);
 }
 
-/* —— Workshop：横向条目列表 —— */
+/* Workshop: horizontal rows */
 
 .WorkshopListPage .workshop-list {
 	display: flex;

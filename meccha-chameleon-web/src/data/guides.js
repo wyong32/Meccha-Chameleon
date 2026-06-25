@@ -1,4 +1,4 @@
-// 攻略指南列表数据 — 玩家视角原创撰写
+// Strategy guide entries written from a player-practice perspective.
 /**
  * @typedef {Object} GuideEntry
  * @property {number} id

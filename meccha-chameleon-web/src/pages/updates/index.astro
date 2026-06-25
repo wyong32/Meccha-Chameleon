@@ -1,5 +1,5 @@
 ---
-// Updates — 单页 patch notes
+// Updates — single-page patch notes.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { siteStats } from '../../data/site-meta.js';
 import { pageSeo } from '../../seo/pages.js';
@@ -15,6 +15,17 @@ const pageJsonLd = buildWebPageJsonLd({
 });
 
 const patches = [
+	{
+		id: 'v1-9-0',
+		version: 'v1.9.0',
+		date: '2026-06-25',
+		type: 'feature',
+		typeLabel: 'Feature',
+		title: 'Cube character and pre-match selection fixes',
+		summary: 'Adds the new Cube character, individual character selection before a match, visible selected-map confirmation, desync improvements for hiding players, pose-stop fixes, and a longer hunter shotgun firing delay.',
+		links: [],
+		impact: 'Groups should confirm character choice and selected map before starting. Hiders should retest pose timing because the update fixes poses stopping midway, while Seekers should account for the longer shotgun delay.',
+	},
 	{
 		id: 'v1-8-0',
 		version: 'v1.8.0',

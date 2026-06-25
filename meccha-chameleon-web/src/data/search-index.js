@@ -1,4 +1,4 @@
-// 全站搜索索引（/search 页面 + filterSearchIndex）
+// Site search index for /search and filterSearchIndex.
 import { wikiMaps } from './wiki-maps.js';
 import { guides } from './guides.js';
 import { workshopMaps } from './workshop-maps.js';
@@ -26,11 +26,11 @@ const staticPages = [
 		keywords: 'multiplayer friends lobby faq troubleshooting private code',
 	},
 	{
-		title: 'MECCHA CHAMELEON Camouflage Simulator',
-		description: 'Paint and rotate a 3D practice figure against an uploaded background, then export a PNG.',
+		title: 'MECCHA CHAMELEON Paint Hide and Seek Simulator',
+		description: 'Choose a preset or uploaded background, paint and rotate a 3D practice figure, then export a PNG.',
 		url: '/camouflage-simulator',
 		category: 'Tool',
-		keywords: 'camouflage simulator paint simulator colour palette chameleon brush camouflage practice spoid',
+		keywords: 'paint hide and seek simulator camouflage simulator paint simulator colour palette chameleon brush camouflage practice spoid',
 	},
 	{
 		title: 'MECCHA CHAMELEON Camouflage Map Notes',
@@ -41,10 +41,10 @@ const staticPages = [
 	},
 	{
 		title: 'MECCHA CHAMELEON Patch Notes & Updates',
-		description: 'Version history through v1.8.0: Osaka, emotes, cloud-save fixes, Sugarland, ranking, and Workshop changes.',
+		description: 'Version history through v1.9.0: Cube character, character selection, Osaka, emotes, cloud-save fixes, Sugarland, ranking, and Workshop changes.',
 		url: '/updates',
 		category: 'Update',
-		keywords: 'meccha chameleon update patch notes v1.8.0 Osaka v1.6.1 v1.4.0 sugarland changelog steam news',
+		keywords: 'meccha chameleon update patch notes v1.9.0 Cube character Osaka v1.8.0 v1.4.0 sugarland changelog steam news',
 	},
 ];
 

@@ -1,4 +1,4 @@
-// Workshop 地图与 hosting 指南 — 字段结构与 guides.js 一致
+// Workshop map and hosting guide entries; field structure matches guides.js.
 /**
  * @typedef {Object} WorkshopMapEntry
  * @property {number} id

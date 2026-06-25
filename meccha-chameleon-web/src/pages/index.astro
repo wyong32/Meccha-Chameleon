@@ -1,5 +1,5 @@
 ---
-// Home 首页 — Wiki & Community Hub
+// Home page — Wiki & Community Hub.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/pages/HomePage.css';
 import { wikiMaps } from '../data/wiki-maps.js';
@@ -19,12 +19,13 @@ const corePillars = [
 ];
 const playerJourney = [
 	{ step: '01', title: 'Learn the Basics', desc: 'Understand roles, match phases, and a repeatable first-match plan.', href: '/beginners-hub', cta: "Beginner's Hub" },
-	{ step: '02', title: 'Practise Colour & Silhouette', desc: 'Test backdrop matching, pose scale, and two-tone sampling.', href: '/camouflage-simulator', cta: 'Open Simulator' },
+	{ step: '02', title: 'Practise Paint Hide and Seek', desc: 'Test backdrop matching, pose scale, two-tone sampling, and silhouette reads.', href: '/camouflage-simulator', cta: 'Open Simulator' },
 	{ step: '03', title: 'Map-Specific Data', desc: 'Read landmark prompts, scene drills, and Seeker sweep habits.', href: '/wiki#wiki-maps', cta: 'Wiki Maps' },
 	{ step: '04', title: 'Stay Patch-Ready', desc: 'Track map, feature, and stability changes after updates.', href: '/updates', cta: 'Patch Notes' },
 ];
 
 const latestUpdates = [
+	{ version: 'v1.9.0', title: 'Cube Character and Selection Fixes', date: '2026-06-25', href: '/updates' },
 	{ version: 'v1.8.1', title: 'Update Notice and Rollback', date: '2026-06-24', href: '/updates' },
 	{ version: 'v1.8.0', title: '11 Emotes and Osaka Fixes', date: '2026-06-24', href: '/updates' },
 	{ version: 'v1.7.0', title: 'Osaka Map and Report Feature', date: '2026-06-22', href: '/updates' },
@@ -51,8 +52,8 @@ const faqItems = [
 		a: 'They are common search variants for MECCHA CHAMELEON. You may also see searches such as “meccha chameleon steam” or simply “meccha”; use the exact title MECCHA CHAMELEON when looking for the official Steam listing.',
 	},
 	{
-		q: 'What is the Camouflage Simulator?',
-		a: 'It is this site’s browser-based practice tool, not the full game. Upload a background, rotate and paint a 3D figure, then use the exercise to test colour matching and silhouette choices before a live round.',
+		q: 'What is the Paint Hide and Seek Simulator?',
+		a: 'It is this site’s browser-based practice tool, not the full game. Choose or upload a background, rotate and paint a 3D figure, then use the exercise to test colour matching and silhouette choices before a live round.',
 	},
 	{
 		q: 'How do you hide effectively?',
@@ -104,7 +105,7 @@ const orgJsonLd = {
 	jsonLd={[homePageJsonLd, faqJsonLd, orgJsonLd]}
 >
 	<div class="HomePage">
-		<!-- Hero：品牌 + 搜索 + 动图占位 -->
+		<!-- Hero: brand, search, and trailer preview -->
 		<section class="hero-section" aria-labelledby="hero-title">
 			<div class="container">
 				<div class="hero-content">
@@ -115,7 +116,7 @@ const orgJsonLd = {
 						</div>
 						<h1 id="hero-title" class="hero-title">MECCHA CHAMELEON Game, Beginner's, Wiki, Online & Camouflage Simulator</h1>
 						<p class="hero-desc">
-							Find map reading notes, the 3D Camouflage Simulator, multiplayer help, and verified patch notes —
+							Find map reading notes, the Paint Hide and Seek Simulator, multiplayer help, and verified patch notes —
 							all organised around your next better round.
 						</p>
 
@@ -208,12 +209,15 @@ const orgJsonLd = {
 							<span class="stat-label">Steam release date</span>
 						</div>
 					</div>
-					<p class="stats-source-note">Steam store figures as of {verifiedStoreSnapshot.checkedOn}. Prices and review totals change over time.</p>
+					<p class="stats-source-note">
+						Steam store figures as of {verifiedStoreSnapshot.checkedOn}. Prices and review totals change over time.
+						<a href={`https://store.steampowered.com/app/${siteStats.steamAppId}/MECCHA_CHAMELEON/`} target="_blank" rel="noopener noreferrer">Check the Steam Store</a>.
+					</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- 玩家路径 -->
+		<!-- Player journey -->
 		<section class="journey-section" aria-labelledby="journey-title">
 			<div class="container">
 				<div class="journey-content">
@@ -241,7 +245,7 @@ const orgJsonLd = {
 			</div>
 		</section>
 
-		<!-- 六大支柱 -->
+		<!-- Core pillars -->
 		<section class="pillars-section" aria-labelledby="pillars-title">
 			<div class="container">
 				<div class="pillars-content">
@@ -267,7 +271,7 @@ const orgJsonLd = {
 			</div>
 		</section>
 
-		<!-- 更新列表 -->
+		<!-- Update list -->
 		<section class="updates-section" aria-labelledby="updates-title">
 			<div class="container">
 				<div class="updates-content">
@@ -291,7 +295,7 @@ const orgJsonLd = {
 			</div>
 		</section>
 
-		<!-- 游戏概览 -->
+		<!-- Game overview -->
 		<section class="glance-section" aria-labelledby="glance-title">
 			<div class="container">
 				<div class="glance-content">
@@ -332,7 +336,7 @@ const orgJsonLd = {
 			</div>
 		</section>
 
-		<!-- 精选内容 -->
+		<!-- Featured content -->
 		<section class="featured-section" aria-labelledby="featured-camo-title">
 			<div class="container">
 				<div class="featured-block">
@@ -397,10 +401,10 @@ const orgJsonLd = {
 				<div class="simulator-promo__grid">
 					<div class="simulator-promo__copy">
 						<span class="section-label">Practice Tool</span>
-						<h2 id="simulator-title">MECCHA CHAMELEON Camouflage Simulator</h2>
+						<h2 id="simulator-title">Paint Hide and Seek Simulator for MECCHA CHAMELEON</h2>
 						<p>
-							Upload a background screenshot, rotate a 3D practice figure, and test colour matching and
-							silhouette before you commit to a hide in a live lobby.
+							Choose a preset scene or upload a background screenshot, rotate a 3D practice figure, and test
+							paint hide and seek colour matching before you commit to a hide in a live lobby.
 						</p>
 						<ul class="simulator-promo__features">
 							<li>Background upload with scale and pan</li>

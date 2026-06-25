@@ -5,9 +5,9 @@ export const pageSeo = {
 	home: {
 		title: 'MECCHA CHAMELEON Game Wiki, Online & Simulator',
 		description:
-			'MECCHA CHAMELEON game hub with a beginner guide, Wiki Maps, online multiplayer help, a 3D Camouflage Simulator, and verified Steam patch notes.',
+			'MECCHA CHAMELEON game hub with a beginner guide, Wiki Maps, online multiplayer help, a paint hide and seek simulator, and verified Steam patch notes.',
 		keywords:
-			'MECCHA CHAMELEON game, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes',
+			'MECCHA CHAMELEON game, paint hide and seek, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes',
 	},
 	beginnersHub: {
 		title: "Beginner's Hub — How to Play MECCHA CHAMELEON",
@@ -31,11 +31,11 @@ export const pageSeo = {
 			'MECCHA CHAMELEON online, meccha chameleon multiplayer, play with friends, private lobby, steam party game, voice chat, workshop troubleshooting',
 	},
 	paintLab: {
-		title: 'MECCHA CHAMELEON Camouflage Simulator',
+		title: 'MECCHA CHAMELEON Paint Hide and Seek Simulator',
 		description:
-			'MECCHA CHAMELEON Camouflage Simulator: rotate and paint a 3D practice figure, upload backgrounds, test colour matching and silhouettes, then export a PNG.',
+			'Practice paint hide and seek camouflage for MECCHA CHAMELEON: choose a background, sample colours, paint the 3D figure, rotate the silhouette, and export a PNG.',
 		keywords:
-			'meccha chameleon camouflage simulator, paint simulator, camouflage practice, colour matching, spoid workflow, browser practice tool',
+			'MECCHA CHAMELEON paint hide and seek, paint hide and seek simulator, camouflage simulator, paint simulator, colour matching, spoid workflow, browser practice tool',
 	},
 	wikiMapsIndex: {
 		title: 'MECCHA CHAMELEON Wiki Maps — Camouflage Notes',
@@ -61,9 +61,9 @@ export const pageSeo = {
 	updatesIndex: {
 		title: 'MECCHA CHAMELEON Patch Notes & Updates',
 		description:
-			'MECCHA CHAMELEON patch notes through v1.8.0: Osaka, emotes, cloud-save fixes, Sugarland, ranking, and player-impact summaries linked to official Steam news posts.',
+			'MECCHA CHAMELEON patch notes through v1.9.0: Cube character, character selection, Osaka, emotes, cloud-save fixes, Sugarland, ranking, and player-impact summaries.',
 		keywords:
-			'meccha chameleon update, patch notes, v1.8.0, Osaka, v1.4.0 Sugarland, changelog, steam news',
+			'meccha chameleon update, patch notes, v1.9.0, Cube character, Osaka, v1.4.0 Sugarland, changelog, steam news',
 	},
 	notFound: {
 		title: 'Page Not Found — MECCHA CHAMELEON Guide',

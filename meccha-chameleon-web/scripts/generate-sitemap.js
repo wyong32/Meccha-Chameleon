@@ -21,13 +21,39 @@ function getChangefreq(name) {
 	return seoConfig.changefreq[name] ?? 'monthly';
 }
 
-/** Sitemap expects YYYY-MM-DD; non-ISO strings fall back to build day */
-function coerceSitemapLastmod(raw, fallback) {
+/** Sitemap expects YYYY-MM-DD; invalid or empty strings should not become build-day dates. */
+function coerceSitemapLastmod(raw) {
 	const s = raw == null ? '' : String(raw).trim();
 	if (/^\d{4}-\d{2}-\d{2}(?:T[\d:Z.+-]*)?$/.test(s)) return s.slice(0, 10);
 	const t = Date.parse(s);
 	if (!Number.isNaN(t)) return new Date(t).toISOString().slice(0, 10);
-	return fallback;
+	return undefined;
+}
+
+function readExistingLastmods(publicPath) {
+	if (!fs.existsSync(publicPath)) return new Map();
+
+	const existingXml = fs.readFileSync(publicPath, 'utf8');
+	const lastmods = new Map();
+	const urlPattern = /<url>\s*<loc>(.*?)<\/loc>(?:\s*<lastmod>(.*?)<\/lastmod>)?/gs;
+
+	for (const match of existingXml.matchAll(urlPattern)) {
+		const rawLoc = match[1]?.trim();
+		const lastmod = coerceSitemapLastmod(match[2]);
+		if (!rawLoc || !lastmod) continue;
+
+		try {
+			lastmods.set(new URL(rawLoc).pathname, lastmod);
+		} catch {
+			lastmods.set(rawLoc.replace(fullDomain, '') || '/', lastmod);
+		}
+	}
+
+	return lastmods;
+}
+
+function resolveLastmod(loc, explicitDate, existingLastmods) {
+	return coerceSitemapLastmod(explicitDate) ?? existingLastmods.get(loc);
 }
 
 function urlNode(loc, lastmod, changefreq, priority) {
@@ -40,34 +66,36 @@ function urlNode(loc, lastmod, changefreq, priority) {
   </url>`;
 }
 
-function addDynamicEntries(xml, items, basePath, routeName, fallbackLastmod) {
+function addDynamicEntries(xml, items, basePath, routeName, existingLastmods) {
 	for (const item of items) {
 		if (!item?.addressBar) continue;
 		const slug = String(item.addressBar).replace(/^\/+|\/+$/g, '');
-		const date = coerceSitemapLastmod(item.publishDate || item.lastReviewed, fallbackLastmod);
-		xml += `\n${urlNode(`/${basePath}/${slug}`, date, getChangefreq(routeName), getPriority(routeName))}`;
+		const loc = `/${basePath}/${slug}`;
+		const date = resolveLastmod(loc, item.lastReviewed || item.publishDate, existingLastmods);
+		xml += `\n${urlNode(loc, date, getChangefreq(routeName), getPriority(routeName))}`;
 	}
 	return xml;
 }
 
 function generate() {
-	const fallbackLastmod = new Date().toISOString().split('T')[0];
+	const publicPath = path.join(__dirname, '../public/sitemap.xml');
+	const existingLastmods = readExistingLastmods(publicPath);
 
 	let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 `;
 
 	for (const route of sitemapStaticRoutes) {
-		xml += `\n${urlNode(route.path, route.lastmod, getChangefreq(route.name), getPriority(route.name))}`;
+		const date = resolveLastmod(route.path, route.lastmod, existingLastmods);
+		xml += `\n${urlNode(route.path, date, getChangefreq(route.name), getPriority(route.name))}`;
 	}
 
-	xml = addDynamicEntries(xml, wikiMaps, 'wiki/maps', 'wiki-map-detail', fallbackLastmod);
-	xml = addDynamicEntries(xml, guides, 'guides', 'guide-detail', fallbackLastmod);
-	xml = addDynamicEntries(xml, workshopMaps, 'workshop', 'workshop-detail', fallbackLastmod);
+	xml = addDynamicEntries(xml, wikiMaps, 'wiki/maps', 'wiki-map-detail', existingLastmods);
+	xml = addDynamicEntries(xml, guides, 'guides', 'guide-detail', existingLastmods);
+	xml = addDynamicEntries(xml, workshopMaps, 'workshop', 'workshop-detail', existingLastmods);
 
 	xml += '\n</urlset>';
 
-	const publicPath = path.join(__dirname, '../public/sitemap.xml');
 	const publicDir = path.dirname(publicPath);
 	if (!fs.existsSync(publicDir)) {
 		fs.mkdirSync(publicDir, { recursive: true });

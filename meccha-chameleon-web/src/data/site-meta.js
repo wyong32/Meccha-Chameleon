@@ -1,7 +1,7 @@
 /** Shared site facts — import instead of duplicating inline constants. */
 export const siteStats = {
-	lastVerified: '2026-06-24',
-	currentVersion: 'v1.8.0',
+	lastVerified: '2026-06-25',
+	currentVersion: 'v1.9.0',
 	playerRange: '2–10',
 	developer: 'lemorion_1224 (LEMORION)',
 	platform: 'Steam (Windows)',
@@ -12,10 +12,10 @@ export const siteStats = {
 };
 
 export const verifiedStoreSnapshot = {
-	checkedOn: '24 June 2026',
+	checkedOn: '25 June 2026',
 	price: '$5.99',
 	releaseDate: '9 June 2026',
-	totalReviews: '23,402',
-	positiveRate: '83%',
+	totalReviews: '26,128',
+	positiveRate: '84%',
 	reviewLabel: 'Very Positive',
 };

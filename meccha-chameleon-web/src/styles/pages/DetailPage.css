@@ -1,6 +1,6 @@
-/* 详情页 — 基于 InnerPage 统一风格 */
+/* Detail pages — shared style layer based on InnerPage. */
 
-/* 详情页 — 左文右图 Hero（flex，全站详情页统一） */
+/* Detail hero — text and image layout shared across detail pages. */
 .DetailPage .inner-hero-section {
 	text-align: left;
 	padding-bottom: clamp(1.75rem, 3vw, 2.5rem);

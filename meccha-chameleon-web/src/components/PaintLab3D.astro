@@ -2,16 +2,21 @@
 // Original WebGL practice figure. It is intentionally not a game asset.
 ---
 
-<section class="paint-lab-3d" data-paint-lab-3d aria-label="3D Camouflage Simulator">
+<section class="paint-lab-3d" data-paint-lab-3d aria-label="Paint Hide and Seek Simulator">
 	<div class="paint-lab-3d__topbar">
 		<span><i></i>3D practice figure</span>
 		<output data-status aria-live="polite">Loading practice canvas…</output>
 	</div>
 
+	<div class="paint-lab-3d__intro">
+		<p>PAINT HIDE AND SEEK PRACTICE</p>
+		<h2>Paint Hide and Seek Practice Tool for MECCHA CHAMELEON</h2>
+		<span>Choose a scene background, sample colours, then paint the practice figure before trying the idea in-game.</span>
+	</div>
+
 	<div class="paint-lab-3d__layout">
 		<div class="paint-lab-3d__stage">
 			<div class="paint-lab-3d__stage-tools" aria-label="Canvas controls">
-				<label class="paint-lab-3d__upload"><span>Upload scene</span><span class="paint-lab-3d__choose-file">Choose image</span><input class="paint-lab-3d__file-input" type="file" accept="image/png,image/jpeg,image/webp" data-background /><span data-file-label>No image selected</span></label>
 				<div class="paint-lab-3d__tool-group" aria-label="Background controls">
 					<button type="button" data-fit-background disabled>Fit scene</button>
 					<button type="button" data-move-background aria-pressed="false" disabled>Position scene</button>
@@ -19,6 +24,7 @@
 					<label>Scene scale <input data-background-scale type="range" min="50" max="250" value="100" disabled /><output data-background-scale-out>100%</output></label>
 				</div>
 				<div class="paint-lab-3d__tool-group paint-lab-3d__mode-group" role="group" aria-label="Figure interaction mode">
+					<label>Pose <select data-figure-pose aria-label="Choose practice figure pose"><option value="standing" selected>Standing</option><!-- <option value="sitting">Sitting</option> --></select></label>
 					<button type="button" data-mode="paint" class="is-active" aria-pressed="true">Paint</button>
 					<button type="button" data-mode="rotate" aria-pressed="false">Rotate</button>
 					<label>Figure zoom <input data-zoom type="range" min="75" max="150" value="100" /><output data-zoom-out>100%</output></label>
@@ -73,6 +79,32 @@
 			</details>
 
 			<p class="paint-lab-3d__tip"><strong>Original practice figure</strong> · This browser tool is for colour and silhouette exercises; it does not use official game assets.</p>
+
+			<div class="paint-lab-3d__scene-library" aria-label="Scene background choices">
+				<div class="paint-lab-3d__scene-head">
+					<div>
+						<p class="paint-lab-3d__eyebrow">SCENE SETUP</p>
+						<h3>Simulator Backgrounds</h3>
+						<p>Pick a scene, sample its colours with Eyedropper, then paint the figure to blend in.</p>
+					</div>
+					<output data-file-label aria-label="Current simulator background">Preset 01</output>
+				</div>
+				<div class="paint-lab-3d__scene-grid">
+					<button type="button" class="paint-lab-3d__scene-card is-active" data-preset-background="/images/simulator/simulator-bg-01.png" data-scene-label="Preset 01" aria-pressed="true">
+						<img src="/images/simulator/simulator-bg-01.png" alt="Simulator preset background 01" loading="lazy" decoding="async" />
+						<span><small>Preset scene</small>01</span>
+					</button>
+					<button type="button" class="paint-lab-3d__scene-card" data-preset-background="/images/simulator/simulator-bg-02.png" data-scene-label="Preset 02" aria-pressed="false">
+						<img src="/images/simulator/simulator-bg-02.png" alt="Simulator preset background 02" loading="lazy" decoding="async" />
+						<span><small>Preset scene</small>02</span>
+					</button>
+					<label class="paint-lab-3d__scene-card paint-lab-3d__scene-upload">
+						<input class="paint-lab-3d__file-input" type="file" accept="image/png,image/jpeg,image/webp" data-background />
+						<span class="paint-lab-3d__upload-icon">+</span>
+						<span><small>Your image</small>Upload</span>
+					</label>
+				</div>
+			</div>
 		</aside>
 	</div>
 </section>
@@ -82,10 +114,11 @@
 	.paint-lab-3d button, .paint-lab-3d input { font:inherit; }
 	.paint-lab-3d__topbar { display:flex; align-items:center; gap:1rem; min-height:46px; padding:0 1rem; background:#fbf7e9; color:#173328; font-size:.78rem; font-weight:900; letter-spacing:.075em; text-transform:uppercase; }
 	.paint-lab-3d__topbar span { display:flex; align-items:center; gap:.55rem; }.paint-lab-3d__topbar i { width:9px; height:9px; border-radius:50%; background:#ff7c62; box-shadow:0 0 0 3px #ff7c6233; }.paint-lab-3d__topbar output { margin-left:auto; overflow:hidden; color:#4d7560; font-size:.68rem; text-overflow:ellipsis; white-space:nowrap; }
+	.paint-lab-3d__intro { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.55rem 1.25rem; align-items:end; padding:1.05rem 1.2rem; border-bottom:1px solid #496a59; background:radial-gradient(circle at 8% 0,#b9e84a22,#0000 34%),linear-gradient(135deg,#143426,#0d241a); }.paint-lab-3d__intro p { grid-column:1/-1; margin:0; color:var(--accent); font-size:.68rem; font-weight:1000; letter-spacing:.14em; text-transform:uppercase; }.paint-lab-3d__intro h2 { margin:0; color:#fff7df; font-family:var(--font-heading); font-size:clamp(1.35rem,2.8vw,2.05rem); line-height:.98; }.paint-lab-3d__intro span { max-width:28rem; color:#cbdccb; font-size:.82rem; line-height:1.45; }
 	.paint-lab-3d__layout { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(330px,.6fr); }.paint-lab-3d__stage { min-width:0; background:#e2e8dc; color:#193126; }
-	.paint-lab-3d__stage-tools { display:flex; flex-wrap:wrap; align-items:center; gap:.7rem 1rem; padding:.8rem 1rem; background:#d1ddcf; border-bottom:1px solid #a7baaa; font-size:.75rem; font-weight:800; letter-spacing:.025em; }.paint-lab-3d__upload { display:flex; position:relative; align-items:center; gap:.45rem; min-width:0; cursor:pointer; }.paint-lab-3d__file-input { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }.paint-lab-3d__choose-file { padding:.43rem .62rem; border:1px solid #718b7b; background:#f8f6e9; color:#193126; font-size:.74rem; font-weight:800; transition:background-color 160ms ease,border-color 160ms ease; }.paint-lab-3d__upload:hover .paint-lab-3d__choose-file { border-color:#193e2f; background:#edf4df; }.paint-lab-3d__upload:focus-within .paint-lab-3d__choose-file { outline:2px solid #ffca61; outline-offset:2px; }.paint-lab-3d__upload [data-file-label] { max-width:14ch; overflow:hidden; color:#587062; font-size:.69rem; font-weight:700; text-overflow:ellipsis; white-space:nowrap; }
-	.paint-lab-3d__tool-group { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; padding-left:1rem; border-left:1px solid #a5b6a6; }.paint-lab-3d__tool-group label { display:flex; align-items:center; gap:.35rem; }.paint-lab-3d__tool-group button { border:1px solid #718b7b; background:#f8f6e9; padding:.46rem .65rem; color:#193126; font-size:.74rem; font-weight:800; cursor:pointer; }.paint-lab-3d__tool-group button:hover:not(:disabled) { border-color:#193e2f; background:#edf4df; }.paint-lab-3d__tool-group button.is-active { background:#1d4935; border-color:#1d4935; color:#fffaf0; }.paint-lab-3d__tool-group button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__tool-group input[type=range] { width:72px; accent-color:#487b60; }.paint-lab-3d__tool-group output { min-width:3.2rem; color:#496858; font-size:.68rem; }
-	.paint-lab-3d__viewport { position:relative; display:grid; min-height:500px; place-items:center; background:radial-gradient(circle at 50% 25%,#fbf9ee 0,#d4dfd2 45%,#b7c8ba 100%); touch-action:none; }.paint-lab-3d__viewport canvas { display:block; width:100%; height:100%; cursor:crosshair; }.paint-lab-3d__stage:has([data-mode=rotate].is-active) .paint-lab-3d__viewport canvas { cursor:grab; }.paint-lab-3d__viewport.is-positioning canvas { cursor:move; }.paint-lab-3d__viewport.is-picking-colour canvas { cursor:copy; }.paint-lab-3d__loading { margin:0; padding:1rem; color:#476553; font-size:.86rem; font-weight:700; text-align:center; }
+	.paint-lab-3d__stage-tools { display:flex; flex-wrap:wrap; align-items:center; gap:.7rem 1rem; padding:.8rem 1rem; background:#d1ddcf; border-bottom:1px solid #a7baaa; font-size:.75rem; font-weight:800; letter-spacing:.025em; }.paint-lab-3d__file-input { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+	.paint-lab-3d__tool-group { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; padding-left:1rem; border-left:1px solid #a5b6a6; }.paint-lab-3d__tool-group label { display:flex; align-items:center; gap:.35rem; }.paint-lab-3d__tool-group button,.paint-lab-3d__tool-group select { border:1px solid #718b7b; background:#f8f6e9; padding:.46rem .65rem; color:#193126; font-size:.74rem; font-weight:800; cursor:pointer; }.paint-lab-3d__tool-group select { min-width:6.6rem; }.paint-lab-3d__tool-group button:hover:not(:disabled),.paint-lab-3d__tool-group select:hover { border-color:#193e2f; background:#edf4df; }.paint-lab-3d__tool-group button.is-active { background:#1d4935; border-color:#1d4935; color:#fffaf0; }.paint-lab-3d__tool-group button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__tool-group input[type=range] { width:72px; accent-color:#487b60; }.paint-lab-3d__tool-group output { min-width:3.2rem; color:#496858; font-size:.68rem; }
+	.paint-lab-3d__viewport { position:relative; display:grid; min-height:500px; place-items:center; background:radial-gradient(circle at 50% 25%,#fbf9ee 0,#d4dfd2 45%,#b7c8ba 100%); touch-action:none; }.paint-lab-3d__viewport canvas { display:block; width:100%; height:100%; cursor:url('/images/simulator/cursors/brush.svg') 7 24, cell !important; }.paint-lab-3d__viewport.is-rotating-figure canvas { cursor:url('/images/simulator/cursors/rotate.svg') 16 16, grab !important; }.paint-lab-3d__viewport.is-positioning canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-picking-colour canvas { cursor:url('/images/simulator/cursors/eyedropper.svg') 8 25, copy !important; }.paint-lab-3d__viewport.is-dragging canvas { cursor:grabbing !important; }.paint-lab-3d__viewport.is-positioning.is-dragging canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-picking-colour.is-dragging canvas { cursor:url('/images/simulator/cursors/eyedropper.svg') 8 25, copy !important; }.paint-lab-3d__loading { margin:0; padding:1rem; color:#476553; font-size:.86rem; font-weight:700; text-align:center; }
 	.paint-lab-3d__help { margin:0; padding:.68rem 1rem; background:#f5f6ed; border-top:1px solid #adbbaa; color:#466353; font-size:.8rem; line-height:1.45; }.paint-lab-3d__actions { display:flex; flex-wrap:wrap; gap:.55rem; padding:.9rem 1rem; background:#fbf7e9; }.paint-lab-3d__actions button { border:1px solid #819486; background:transparent; color:#193126; padding:.58rem .75rem; font-size:.78rem; font-weight:800; cursor:pointer; }.paint-lab-3d__actions button:hover:not(:disabled) { background:#e8efdf; }.paint-lab-3d__actions button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:auto; border-color:#1c4433; background:#1c4433; color:#fffaf0; }
 	.paint-lab-3d__panel { padding:1.35rem; background:linear-gradient(160deg,#204835,#10271e 75%); }.paint-lab-3d__panel-title { margin:0; padding-bottom:.65rem; border-bottom:1px solid #769183; font-family:var(--font-heading); font-size:1.2rem; }.paint-lab-3d__panel-title span { margin-right:.48rem; color:var(--accent); font-family:var(--font-body); font-size:.7rem; font-weight:900; letter-spacing:.12em; }.paint-lab-3d__panel-lead { margin:.75rem 0 0; color:#c6d7ca; font-size:.82rem; line-height:1.5; }
 	.paint-lab-3d__picker { display:grid; grid-template-columns:136px 1fr; gap:1rem; align-items:center; padding:1rem 0; }.paint-lab-3d__wheel { position:relative; width:128px; aspect-ratio:1; border:4px solid #f7eed7; border-radius:50%; box-shadow:0 0 0 2px #0a1811,0 3px 10px #0008; overflow:hidden; touch-action:none; cursor:crosshair; }.paint-lab-3d__wheel canvas { display:block; width:100%; height:100%; }.paint-lab-3d__wheel span { position:absolute; left:82%; top:58%; width:13px; height:13px; border:2px solid #10251a; border-radius:50%; background:var(--accent); box-shadow:0 0 0 2px #f6efd9,0 1px 3px #0008; transform:translate(-50%,-50%); pointer-events:none; }.paint-lab-3d__wheel:focus-visible { outline:3px solid #ffca61; outline-offset:4px; }
@@ -93,14 +126,17 @@
 	.paint-lab-3d__brush-controls { display:grid; gap:.65rem; padding:.9rem 0; border-top:1px solid #718779; border-bottom:1px solid #718779; }.paint-lab-3d__brush-controls label,.paint-lab-3d__channels label,.paint-lab-3d__finish label { display:grid; grid-template-columns:clamp(4.8rem,22%,6.3rem) 1fr 3.3rem; align-items:center; gap:.55rem; color:#f5f1df; font-size:.78rem; font-weight:800; }.paint-lab-3d__brush-controls input,.paint-lab-3d__channels input,.paint-lab-3d__finish input { appearance:none; height:9px; margin:0; border:1px solid #09160f; background:#405447; cursor:pointer; }.paint-lab-3d__brush-controls input::-webkit-slider-thumb,.paint-lab-3d__channels input::-webkit-slider-thumb,.paint-lab-3d__finish input::-webkit-slider-thumb { appearance:none; width:8px; height:18px; border:1px solid #172419; background:#fff8df; box-shadow:0 1px 3px #0008; }.paint-lab-3d__brush-controls output,.paint-lab-3d__channels output,.paint-lab-3d__finish output { padding:.16rem .25rem; background:#09150e; color:#f4f4e7; font-size:.7rem; text-align:right; }.paint-lab-3d__brush-controls label:nth-child(1) input { background:linear-gradient(90deg,#2c5a42,var(--accent)); }.paint-lab-3d__brush-controls label:nth-child(2) input { background:linear-gradient(90deg,#1e3a2d,var(--accent)); }
 	.paint-lab-3d__advanced { margin-top:.95rem; border-bottom:1px solid #718779; }.paint-lab-3d__advanced summary { padding:.15rem 0 .9rem; color:#dce9da; font-size:.78rem; font-weight:800; cursor:pointer; }.paint-lab-3d__advanced[open] summary { color:var(--accent); }.paint-lab-3d__channels,.paint-lab-3d__finish { display:grid; gap:.52rem; padding:.2rem 0 .9rem; }.paint-lab-3d__channels label:nth-child(1) input { background:linear-gradient(90deg,#180909,#f13535); }.paint-lab-3d__channels label:nth-child(2) input { background:linear-gradient(90deg,#08190b,#31da55); }.paint-lab-3d__channels label:nth-child(3) input { background:linear-gradient(90deg,#080a1a,#3d72ed); }.paint-lab-3d__channels label:nth-child(4) input { background:linear-gradient(90deg,#f33,#f3e845,#30da61,#38b9e8,#5c59d8,#d64dad,#f33); }.paint-lab-3d__channels label:nth-child(5) input { background:linear-gradient(90deg,#f2edda,var(--accent)); }.paint-lab-3d__channels label:nth-child(6) input { background:linear-gradient(90deg,#07120c,var(--accent)); }.paint-lab-3d__finish { padding-top:.85rem; border-top:1px dashed #718779; }.paint-lab-3d__finish label:nth-child(1) input { background:linear-gradient(90deg,#15231a,#f2edda); }.paint-lab-3d__finish label:nth-child(2) input { background:linear-gradient(90deg,#f2edda,#15231a); }
 	.paint-lab-3d__tip { margin:1rem 0 0; color:#c4d7c7; font-size:.78rem; line-height:1.55; }.paint-lab-3d__tip strong { color:var(--accent); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; }
+	.paint-lab-3d__scene-library { margin-top:1.25rem; padding:1rem; border:1px solid color-mix(in srgb,var(--accent) 20%,#718779); background:linear-gradient(160deg,#0b2118,#143426 72%); box-shadow:inset 0 1px 0 #ffffff12; }.paint-lab-3d__scene-head { display:grid; grid-template-columns:1fr auto; gap:.9rem; align-items:start; margin-bottom:.85rem; }.paint-lab-3d__scene-head h3 { margin:.12rem 0 .35rem; color:#fff7df; font-family:var(--font-heading); font-size:clamp(1rem,2vw,1.2rem); line-height:1.05; }.paint-lab-3d__scene-head p { margin:0; color:#c8d9cb; font-size:.78rem; line-height:1.45; }.paint-lab-3d__eyebrow { color:var(--accent) !important; font-size:.66rem !important; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }.paint-lab-3d__scene-head output { max-width:10rem; padding:.32rem .5rem; border:1px solid #6f887a; background:#07150f; color:#f4f4e7; font-size:.68rem; font-weight:900; text-align:right; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }.paint-lab-3d__scene-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.65rem; }.paint-lab-3d__scene-card { position:relative; display:grid; min-height:88px; overflow:hidden; border:1px solid #789184; background:#0a1c14; color:#fff8df; cursor:pointer; place-items:end start; isolation:isolate; transition:border-color 160ms ease,box-shadow 160ms ease,transform 160ms ease; }.paint-lab-3d__scene-card::before { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(circle at 20% 15%,#ffffff2a,#0000 36%),linear-gradient(180deg,#0000 18%,#06130de8 100%); }.paint-lab-3d__scene-card img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; transition:transform 180ms ease,filter 180ms ease; }.paint-lab-3d__scene-card span:last-child { display:grid; gap:.08rem; padding:.5rem; font-size:.86rem; font-weight:900; line-height:1; text-shadow:0 1px 4px #000; }.paint-lab-3d__scene-card small { color:color-mix(in srgb,var(--accent) 78%,#fff); font-size:.58rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }.paint-lab-3d__scene-card:hover { transform:translateY(-1px); border-color:#dbead7; }.paint-lab-3d__scene-card:hover img { transform:scale(1.06); filter:saturate(1.12); }.paint-lab-3d__scene-card.is-active { border-color:var(--accent); box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 48%,transparent),0 8px 20px #0004; }.paint-lab-3d__scene-card.is-active::after { content:"Selected"; position:absolute; top:.42rem; right:.42rem; padding:.16rem .34rem; background:var(--accent); color:#10251a; font-size:.55rem; font-weight:1000; letter-spacing:.08em; text-transform:uppercase; }.paint-lab-3d__scene-card:focus-visible,.paint-lab-3d__scene-upload:focus-within { outline:3px solid #ffca61; outline-offset:3px; }.paint-lab-3d__scene-upload { background:linear-gradient(135deg,#0b1e16,#1f4d38); place-items:center; text-align:center; }.paint-lab-3d__scene-upload::before { z-index:-1; background:linear-gradient(135deg,#0d241a,#1b5a3b),repeating-linear-gradient(-45deg,#ffffff10 0 8px,#0000 8px 16px); }.paint-lab-3d__upload-icon { display:grid; width:1.8rem; height:1.8rem; margin-bottom:.24rem; border:1px solid color-mix(in srgb,var(--accent) 70%,#fff); border-radius:50%; color:var(--accent); font-size:1.25rem; line-height:1; place-items:center; }
 	.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 	@media (max-width:1024px) { .paint-lab-3d__layout { grid-template-columns:1fr; }.paint-lab-3d__panel { border-top:1px solid #587063; }.paint-lab-3d__viewport { min-height:420px; } }
-	@media (max-width:768px) { .paint-lab-3d__topbar output { max-width:45%; }.paint-lab-3d__tool-group { width:100%; padding-left:0; border-left:0; }.paint-lab-3d__picker { grid-template-columns:1fr; }.paint-lab-3d__preview { grid-template-columns:1fr 1fr; }.paint-lab-3d__preview small,.paint-lab-3d__preview output { grid-column:1/-1; }.paint-lab-3d__viewport { min-height:360px; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:0; } }
+	@media (max-width:768px) { .paint-lab-3d__topbar output { max-width:45%; }.paint-lab-3d__intro { grid-template-columns:1fr; }.paint-lab-3d__tool-group { width:100%; padding-left:0; border-left:0; }.paint-lab-3d__picker { grid-template-columns:1fr; }.paint-lab-3d__preview { grid-template-columns:1fr 1fr; }.paint-lab-3d__preview small,.paint-lab-3d__preview output { grid-column:1/-1; }.paint-lab-3d__viewport { min-height:360px; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:0; } }
 	@media (prefers-reduced-motion: reduce) { .paint-lab-3d *, .paint-lab-3d *::before, .paint-lab-3d *::after { scroll-behavior:auto !important; transition-duration:.01ms !important; } }
 </style>
 
 <script>
 	import type * as THREE_NS from 'three';
+	import { createSittingPose } from './figureModels/sittingPose';
+	import { createStandingPose } from './figureModels/standingPose';
 
 	const bootPaintLab = async (lab: HTMLElement) => {
 		if (lab.dataset.paintLabReady === 'true') return;
@@ -124,6 +160,9 @@
 		const eyedropperButton = lab.querySelector<HTMLButtonElement>('[data-eyedropper]')!;
 		const clearSceneButton = lab.querySelector<HTMLButtonElement>('[data-reset-scene]')!;
 		const undoButton = lab.querySelector<HTMLButtonElement>('[data-undo]')!;
+		const figurePoseSelect = lab.querySelector<HTMLSelectElement>('[data-figure-pose]')!;
+		const presetBackgroundButtons = Array.from(lab.querySelectorAll<HTMLButtonElement>('[data-preset-background]'));
+		const uploadSceneCard = lab.querySelector<HTMLElement>('.paint-lab-3d__scene-upload')!;
 		const inputs = {
 			r: lab.querySelector<HTMLInputElement>('[data-r]')!, g: lab.querySelector<HTMLInputElement>('[data-g]')!, b: lab.querySelector<HTMLInputElement>('[data-b]')!,
 			h: lab.querySelector<HTMLInputElement>('[data-h]')!, s: lab.querySelector<HTMLInputElement>('[data-s]')!, v: lab.querySelector<HTMLInputElement>('[data-v]')!,
@@ -186,23 +225,12 @@
 			figure.add(mesh);
 			return mesh;
 		};
-		const leftArmPath = new THREE.CatmullRomCurve3([
-			new THREE.Vector3(-0.27, 0.57, -0.01), new THREE.Vector3(-0.42, 0.43, -0.01), new THREE.Vector3(-0.5, 0.1, -0.01), new THREE.Vector3(-0.52, -0.24, -0.01), new THREE.Vector3(-0.49, -0.43, -0.01),
-		]);
-		const rightArmPath = new THREE.CatmullRomCurve3([
-			new THREE.Vector3(0.27, 0.57, -0.01), new THREE.Vector3(0.42, 0.43, -0.01), new THREE.Vector3(0.5, 0.1, -0.01), new THREE.Vector3(0.52, -0.24, -0.01), new THREE.Vector3(0.49, -0.43, -0.01),
-		]);
-		const parts = [
-			createPaintPart(new THREE.SphereGeometry(0.44, 48, 36), [0, 1.21, 0], 0, [1, 1.08, 0.94]),
-			createPaintPart(new THREE.SphereGeometry(0.18, 36, 24), [0, 0.76, 0], 0, [1, 1.05, 0.92]),
-			createPaintPart(new THREE.CapsuleGeometry(0.38, 0.9, 14, 40), [0, 0.03, 0], 0, [1.02, 1, 0.88]),
-			createPaintPart(new THREE.TubeGeometry(leftArmPath, 56, 0.15, 18, false), [0, 0, 0]),
-			createPaintPart(new THREE.TubeGeometry(rightArmPath, 56, 0.15, 18, false), [0, 0, 0]),
-			createPaintPart(new THREE.SphereGeometry(0.165, 28, 20), [-0.49, -0.43, -0.01], 0, [0.94, 1.2, 0.94]),
-			createPaintPart(new THREE.SphereGeometry(0.165, 28, 20), [0.49, -0.43, -0.01], 0, [0.94, 1.2, 0.94]),
-			createPaintPart(new THREE.CapsuleGeometry(0.21, 0.72, 14, 34), [-0.2, -0.98, 0], 0.012, [1, 1, 0.9]),
-			createPaintPart(new THREE.CapsuleGeometry(0.21, 0.72, 14, 34), [0.2, -0.98, 0], -0.012, [1, 1, 0.9]),
-		];
+		const figureModels = {
+			sitting: createSittingPose,
+			standing: createStandingPose,
+		};
+		type FigurePose = keyof typeof figureModels;
+		let parts: THREE_NS.Mesh[] = [];
 
 		const raycaster = new THREE.Raycaster();
 		const pointer = new THREE.Vector2();
@@ -217,6 +245,25 @@
 		let history: ImageData[][] = [];
 		let background: THREE_NS.Mesh | undefined;
 		let renderRequested = false;
+
+		const syncViewportCursorMode = () => {
+			viewport.classList.toggle('is-rotating-figure', mode === 'rotate' && !movingBackground && !pickingBackground);
+			viewport.classList.toggle('is-positioning', movingBackground);
+			viewport.classList.toggle('is-picking-colour', pickingBackground);
+			if (pickingBackground) {
+				renderer.domElement.style.cursor = "url('/images/simulator/cursors/eyedropper.svg') 8 25, copy";
+				return;
+			}
+			if (movingBackground) {
+				renderer.domElement.style.cursor = "url('/images/simulator/cursors/move-scene.svg') 16 16, move";
+				return;
+			}
+			if (mode === 'rotate') {
+				renderer.domElement.style.cursor = pointerDown ? 'grabbing' : "url('/images/simulator/cursors/rotate.svg') 16 16, grab";
+				return;
+			}
+			renderer.domElement.style.cursor = "url('/images/simulator/cursors/brush.svg') 7 24, cell";
+		};
 
 		const hsvRgb = (h: number, s: number, v: number) => {
 			const c = v * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = v - c;
@@ -236,6 +283,29 @@
 		const requestRender = () => { if (renderRequested) return; renderRequested = true; requestAnimationFrame(render); };
 		const resize = () => { const box = viewport.getBoundingClientRect(); renderer.setSize(box.width, box.height, false); camera.aspect = box.width / box.height; camera.updateProjectionMatrix(); requestRender(); };
 		new ResizeObserver(resize).observe(viewport);
+
+		const disposeFigureParts = () => {
+			parts.forEach((part) => {
+				figure.remove(part);
+				part.geometry.dispose();
+				const paintMaterial = part.userData.paintMaterial as THREE_NS.MeshStandardMaterial | undefined;
+				const texture = part.userData.texture as THREE_NS.CanvasTexture | undefined;
+				texture?.dispose();
+				paintMaterial?.dispose();
+			});
+			parts = [];
+			lastPaint = null;
+			history = [];
+			undoButton.disabled = true;
+		};
+		const loadFigurePose = (pose: FigurePose) => {
+			disposeFigureParts();
+			parts = figureModels[pose](THREE, createPaintPart);
+			figure.rotation.set(0, 0, 0);
+			const scale = Number(inputs.zoom.value) / 100;
+			figure.scale.set(scale, scale, scale);
+			requestRender();
+		};
 
 		const updateWheelPosition = () => {
 			const angle = colour.h * Math.PI / 180, distance = colour.s * 42;
@@ -326,7 +396,7 @@
 			eyedropperButton.classList.toggle('is-active', active);
 			eyedropperButton.setAttribute('aria-pressed', String(active));
 			eyedropperButton.textContent = active ? 'Click scene colour' : 'Eyedropper';
-			viewport.classList.toggle('is-picking-colour', active);
+			syncViewportCursorMode();
 		};
 		const pickBackgroundColour = (event: PointerEvent) => {
 			if (!background) return;
@@ -359,17 +429,46 @@
 		const setBackgroundControls = (enabled: boolean) => {
 			backgroundScaleInput.disabled = !enabled; backgroundMoveButton.disabled = !enabled; fitBackgroundButton.disabled = !enabled; eyedropperButton.disabled = !enabled; clearSceneButton.disabled = !enabled;
 		};
+		const setActiveSceneCard = (activeCard?: HTMLElement) => {
+			presetBackgroundButtons.forEach((button) => {
+				const active = button === activeCard;
+				button.classList.toggle('is-active', active);
+				button.setAttribute('aria-pressed', String(active));
+			});
+			uploadSceneCard.classList.toggle('is-active', uploadSceneCard === activeCard);
+		};
 		const clearBackground = () => {
 			if (!background) return;
 			background.geometry.dispose();
 			const backgroundMaterial = background.material as THREE_NS.MeshBasicMaterial;
 			backgroundMaterial.map?.dispose(); backgroundMaterial.dispose(); scene.remove(background); background = undefined;
-			movingBackground = false; viewport.classList.remove('is-positioning'); backgroundMoveButton.classList.remove('is-active'); backgroundMoveButton.setAttribute('aria-pressed', 'false'); backgroundMoveButton.textContent = 'Position scene'; setEyedropper(false); backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; fileLabel.textContent = 'No image selected'; setBackgroundControls(false); requestRender();
+			movingBackground = false; backgroundMoveButton.classList.remove('is-active'); backgroundMoveButton.setAttribute('aria-pressed', 'false'); backgroundMoveButton.textContent = 'Position scene'; setEyedropper(false); backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; fileLabel.textContent = 'No scene selected'; setBackgroundControls(false); syncViewportCursorMode(); requestRender();
+		};
+		const loadSceneTexture = (url: string, label: string, activeCard?: HTMLElement, revokeAfterLoad = false) => {
+			new THREE.TextureLoader().load(url, (texture: THREE_NS.Texture) => {
+				clearBackground(); texture.colorSpace = THREE.SRGBColorSpace;
+				const image = texture.image as HTMLImageElement, aspect = image.width / image.height;
+				background = new THREE.Mesh(new THREE.PlaneGeometry(5.8 * aspect, 5.8), new THREE.MeshBasicMaterial({ map: texture }));
+				const samplingScale = Math.min(1, 2048 / Math.max(image.width, image.height));
+				const samplerCanvas = document.createElement('canvas');
+				samplerCanvas.width = Math.max(1, Math.round(image.width * samplingScale));
+				samplerCanvas.height = Math.max(1, Math.round(image.height * samplingScale));
+				const samplerContext = samplerCanvas.getContext('2d', { willReadFrequently: true })!;
+				samplerContext.drawImage(image, 0, 0, samplerCanvas.width, samplerCanvas.height);
+				background.userData.sampler = { canvas: samplerCanvas, context: samplerContext };
+				background.position.set(0, 0.14, -1.65); scene.add(background);
+				backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; fileLabel.textContent = label; setActiveSceneCard(activeCard); setBackgroundControls(true);
+				if (revokeAfterLoad) URL.revokeObjectURL(url);
+				requestRender(); setStatus('Scene loaded — fit, position, or paint');
+			}, undefined, () => {
+				if (revokeAfterLoad) URL.revokeObjectURL(url);
+				setStatus('That image could not be loaded. Try PNG, JPG, or WebP.');
+			});
 		};
 
 		renderer.domElement.addEventListener('pointerdown', (event: PointerEvent) => {
 			if (pickingBackground) { pickBackgroundColour(event); return; }
-			pointerDown = true; lastPaint = null; previous = { x: event.clientX, y: event.clientY }; renderer.domElement.setPointerCapture(event.pointerId);
+			pointerDown = true; viewport.classList.add('is-dragging'); syncViewportCursorMode(); lastPaint = null; previous = { x: event.clientX, y: event.clientY }; renderer.domElement.setPointerCapture(event.pointerId);
 			if (movingBackground) { setStatus('Positioning scene'); return; }
 			if (mode === 'paint') { snapshot(); paintHit(event); setStatus('Painting surface'); }
 		});
@@ -382,7 +481,9 @@
 			if (mode === 'rotate') { figure.rotation.y += (event.clientX - previous.x) * 0.012; figure.rotation.x = Math.max(-0.23, Math.min(0.18, figure.rotation.x + (event.clientY - previous.y) * 0.007)); previous = { x: event.clientX, y: event.clientY }; requestRender(); return; }
 			paintHit(event);
 		});
-		renderer.domElement.addEventListener('pointerup', () => { pointerDown = false; lastPaint = null; setStatus(movingBackground ? 'Scene positioned' : mode === 'paint' ? 'Paint mode' : 'Rotate mode'); });
+		const endPointerAction = () => { pointerDown = false; viewport.classList.remove('is-dragging'); syncViewportCursorMode(); lastPaint = null; setStatus(movingBackground ? 'Scene positioned' : mode === 'paint' ? 'Paint mode' : 'Rotate mode'); };
+		renderer.domElement.addEventListener('pointerup', endPointerAction);
+		renderer.domElement.addEventListener('pointercancel', endPointerAction);
 
 		const chooseWheelColour = (event: PointerEvent) => {
 			const bounds = wheelCanvas.getBoundingClientRect(), x = event.clientX - bounds.left - bounds.width / 2, y = event.clientY - bounds.top - bounds.height / 2;
@@ -403,9 +504,10 @@
 		[inputs.h, inputs.s, inputs.v].forEach((input) => input.addEventListener('input', () => { const rgb = hsvRgb(Number(inputs.h.value), Number(inputs.s.value) / 100, Number(inputs.v.value) / 100); sync(rgbHex(rgb.r, rgb.g, rgb.b)); }));
 		[inputs.metallic, inputs.roughness, inputs.brush, inputs.opacity].forEach((input) => input.addEventListener('input', updateFinish));
 		inputs.zoom.addEventListener('input', () => { const scale = Number(inputs.zoom.value) / 100; figure.scale.set(scale, scale, scale); updateFinish(); });
-		lab.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => button.addEventListener('click', () => { mode = button.dataset.mode as 'paint' | 'rotate'; lab.querySelectorAll('[data-mode]').forEach((item) => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); }); help.textContent = mode === 'paint' ? 'Paint mode: drag across the figure to apply colour to its surface.' : 'Rotate mode: drag the figure to inspect its silhouette, then switch back to paint.'; setStatus(mode === 'paint' ? 'Paint mode' : 'Rotate mode'); }));
+		figurePoseSelect.addEventListener('change', () => { loadFigurePose(figurePoseSelect.value as FigurePose); updateFinish(); setStatus(`${figurePoseSelect.selectedOptions[0]?.textContent ?? 'Figure'} pose loaded`); });
+		lab.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => button.addEventListener('click', () => { mode = button.dataset.mode as 'paint' | 'rotate'; lab.querySelectorAll('[data-mode]').forEach((item) => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); }); syncViewportCursorMode(); help.textContent = mode === 'paint' ? 'Paint mode: drag across the figure to apply colour to its surface.' : 'Rotate mode: drag the figure to inspect its silhouette, then switch back to paint.'; setStatus(mode === 'paint' ? 'Paint mode' : 'Rotate mode'); }));
 		backgroundScaleInput.addEventListener('input', () => { if (!background) return; const scale = Number(backgroundScaleInput.value) / 100; background.scale.set(scale, scale, 1); backgroundScaleOutput.value = `${backgroundScaleInput.value}%`; setStatus(`Scene scale ${backgroundScaleInput.value}%`); requestRender(); });
-		backgroundMoveButton.addEventListener('click', () => { if (!background) return; setEyedropper(false); movingBackground = !movingBackground; viewport.classList.toggle('is-positioning', movingBackground); backgroundMoveButton.classList.toggle('is-active', movingBackground); backgroundMoveButton.setAttribute('aria-pressed', String(movingBackground)); backgroundMoveButton.textContent = movingBackground ? 'Finish positioning' : 'Position scene'; setStatus(movingBackground ? 'Drag the scene behind the figure' : 'Scene positioned'); });
+		backgroundMoveButton.addEventListener('click', () => { if (!background) return; setEyedropper(false); movingBackground = !movingBackground; syncViewportCursorMode(); backgroundMoveButton.classList.toggle('is-active', movingBackground); backgroundMoveButton.setAttribute('aria-pressed', String(movingBackground)); backgroundMoveButton.textContent = movingBackground ? 'Finish positioning' : 'Position scene'; setStatus(movingBackground ? 'Drag the scene behind the figure' : 'Scene positioned'); });
 		eyedropperButton.addEventListener('click', () => { if (!background) return; if (movingBackground) backgroundMoveButton.click(); const active = !pickingBackground; setEyedropper(active); help.textContent = active ? 'Eyedropper: click a colour in your uploaded scene to copy it into the palette.' : 'Paint mode: drag across the figure to apply colour to its surface.'; setStatus(active ? 'Eyedropper ready — click the uploaded scene' : 'Paint mode'); });
 		fitBackgroundButton.addEventListener('click', () => { fitBackground(); setStatus('Scene fitted to canvas'); });
 		clearSceneButton.addEventListener('click', () => { clearBackground(); setStatus('Scene cleared'); });
@@ -423,28 +525,22 @@
 			setStatus('Stroke undone');
 		});
 		lab.querySelector<HTMLButtonElement>('[data-save]')!.addEventListener('click', () => { requestRender(); window.requestAnimationFrame(() => { const link = document.createElement('a'); link.download = 'meccha-chameleon-camouflage-practice.png'; link.href = renderer.domElement.toDataURL('image/png'); link.click(); setStatus('PNG saved'); }); });
+		presetBackgroundButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const url = button.dataset.presetBackground;
+				if (!url) return;
+				loadSceneTexture(url, button.dataset.sceneLabel || 'Preset scene', button);
+			});
+		});
 		lab.querySelector<HTMLInputElement>('[data-background]')!.addEventListener('change', (event: Event) => {
 			const file = (event.currentTarget as HTMLInputElement).files?.[0];
 			if (!file) return;
 			if (file.size > 12 * 1024 * 1024) { setStatus('Choose an image smaller than 12 MB'); return; }
 			const url = URL.createObjectURL(file);
-			new THREE.TextureLoader().load(url, (texture: THREE_NS.Texture) => {
-				clearBackground(); texture.colorSpace = THREE.SRGBColorSpace;
-				const image = texture.image as HTMLImageElement, aspect = image.width / image.height;
-				background = new THREE.Mesh(new THREE.PlaneGeometry(5.8 * aspect, 5.8), new THREE.MeshBasicMaterial({ map: texture }));
-				const samplingScale = Math.min(1, 2048 / Math.max(image.width, image.height));
-				const samplerCanvas = document.createElement('canvas');
-				samplerCanvas.width = Math.max(1, Math.round(image.width * samplingScale));
-				samplerCanvas.height = Math.max(1, Math.round(image.height * samplingScale));
-				const samplerContext = samplerCanvas.getContext('2d', { willReadFrequently: true })!;
-				samplerContext.drawImage(image, 0, 0, samplerCanvas.width, samplerCanvas.height);
-				background.userData.sampler = { canvas: samplerCanvas, context: samplerContext };
-				background.position.set(0, 0.14, -1.65); scene.add(background);
-				backgroundScaleInput.value = '100'; backgroundScaleOutput.value = '100%'; fileLabel.textContent = file.name; setBackgroundControls(true); URL.revokeObjectURL(url); requestRender(); setStatus('Scene loaded — fit, position, or paint');
-			}, undefined, () => { URL.revokeObjectURL(url); setStatus('That image could not be loaded. Try PNG, JPG, or WebP.'); });
+			loadSceneTexture(url, file.name, uploadSceneCard, true);
 		});
 
-		drawWheel(); sync(paintColor); updateFinish(); resize(); viewport.setAttribute('aria-busy', 'false'); loading.remove(); setStatus('Paint mode');
+		drawWheel(); sync(paintColor); loadFigurePose(figurePoseSelect.value as FigurePose); updateFinish(); resize(); loadSceneTexture('/images/simulator/simulator-bg-01.png', 'Preset 01', presetBackgroundButtons[0]); syncViewportCursorMode(); viewport.setAttribute('aria-busy', 'false'); loading.remove(); setStatus('Paint mode');
 	};
 
 	document.querySelectorAll<HTMLElement>('[data-paint-lab-3d]').forEach((lab) => {

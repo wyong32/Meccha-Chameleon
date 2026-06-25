@@ -1,5 +1,5 @@
 ---
-// 全站基础布局：TDK、canonical、JSON-LD、OG/Twitter、Header/Footer
+// Site base layout: TDK, canonical, JSON-LD, OG/Twitter, Header/Footer.
 import AppHeader from '../components/AppHeader.astro';
 import AppFooter from '../components/AppFooter.astro';
 import '../styles/global.css';
@@ -59,7 +59,7 @@ const websiteJsonLd = buildWebSiteJsonLd();
 		<meta name="twitter:image" content={absoluteOgImage} />
 		<meta name="twitter:url" content={canonicalURL.href} />
 		<link rel="icon" href="/favicon.ico" sizes="any" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
 		{
 			jsonLdItems.map((item) => (
