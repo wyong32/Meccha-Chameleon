@@ -121,7 +121,7 @@ export const guides = [
 			<p>
 				Prep shortcut: 0–5s pick a spot, 5–10s set pose, 10–20s two-tone paint, then freeze. Running low on time?
 				One wall, one pose, two Spoid samples still beats an unfinished hide. Practice silhouettes in the
-				<a href="/camouflage-simulator">Camouflage Simulator</a> before a live lobby.
+				<a href="/camouflage-simulator">Camouflage Simulator</a> before a <a href="/online">live lobby</a>.
 			</p>
 
 			<h2>Modes and post-round review</h2>
@@ -143,7 +143,7 @@ export const guides = [
 				<a href="/updates">patch notes</a> before blaming your paint.
 			</p>
 
-			<h2>Three private-lobby drills</h2>
+			<h2>Three <a href="/online">private-lobby</a> drills</h2>
 			<ol class="guide-steps guide-steps--compact">
 				<li><strong>Wall-only:</strong> flat wall, flatten pose, two Spoid samples — judge the door sightline only.</li>
 				<li><strong>Reverse-angle:</strong> walk the main Seeker route backward in your head; fix pose before colour.</li>

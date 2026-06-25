@@ -102,6 +102,23 @@
 	color: #dce1fb;
 }
 
+.inner-hero-section .page-intro a,
+.DetailPage .detail-lead a {
+	color: #fff1a8;
+	font-weight: 800;
+	text-decoration-color: rgba(255, 241, 168, 0.7);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.18em;
+	text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28);
+}
+
+.inner-hero-section .page-intro a:hover,
+.DetailPage .detail-lead a:hover {
+	color: #ffffff;
+	background: rgba(255, 241, 168, 0.16);
+	text-decoration-color: #ffffff;
+}
+
 .inner-hero-meta {
 	display: flex;
 	flex-wrap: wrap;

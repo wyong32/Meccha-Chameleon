@@ -23,8 +23,8 @@ const patches = [
 		typeLabel: 'Feature',
 		title: 'Cube character and pre-match selection fixes',
 		summary: 'Adds the new Cube character, individual character selection before a match, visible selected-map confirmation, desync improvements for hiding players, pose-stop fixes, and a longer hunter shotgun firing delay.',
-		links: [],
 		impact: 'Groups should confirm character choice and selected map before starting. Hiders should retest pose timing because the update fixes poses stopping midway, while Seekers should account for the longer shotgun delay.',
+		links: [{ href: '/wiki#wiki-maps', label: 'Official map notes' }],
 	},
 	{
 		id: 'v1-8-0',
@@ -45,7 +45,7 @@ const patches = [
 		typeLabel: 'Fix',
 		title: '1.8.1 update notice and rollback context',
 		summary: 'The developer posted update 1.8.1 and later announced a rollback because of a bug. The latest official announcement is update 1.8.0, so verify the version shown in your own client before testing a route.',
-		links: [],
+		links: [{ href: '/online', label: 'Online setup guide' }],
 		impact: 'Do not assume every client has the same build during a rollback window. Confirm the displayed version before treating an Osaka clip, emote, or elimination behaviour as reproducible.',
 	},
 	{
@@ -67,7 +67,7 @@ const patches = [
 		typeLabel: 'Fix',
 		title: 'Cloud save and BGM fixes',
 		summary: 'Fixes infinite loading on the cloud-save screen and an issue where BGM did not play.',
-		links: [],
+		links: [{ href: '/online', label: 'Online setup guide' }],
 		impact: 'If cloud saves or background music fail after an update, restart the game first and test a simple private room before changing local files.',
 	},
 	{
@@ -78,7 +78,7 @@ const patches = [
 		typeLabel: 'Feature',
 		title: 'Hider size option and cloud-save work',
 		summary: 'Adds an option to change Hider size and implements measures for a cloud-save error.',
-		links: [],
+		links: [{ href: '/online', label: 'Online setup guide' }],
 		impact: 'Hosts can use the new Hider-size option for a room rule, but should confirm every player is on the same build before comparing results.',
 	},
 	{
@@ -113,7 +113,7 @@ const patches = [
 		title: 'Player-state and Workshop API fixes',
 		summary:
 			'Fixes detected-player deletion, Steam Workshop API limit issues, server-status display, and player nameplates.',
-		links: [],
+		links: [{ href: '/workshop', label: 'Workshop hosting notes' }],
 		impact: 'When Workshop or lobby display problems appear, test one official map first so a subscription issue is not mistaken for a game-wide issue.',
 	},
 	{

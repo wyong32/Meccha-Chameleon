@@ -98,14 +98,14 @@ export const workshopMaps = [
 			<ol class="guide-steps guide-steps--compact">
 				<li><strong>Subscribe:</strong> open the Workshop item and subscribe; restart the game if the map does not appear.</li>
 				<li><strong>Sync the lobby:</strong> every player must subscribe before joining — mismatched subscriptions cause load failures.</li>
-				<li><strong>Private test:</strong> one short round on an official map, then one on Meeting room, before inviting a full group.</li>
+				<li><strong>Private test:</strong> one short round on an <a href="/wiki#wiki-maps">official map</a>, then one on Meeting room, before inviting a full group.</li>
 				<li><strong>Share the link:</strong> paste the Workshop URL in chat so late joiners subscribe to the same item.</li>
 			</ol>
 			<p>Full multiplayer setup habits: <a href="/online">Online guide</a>.</p>
 
 			<h2>Scene reading on an office interior</h2>
 			<p>
-				Meeting room rewards the same core loop as official indoor maps — <strong>Spot → Pose → Paint</strong> — but
+				Meeting room rewards the same core loop as official indoor maps — <a href="/guides/hider-camouflage-masterclass"><strong>Spot → Pose → Paint</strong></a> — but
 				the props are desks, chairs, glass partitions, and flat wall panels. Pick one material family per hide instead
 				of painting across unrelated surfaces.
 			</p>
@@ -212,7 +212,7 @@ export const workshopMaps = [
 			<ol class="guide-steps guide-steps--compact">
 				<li><strong>Subscribe:</strong> open the Workshop item and subscribe; restart if Viking Dining does not appear in map select.</li>
 				<li><strong>Sync the lobby:</strong> every player must subscribe — partial groups fail to load custom stages.</li>
-				<li><strong>Private test:</strong> one official-map round, then one Viking Dining test, before a full party.</li>
+				<li><strong>Private test:</strong> one <a href="/wiki#wiki-maps">official-map</a> round, then one Viking Dining test, before a full party.</li>
 				<li><strong>Share the link:</strong> paste the Workshop URL so late joiners grab the same file.</li>
 			</ol>
 			<p>Full multiplayer setup habits: <a href="/online">Online guide</a>.</p>
@@ -220,7 +220,7 @@ export const workshopMaps = [
 			<h2>Scene reading in a viking tavern</h2>
 			<p>
 				Taverns mix <strong>wood grain</strong>, <strong>stone</strong>, and <strong>warm light</strong> — easy to
-				over-paint. Use <strong>Spot → Pose → Paint</strong>: commit to one prop family (barrel row, beam, hearth
+				over-paint. Use <a href="/guides/hider-camouflage-masterclass"><strong>Spot → Pose → Paint</strong></a>: commit to one prop family (barrel row, beam, hearth
 				wall), set a low silhouette, then Spoid lit and shadow tones from the same material beside your pose.
 			</p>
 			<div class="guide-table-wrap">
@@ -325,14 +325,14 @@ export const workshopMaps = [
 			<ol class="guide-steps guide-steps--compact">
 				<li><strong>Subscribe:</strong> open the Workshop item and subscribe; restart if Police Station is missing from map select.</li>
 				<li><strong>Sync the lobby:</strong> every player must subscribe before joining.</li>
-				<li><strong>Private test:</strong> one official-map round, then one Police Station test, before a full group.</li>
+				<li><strong>Private test:</strong> one <a href="/wiki#wiki-maps">official-map</a> round, then one Police Station test, before a full group.</li>
 				<li><strong>Share the link:</strong> paste the Workshop URL for late joiners.</li>
 			</ol>
 			<p>Full multiplayer setup habits: <a href="/online">Online guide</a>.</p>
 
 			<h2>Scene reading in a police interior</h2>
 			<p>
-				Use <strong>Spot → Pose → Paint</strong> on one material family — desk edge, tile run, or cabinet row. Fluorescent
+				Use <a href="/guides/hider-camouflage-masterclass"><strong>Spot → Pose → Paint</strong></a> on one material family — desk edge, tile run, or cabinet row. Fluorescent
 				lighting makes single flat colours obvious; Spoid both a lit plane and a nearby shadow on the same surface.
 			</p>
 			<div class="guide-table-wrap">
