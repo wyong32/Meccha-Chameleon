@@ -59,8 +59,8 @@
 			const frame = getFrame(slot);
 			if (slot.dataset.adRenderedSize === 'native') return;
 			slot.dataset.adRenderedSize = 'native';
-			slot.style.setProperty('--affiliate-ad-width', '100%');
-			slot.style.setProperty('--affiliate-ad-height', 'auto');
+			slot.style.setProperty('--affiliate-ad-width', '728px');
+			slot.style.setProperty('--affiliate-ad-height', '280px');
 			frame.replaceChildren(makeIframe(nativeBanner, 728, 280, 'Native advertisement'));
 		}
 
