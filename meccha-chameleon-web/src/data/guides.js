@@ -16,6 +16,12 @@
 const guideCardImage = '/images/guides/hider-masterclass.webp';
 const multiplayerGuideImage = '/images/guides/hider-masterclass.webp';
 const mapsGuideImage = '/images/workshop/meeting-room/card.jpg';
+const guideBodyBannerHtml = `
+			<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
+				<span class="affiliate-ad-slot__label">Advertisement</span>
+				<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
+			</aside>
+`;
 
 /** @type {GuideEntry[]} */
 export const guides = [
@@ -123,6 +129,8 @@ export const guides = [
 				<p><strong>Do not debug five variables at once.</strong> If friends cannot join, remove Workshop maps, public filters, extra house rules, and unusual modes until the base room works.</p>
 			</div>
 
+			${guideBodyBannerHtml}
+
 			<h2>Crossplay and random players</h2>
 			<h3>Is MECCHA CHAMELEON crossplay?</h3>
 			<p>
@@ -153,6 +161,8 @@ export const guides = [
 					</tbody>
 				</table>
 			</div>
+
+			${guideBodyBannerHtml}
 
 			<h3>Friend invite appears but does not connect</h3>
 			<ol class="guide-steps guide-steps--compact">
@@ -276,6 +286,8 @@ export const guides = [
 				<p><strong>Safe rule:</strong> if the host cannot send the original Workshop item link, do not ask the group to install it.</p>
 			</div>
 
+			${guideBodyBannerHtml}
+
 			<h2>Best hiding spots</h2>
 			<h3>What makes a hiding spot strong</h3>
 			<p>
@@ -328,6 +340,8 @@ export const guides = [
 					</tbody>
 				</table>
 			</div>
+
+			${guideBodyBannerHtml}
 
 			<h3>When to split map maker into its own page</h3>
 			<p>
