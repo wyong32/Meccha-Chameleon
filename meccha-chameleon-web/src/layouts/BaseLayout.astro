@@ -2,6 +2,7 @@
 // Site base layout: TDK, canonical, JSON-LD, OG/Twitter, Header/Footer.
 import AppHeader from '../components/AppHeader.astro';
 import AppFooter from '../components/AppFooter.astro';
+import AdManager from '../components/AdManager.astro';
 import '../styles/global.css';
 import '../styles/pages/InnerPage.css';
 import { seoConfig } from '../seo/config.js';
@@ -88,5 +89,6 @@ const websiteJsonLd = buildWebSiteJsonLd();
 			<slot />
 		</main>
 		<AppFooter />
+		<AdManager />
 	</body>
 </html>

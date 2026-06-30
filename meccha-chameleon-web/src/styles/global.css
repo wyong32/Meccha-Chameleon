@@ -322,6 +322,47 @@ img {
 	color: var(--color-dark-muted);
 }
 
+.affiliate-ad-slot {
+	--affiliate-ad-width: 728px;
+	--affiliate-ad-height: 90px;
+	display: grid;
+	width: min(100%, calc(var(--affiliate-ad-width) + 2rem));
+	min-height: calc(var(--affiliate-ad-height) + 2rem);
+	margin: clamp(1.75rem, 4vw, 3rem) auto;
+	padding: 0.75rem;
+	place-items: center;
+	border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+	border-radius: var(--radius-md);
+	background:
+		linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 247, 0.78)),
+		radial-gradient(circle at 12% 20%, rgba(200, 239, 98, 0.18), transparent 12rem);
+	box-shadow: var(--shadow-sm);
+	overflow: hidden;
+}
+
+.affiliate-ad-slot__label {
+	margin-bottom: 0.45rem;
+	color: var(--color-text-muted);
+	font-size: 0.68rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.affiliate-ad-slot__frame {
+	display: grid;
+	width: min(100%, var(--affiliate-ad-width));
+	min-height: var(--affiliate-ad-height);
+	place-items: center;
+}
+
+.affiliate-ad-slot iframe {
+	display: block;
+	border: 0;
+	background: transparent;
+}
+
 .breadcrumb {
 	margin-bottom: 1.5rem;
 	max-width: 100%;

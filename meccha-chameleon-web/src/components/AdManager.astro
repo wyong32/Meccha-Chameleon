@@ -1,0 +1,79 @@
+---
+---
+
+<script src="https://pl30122472.effectivecpmnetwork.com/bf/81/ad/bf81adf2aff5ae5979d300f63def40da.js"></script>
+
+<script is:inline>
+	(() => {
+		if (window.__mecchaChameleonAdsReady) return;
+		window.__mecchaChameleonAdsReady = true;
+
+		const bannerDesktop = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;width:728px;height:90px;overflow:hidden;background:transparent}</style></head><body><script>atOptions={'key':'b393fb28953bcd49e8ce6ac392406edf','format':'iframe','height':90,'width':728,'params':{}};<\/script><script src="https://www.highperformanceformat.com/b393fb28953bcd49e8ce6ac392406edf/invoke.js"><\/script></body></html>`;
+		const bannerMobile = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;width:300px;height:250px;overflow:hidden;background:transparent}</style></head><body><script>atOptions={'key':'53a87f0ddf4dc6db0543c156a066ce93','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src="https://www.highperformanceformat.com/53a87f0ddf4dc6db0543c156a066ce93/invoke.js"><\/script></body></html>`;
+		const nativeBanner = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style></head><body><script async="async" data-cfasync="false" src="https://pl30122473.effectivecpmnetwork.com/86793d4698947ef6e23e7cdeee40b713/invoke.js"><\/script><div id="container-86793d4698947ef6e23e7cdeee40b713"></div></body></html>`;
+
+		const mobileQuery = window.matchMedia('(max-width: 767px)');
+
+		function getFrame(slot) {
+			let frame = slot.querySelector('[data-affiliate-ad-frame]');
+			if (!frame) {
+				frame = document.createElement('div');
+				frame.setAttribute('data-affiliate-ad-frame', '');
+				frame.className = 'affiliate-ad-slot__frame';
+				slot.appendChild(frame);
+			}
+			return frame;
+		}
+
+		function makeIframe(srcdoc, width, height, title) {
+			const iframe = document.createElement('iframe');
+			iframe.title = title;
+			iframe.width = String(width);
+			iframe.height = String(height);
+			iframe.loading = 'lazy';
+			iframe.referrerPolicy = 'no-referrer-when-downgrade';
+			iframe.setAttribute('scrolling', 'no');
+			iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+			iframe.style.width = `${width}px`;
+			iframe.style.height = `${height}px`;
+			iframe.style.maxWidth = '100%';
+			iframe.style.border = '0';
+			iframe.srcdoc = srcdoc;
+			return iframe;
+		}
+
+		function renderBanner(slot) {
+			const isMobile = mobileQuery.matches;
+			const width = isMobile ? 300 : 728;
+			const height = isMobile ? 250 : 90;
+			const frame = getFrame(slot);
+
+			if (slot.dataset.adRenderedSize === `${width}x${height}`) return;
+			slot.dataset.adRenderedSize = `${width}x${height}`;
+			slot.style.setProperty('--affiliate-ad-width', `${width}px`);
+			slot.style.setProperty('--affiliate-ad-height', `${height}px`);
+			frame.replaceChildren(makeIframe(isMobile ? bannerMobile : bannerDesktop, width, height, `Advertisement ${width} by ${height}`));
+		}
+
+		function renderNative(slot) {
+			const frame = getFrame(slot);
+			if (slot.dataset.adRenderedSize === 'native') return;
+			slot.dataset.adRenderedSize = 'native';
+			slot.style.setProperty('--affiliate-ad-width', '100%');
+			slot.style.setProperty('--affiliate-ad-height', 'auto');
+			frame.replaceChildren(makeIframe(nativeBanner, 728, 280, 'Native advertisement'));
+		}
+
+		function renderAds() {
+			document.querySelectorAll('[data-affiliate-ad]').forEach((slot) => {
+				const type = slot.getAttribute('data-affiliate-ad');
+				if (type === 'native') renderNative(slot);
+				else renderBanner(slot);
+			});
+		}
+
+		renderAds();
+		window.addEventListener('DOMContentLoaded', renderAds, { once: true });
+		mobileQuery.addEventListener?.('change', renderAds);
+	})();
+</script>
