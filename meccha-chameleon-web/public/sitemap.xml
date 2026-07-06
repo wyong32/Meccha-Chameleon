@@ -121,6 +121,18 @@
     <priority>0.82</priority>
   </url>
   <url>
+    <loc>https://meccachameleon.com/guides/meccha-chameleon-how-to-play</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://meccachameleon.com/guides/meccha-chameleon-controls-settings</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
     <loc>https://meccachameleon.com/guides/meccha-chameleon-multiplayer-friends-guide</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
