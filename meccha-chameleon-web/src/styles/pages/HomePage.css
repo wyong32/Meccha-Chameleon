@@ -339,22 +339,51 @@
 }
 
 .HomePage .simulator-promo {
-	background: var(--color-dark-bg);
+	background:
+		radial-gradient(circle at 85% 15%, rgba(200, 239, 98, 0.14), transparent 42%),
+		var(--color-dark-bg);
 	color: var(--color-dark-text);
 }
 
 .HomePage .simulator-promo__grid {
 	display: grid;
-	grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-	gap: clamp(1.5rem, 4vw, 2.5rem);
+	grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+	gap: clamp(1.5rem, 4vw, 2.75rem);
 	align-items: center;
 }
 
 .HomePage .simulator-promo__copy p {
-	max-width: 58ch;
-	margin: 0.65rem 0 1rem;
+	max-width: 52ch;
+	margin: 0.65rem 0 1.15rem;
 	color: var(--color-dark-muted);
 	line-height: 1.65;
+}
+
+.HomePage .simulator-promo__tools {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+	margin: 0 0 1.15rem;
+	padding: 0;
+}
+
+.HomePage .simulator-promo__tools li {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.45rem 0.7rem;
+	border: 1px solid rgba(200, 239, 98, 0.28);
+	border-radius: 999px;
+	background: rgba(200, 239, 98, 0.08);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	color: #f4f7ff;
+}
+
+.HomePage .simulator-promo__tools img {
+	flex-shrink: 0;
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
 .HomePage .simulator-promo__features {
@@ -383,25 +412,119 @@
 	background: var(--color-primary);
 }
 
-.HomePage .simulator-promo__visual {
-	display: flex;
-	justify-content: center;
+.HomePage .simulator-promo__actions {
+	display: grid;
+	gap: 0.55rem;
 }
 
-.HomePage .simulator-promo__panel {
-	width: min(100%, 360px);
-	padding: 1.5rem 1.35rem;
-	border-radius: 18px 18px 18px 5px;
-	border: 1px solid var(--color-dark-border);
-	background:
-		linear-gradient(145deg, rgba(200, 239, 98, 0.12), transparent 55%),
-		var(--color-dark-elevated);
-	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+.HomePage .simulator-promo__hint {
+	margin: 0;
+	font-size: 0.8125rem;
+	color: var(--color-dark-muted);
+	line-height: 1.45;
+}
+
+.HomePage .simulator-promo__preview {
+	display: grid;
+	gap: 0.75rem;
+	text-decoration: none;
+	color: inherit;
+	border-radius: 18px;
+	transition:
+		transform var(--transition),
+		box-shadow var(--transition);
+}
+
+.HomePage .simulator-promo__preview:hover {
+	transform: translateY(-4px);
+	color: inherit;
+}
+
+.HomePage .simulator-promo__preview:focus-visible {
+	outline: 3px solid var(--color-primary);
+	outline-offset: 4px;
+}
+
+.HomePage .simulator-promo__preview-main {
+	position: relative;
+	overflow: hidden;
+	border-radius: 16px;
+	border: 2px solid rgba(200, 239, 98, 0.35);
+	box-shadow:
+		0 22px 48px rgba(0, 0, 0, 0.38),
+		0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+	aspect-ratio: 16 / 10;
+}
+
+.HomePage .simulator-promo__preview-image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.45s ease;
+}
+
+.HomePage .simulator-promo__preview:hover .simulator-promo__preview-image {
+	transform: scale(1.04);
+}
+
+.HomePage .simulator-promo__figure {
+	position: absolute;
+	left: 50%;
+	bottom: 8%;
+	width: clamp(52px, 14%, 88px);
+	height: clamp(120px, 32%, 200px);
+	transform: translateX(-50%);
+	border-radius: 42% 42% 18% 18% / 55% 55% 20% 20%;
+	background: linear-gradient(180deg, #f8fff0 0%, #d8f07a 55%, #9fc94a 100%);
+	box-shadow:
+		0 0 0 2px rgba(255, 255, 255, 0.65),
+		0 10px 24px rgba(0, 0, 0, 0.35);
+	opacity: 0.92;
+	pointer-events: none;
+}
+
+.HomePage .simulator-promo__figure::before,
+.HomePage .simulator-promo__figure::after {
+	content: '';
+	position: absolute;
+	background: inherit;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.HomePage .simulator-promo__figure::before {
+	top: -18%;
+	left: 18%;
+	width: 34%;
+	height: 22%;
+	border-radius: 45%;
+}
+
+.HomePage .simulator-promo__figure::after {
+	top: 30%;
+	left: -28%;
+	width: 22%;
+	height: 38%;
+	border-radius: 40%;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.HomePage .simulator-promo__preview-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 0.45rem;
+	padding: 1.15rem 1.25rem;
+	background: linear-gradient(180deg, rgba(15, 8, 20, 0.05) 20%, rgba(15, 8, 20, 0.82) 100%);
+	pointer-events: none;
 }
 
 .HomePage .simulator-promo__badge {
+	align-self: flex-start;
 	display: inline-block;
-	margin-bottom: 0.75rem;
 	padding: 0.28rem 0.6rem;
 	font-size: 0.6875rem;
 	font-weight: 800;
@@ -412,30 +535,93 @@
 	background: var(--color-primary);
 }
 
-.HomePage .simulator-promo__panel-title {
-	margin: 0 0 1rem;
+.HomePage .simulator-promo__preview-title {
+	margin: 0;
+	max-width: 28ch;
 	font-family: var(--font-heading);
-	font-size: 1.35rem;
+	font-size: clamp(1.05rem, 2.2vw, 1.35rem);
 	line-height: 1.25;
 	color: #fff;
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
-.HomePage .simulator-promo__steps {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+.HomePage .simulator-promo__preview-cta {
+	align-self: flex-start;
+	font-size: 0.875rem;
+	font-weight: 800;
+	color: var(--color-primary);
+	letter-spacing: 0.02em;
+	transition: transform var(--transition);
+}
+
+.HomePage .simulator-promo__preview:hover .simulator-promo__preview-cta {
+	transform: translateX(4px);
+}
+
+.HomePage .simulator-promo__thumbs {
 	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 0.65rem;
 }
 
-.HomePage .simulator-promo__steps li {
-	font-size: 0.9375rem;
-	color: var(--color-dark-muted);
-	line-height: 1.5;
+.HomePage .simulator-promo__thumb {
+	margin: 0;
+	overflow: hidden;
+	border-radius: 10px;
+	border: 1px solid var(--color-dark-border);
+	background: var(--color-dark-elevated);
+	transition:
+		border-color var(--transition),
+		transform var(--transition);
 }
 
-.HomePage .simulator-promo__steps strong {
-	color: #fff;
+.HomePage .simulator-promo__preview:hover .simulator-promo__thumb {
+	border-color: rgba(200, 239, 98, 0.35);
+}
+
+.HomePage .simulator-promo__thumb img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+}
+
+.HomePage .simulator-promo__thumb figcaption,
+.HomePage .simulator-promo__thumb > span:last-child {
+	display: block;
+	padding: 0.45rem 0.55rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--color-dark-muted);
+	text-align: center;
+}
+
+.HomePage .simulator-promo__thumb--upload {
+	display: grid;
+	place-items: center;
+	gap: 0.25rem;
+	min-height: 100%;
+	padding: 0.65rem 0.5rem;
+	border-style: dashed;
+	border-color: rgba(200, 239, 98, 0.35);
+	background:
+		repeating-linear-gradient(-45deg, rgba(200, 239, 98, 0.06) 0 8px, transparent 8px 16px),
+		var(--color-dark-elevated);
+	color: var(--color-primary);
+	font-size: 0.75rem;
+	font-weight: 800;
+	text-align: center;
+}
+
+.HomePage .simulator-promo__upload-icon {
+	display: grid;
+	width: 1.65rem;
+	height: 1.65rem;
+	border: 1px solid rgba(200, 239, 98, 0.5);
+	border-radius: 50%;
+	place-items: center;
+	font-size: 1.1rem;
+	line-height: 1;
 }
 
 .HomePage .simulator-promo h2 {
@@ -785,6 +971,14 @@
 
 	.HomePage .simulator-promo__grid {
 		grid-template-columns: 1fr;
+	}
+
+	.HomePage .simulator-promo__copy {
+		order: 1;
+	}
+
+	.HomePage .simulator-promo__preview {
+		order: 0;
 	}
 
 	.HomePage .update-row {

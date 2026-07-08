@@ -11,7 +11,7 @@
 	<div class="paint-lab-3d__intro">
 		<p>PAINT HIDE AND SEEK PRACTICE</p>
 		<h2>Paint Hide and Seek Practice Tool for MECCHA CHAMELEON</h2>
-		<span>Choose a scene background, sample colours, then paint the practice figure before trying the idea in-game.</span>
+		<span>Choose a scene background, drag the figure into place, rotate to check the silhouette, then paint before trying the idea in-game.</span>
 	</div>
 
 	<div class="paint-lab-3d__layout">
@@ -26,8 +26,10 @@
 				<div class="paint-lab-3d__tool-group paint-lab-3d__mode-group" role="group" aria-label="Figure interaction mode">
 					<label>Pose <select data-figure-pose aria-label="Choose practice figure pose"><option value="standing" selected>Standing</option><!-- <option value="sitting">Sitting</option> --></select></label>
 					<button type="button" data-mode="paint" class="is-active" aria-pressed="true">Paint</button>
+					<button type="button" data-mode="move" aria-pressed="false">Move</button>
 					<button type="button" data-mode="rotate" aria-pressed="false">Rotate</button>
-					<label>Figure zoom <input data-zoom type="range" min="75" max="150" value="100" /><output data-zoom-out>100%</output></label>
+					<button type="button" data-reset-figure>Center figure</button>
+					<label>Figure zoom <input data-zoom type="range" min="40" max="150" value="100" /><output data-zoom-out>100%</output></label>
 				</div>
 			</div>
 
@@ -85,7 +87,7 @@
 					<div>
 						<p class="paint-lab-3d__eyebrow">SCENE SETUP</p>
 						<h3>Simulator Backgrounds</h3>
-						<p>Pick a scene, sample its colours with Eyedropper, then paint the figure to blend in.</p>
+						<p>Pick a scene, drag the figure into place, sample colours with Eyedropper, then paint to blend in.</p>
 					</div>
 					<output data-file-label aria-label="Current simulator background">Preset 01</output>
 				</div>
@@ -118,7 +120,7 @@
 	.paint-lab-3d__layout { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(330px,.6fr); }.paint-lab-3d__stage { min-width:0; background:#e2e8dc; color:#193126; }
 	.paint-lab-3d__stage-tools { display:flex; flex-wrap:wrap; align-items:center; gap:.7rem 1rem; padding:.8rem 1rem; background:#d1ddcf; border-bottom:1px solid #a7baaa; font-size:.75rem; font-weight:800; letter-spacing:.025em; }.paint-lab-3d__file-input { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 	.paint-lab-3d__tool-group { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; padding-left:1rem; border-left:1px solid #a5b6a6; }.paint-lab-3d__tool-group label { display:flex; align-items:center; gap:.35rem; }.paint-lab-3d__tool-group button,.paint-lab-3d__tool-group select { border:1px solid #718b7b; background:#f8f6e9; padding:.46rem .65rem; color:#193126; font-size:.74rem; font-weight:800; cursor:pointer; }.paint-lab-3d__tool-group select { min-width:6.6rem; }.paint-lab-3d__tool-group button:hover:not(:disabled),.paint-lab-3d__tool-group select:hover { border-color:#193e2f; background:#edf4df; }.paint-lab-3d__tool-group button.is-active { background:#1d4935; border-color:#1d4935; color:#fffaf0; }.paint-lab-3d__tool-group button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__tool-group input[type=range] { width:72px; accent-color:#487b60; }.paint-lab-3d__tool-group output { min-width:3.2rem; color:#496858; font-size:.68rem; }
-	.paint-lab-3d__viewport { position:relative; display:grid; min-height:500px; place-items:center; background:radial-gradient(circle at 50% 25%,#fbf9ee 0,#d4dfd2 45%,#b7c8ba 100%); touch-action:none; }.paint-lab-3d__viewport canvas { display:block; width:100%; height:100%; cursor:url('/images/simulator/cursors/brush.svg') 7 24, cell !important; }.paint-lab-3d__viewport.is-rotating-figure canvas { cursor:url('/images/simulator/cursors/rotate.svg') 16 16, grab !important; }.paint-lab-3d__viewport.is-positioning canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-picking-colour canvas { cursor:url('/images/simulator/cursors/eyedropper.svg') 8 25, copy !important; }.paint-lab-3d__viewport.is-dragging canvas { cursor:grabbing !important; }.paint-lab-3d__viewport.is-positioning.is-dragging canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-picking-colour.is-dragging canvas { cursor:url('/images/simulator/cursors/eyedropper.svg') 8 25, copy !important; }.paint-lab-3d__loading { margin:0; padding:1rem; color:#476553; font-size:.86rem; font-weight:700; text-align:center; }
+	.paint-lab-3d__viewport { position:relative; display:grid; min-height:500px; place-items:center; background:radial-gradient(circle at 50% 25%,#fbf9ee 0,#d4dfd2 45%,#b7c8ba 100%); touch-action:none; }.paint-lab-3d__viewport canvas { display:block; width:100%; height:100%; cursor:url('/images/simulator/cursors/brush.svg') 7 24, cell !important; }.paint-lab-3d__viewport.is-moving-figure canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-rotating-figure canvas { cursor:url('/images/simulator/cursors/rotate.svg') 16 16, grab !important; }.paint-lab-3d__viewport.is-positioning canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-picking-colour canvas { cursor:url('/images/simulator/cursors/eyedropper.svg') 8 25, copy !important; }.paint-lab-3d__viewport.is-dragging canvas { cursor:grabbing !important; }.paint-lab-3d__viewport.is-moving-figure.is-dragging canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-positioning.is-dragging canvas { cursor:url('/images/simulator/cursors/move-scene.svg') 16 16, move !important; }.paint-lab-3d__viewport.is-picking-colour.is-dragging canvas { cursor:url('/images/simulator/cursors/eyedropper.svg') 8 25, copy !important; }.paint-lab-3d__loading { margin:0; padding:1rem; color:#476553; font-size:.86rem; font-weight:700; text-align:center; }
 	.paint-lab-3d__help { margin:0; padding:.68rem 1rem; background:#f5f6ed; border-top:1px solid #adbbaa; color:#466353; font-size:.8rem; line-height:1.45; }.paint-lab-3d__actions { display:flex; flex-wrap:wrap; gap:.55rem; padding:.9rem 1rem; background:#fbf7e9; }.paint-lab-3d__actions button { border:1px solid #819486; background:transparent; color:#193126; padding:.58rem .75rem; font-size:.78rem; font-weight:800; cursor:pointer; }.paint-lab-3d__actions button:hover:not(:disabled) { background:#e8efdf; }.paint-lab-3d__actions button:disabled { cursor:not-allowed; opacity:.42; }.paint-lab-3d__actions .paint-lab-3d__save { margin-left:auto; border-color:#1c4433; background:#1c4433; color:#fffaf0; }
 	.paint-lab-3d__panel { padding:1.35rem; background:linear-gradient(160deg,#204835,#10271e 75%); }.paint-lab-3d__panel-title { margin:0; padding-bottom:.65rem; border-bottom:1px solid #769183; font-family:var(--font-heading); font-size:1.2rem; }.paint-lab-3d__panel-title span { margin-right:.48rem; color:var(--accent); font-family:var(--font-body); font-size:.7rem; font-weight:900; letter-spacing:.12em; }.paint-lab-3d__panel-lead { margin:.75rem 0 0; color:#c6d7ca; font-size:.82rem; line-height:1.5; }
 	.paint-lab-3d__picker { display:grid; grid-template-columns:136px 1fr; gap:1rem; align-items:center; padding:1rem 0; }.paint-lab-3d__wheel { position:relative; width:128px; aspect-ratio:1; border:4px solid #f7eed7; border-radius:50%; box-shadow:0 0 0 2px #0a1811,0 3px 10px #0008; overflow:hidden; touch-action:none; cursor:crosshair; }.paint-lab-3d__wheel canvas { display:block; width:100%; height:100%; }.paint-lab-3d__wheel span { position:absolute; left:82%; top:58%; width:13px; height:13px; border:2px solid #10251a; border-radius:50%; background:var(--accent); box-shadow:0 0 0 2px #f6efd9,0 1px 3px #0008; transform:translate(-50%,-50%); pointer-events:none; }.paint-lab-3d__wheel:focus-visible { outline:3px solid #ffca61; outline-offset:4px; }
@@ -160,6 +162,7 @@
 		const eyedropperButton = lab.querySelector<HTMLButtonElement>('[data-eyedropper]')!;
 		const clearSceneButton = lab.querySelector<HTMLButtonElement>('[data-reset-scene]')!;
 		const undoButton = lab.querySelector<HTMLButtonElement>('[data-undo]')!;
+		const resetFigureButton = lab.querySelector<HTMLButtonElement>('[data-reset-figure]')!;
 		const figurePoseSelect = lab.querySelector<HTMLSelectElement>('[data-figure-pose]')!;
 		const presetBackgroundButtons = Array.from(lab.querySelectorAll<HTMLButtonElement>('[data-preset-background]'));
 		const uploadSceneCard = lab.querySelector<HTMLElement>('.paint-lab-3d__scene-upload')!;
@@ -234,7 +237,11 @@
 
 		const raycaster = new THREE.Raycaster();
 		const pointer = new THREE.Vector2();
-		let mode: 'paint' | 'rotate' = 'paint';
+		const FIGURE_ROT_X_MIN = -Math.PI / 2 + 0.06;
+		const FIGURE_ROT_X_MAX = Math.PI / 2 - 0.06;
+		const FIGURE_ROT_Z_MIN = -Math.PI / 2 + 0.06;
+		const FIGURE_ROT_Z_MAX = Math.PI / 2 - 0.06;
+		let mode: 'paint' | 'move' | 'rotate' = 'paint';
 		let colour = { h: 78, s: 0.76, v: 0.91 };
 		let paintColor = '#b9e84a';
 		let pointerDown = false;
@@ -247,6 +254,7 @@
 		let renderRequested = false;
 
 		const syncViewportCursorMode = () => {
+			viewport.classList.toggle('is-moving-figure', mode === 'move' && !movingBackground && !pickingBackground);
 			viewport.classList.toggle('is-rotating-figure', mode === 'rotate' && !movingBackground && !pickingBackground);
 			viewport.classList.toggle('is-positioning', movingBackground);
 			viewport.classList.toggle('is-picking-colour', pickingBackground);
@@ -258,11 +266,44 @@
 				renderer.domElement.style.cursor = "url('/images/simulator/cursors/move-scene.svg') 16 16, move";
 				return;
 			}
+			if (mode === 'move') {
+				renderer.domElement.style.cursor = pointerDown ? 'grabbing' : "url('/images/simulator/cursors/move-scene.svg') 16 16, move";
+				return;
+			}
 			if (mode === 'rotate') {
 				renderer.domElement.style.cursor = pointerDown ? 'grabbing' : "url('/images/simulator/cursors/rotate.svg') 16 16, grab";
 				return;
 			}
 			renderer.domElement.style.cursor = "url('/images/simulator/cursors/brush.svg') 7 24, cell";
+		};
+
+		const modeHelpText = {
+			paint: 'Paint mode: drag across the figure to apply colour to its surface.',
+			move: 'Move mode: drag the figure to any corner or spot on the scene, then switch to Paint.',
+			rotate: 'Rotate mode: drag up/down to tip the figure flat; drag left/right to spin. Hold Shift while dragging to roll onto its side.',
+		};
+		const modeStatusText = {
+			paint: 'Paint mode',
+			move: 'Move mode',
+			rotate: 'Rotate mode',
+		};
+		const setMode = (nextMode: 'paint' | 'move' | 'rotate') => {
+			mode = nextMode;
+			lab.querySelectorAll('[data-mode]').forEach((item) => {
+				const active = (item as HTMLButtonElement).dataset.mode === nextMode;
+				item.classList.toggle('is-active', active);
+				item.setAttribute('aria-pressed', String(active));
+			});
+			syncViewportCursorMode();
+			help.textContent = modeHelpText[nextMode];
+			setStatus(modeStatusText[nextMode]);
+		};
+		const resetFigureTransform = () => {
+			figure.position.set(0, 0, 0);
+			figure.rotation.set(0, 0, 0);
+			const scale = Number(inputs.zoom.value) / 100;
+			figure.scale.set(scale, scale, scale);
+			requestRender();
 		};
 
 		const hsvRgb = (h: number, s: number, v: number) => {
@@ -301,10 +342,7 @@
 		const loadFigurePose = (pose: FigurePose) => {
 			disposeFigureParts();
 			parts = figureModels[pose](THREE, createPaintPart);
-			figure.rotation.set(0, 0, 0);
-			const scale = Number(inputs.zoom.value) / 100;
-			figure.scale.set(scale, scale, scale);
-			requestRender();
+			resetFigureTransform();
 		};
 
 		const updateWheelPosition = () => {
@@ -415,7 +453,7 @@
 				const hex = rgbHex(r, g, b);
 				sync(hex);
 				setEyedropper(false);
-				help.textContent = 'Paint mode: drag across the figure to apply colour to its surface.';
+				help.textContent = modeHelpText[mode];
 				setStatus(`Sampled ${hex.toUpperCase()}`);
 			} catch {
 				setStatus('This scene colour could not be sampled. Try another image.');
@@ -470,18 +508,45 @@
 			if (pickingBackground) { pickBackgroundColour(event); return; }
 			pointerDown = true; viewport.classList.add('is-dragging'); syncViewportCursorMode(); lastPaint = null; previous = { x: event.clientX, y: event.clientY }; renderer.domElement.setPointerCapture(event.pointerId);
 			if (movingBackground) { setStatus('Positioning scene'); return; }
+			if (mode === 'move') { setStatus('Moving figure'); return; }
 			if (mode === 'paint') { snapshot(); paintHit(event); setStatus('Painting surface'); }
 		});
 		renderer.domElement.addEventListener('pointermove', (event: PointerEvent) => {
 			if (!pointerDown) return;
+			const bounds = renderer.domElement.getBoundingClientRect();
 			if (movingBackground && background) {
-				const bounds = renderer.domElement.getBoundingClientRect();
 				background.position.x += (event.clientX - previous.x) / bounds.width * 4.8; background.position.y -= (event.clientY - previous.y) / bounds.height * 4.8; previous = { x: event.clientX, y: event.clientY }; requestRender(); return;
 			}
-			if (mode === 'rotate') { figure.rotation.y += (event.clientX - previous.x) * 0.012; figure.rotation.x = Math.max(-0.23, Math.min(0.18, figure.rotation.x + (event.clientY - previous.y) * 0.007)); previous = { x: event.clientX, y: event.clientY }; requestRender(); return; }
+			if (mode === 'move') {
+				figure.position.x += (event.clientX - previous.x) / bounds.width * 4.8;
+				figure.position.y -= (event.clientY - previous.y) / bounds.height * 4.8;
+				previous = { x: event.clientX, y: event.clientY };
+				requestRender();
+				return;
+			}
+			if (mode === 'rotate') {
+				const deltaX = event.clientX - previous.x;
+				const deltaY = event.clientY - previous.y;
+				figure.rotation.y += deltaX * 0.012;
+				figure.rotation.x = Math.max(FIGURE_ROT_X_MIN, Math.min(FIGURE_ROT_X_MAX, figure.rotation.x + deltaY * 0.009));
+				if (event.shiftKey) {
+					figure.rotation.z = Math.max(FIGURE_ROT_Z_MIN, Math.min(FIGURE_ROT_Z_MAX, figure.rotation.z + deltaX * 0.009));
+				}
+				previous = { x: event.clientX, y: event.clientY };
+				requestRender();
+				return;
+			}
 			paintHit(event);
 		});
-		const endPointerAction = () => { pointerDown = false; viewport.classList.remove('is-dragging'); syncViewportCursorMode(); lastPaint = null; setStatus(movingBackground ? 'Scene positioned' : mode === 'paint' ? 'Paint mode' : 'Rotate mode'); };
+		const endPointerAction = () => {
+			pointerDown = false;
+			viewport.classList.remove('is-dragging');
+			syncViewportCursorMode();
+			lastPaint = null;
+			if (movingBackground) setStatus('Scene positioned');
+			else if (mode === 'move') setStatus('Figure positioned');
+			else setStatus(modeStatusText[mode]);
+		};
 		renderer.domElement.addEventListener('pointerup', endPointerAction);
 		renderer.domElement.addEventListener('pointercancel', endPointerAction);
 
@@ -505,10 +570,15 @@
 		[inputs.metallic, inputs.roughness, inputs.brush, inputs.opacity].forEach((input) => input.addEventListener('input', updateFinish));
 		inputs.zoom.addEventListener('input', () => { const scale = Number(inputs.zoom.value) / 100; figure.scale.set(scale, scale, scale); updateFinish(); });
 		figurePoseSelect.addEventListener('change', () => { loadFigurePose(figurePoseSelect.value as FigurePose); updateFinish(); setStatus(`${figurePoseSelect.selectedOptions[0]?.textContent ?? 'Figure'} pose loaded`); });
-		lab.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => button.addEventListener('click', () => { mode = button.dataset.mode as 'paint' | 'rotate'; lab.querySelectorAll('[data-mode]').forEach((item) => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); }); syncViewportCursorMode(); help.textContent = mode === 'paint' ? 'Paint mode: drag across the figure to apply colour to its surface.' : 'Rotate mode: drag the figure to inspect its silhouette, then switch back to paint.'; setStatus(mode === 'paint' ? 'Paint mode' : 'Rotate mode'); }));
+		lab.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => button.addEventListener('click', () => {
+			const nextMode = button.dataset.mode as 'paint' | 'move' | 'rotate';
+			if (!nextMode) return;
+			setMode(nextMode);
+		}));
+		resetFigureButton.addEventListener('click', () => { resetFigureTransform(); setStatus('Figure centered'); });
 		backgroundScaleInput.addEventListener('input', () => { if (!background) return; const scale = Number(backgroundScaleInput.value) / 100; background.scale.set(scale, scale, 1); backgroundScaleOutput.value = `${backgroundScaleInput.value}%`; setStatus(`Scene scale ${backgroundScaleInput.value}%`); requestRender(); });
 		backgroundMoveButton.addEventListener('click', () => { if (!background) return; setEyedropper(false); movingBackground = !movingBackground; syncViewportCursorMode(); backgroundMoveButton.classList.toggle('is-active', movingBackground); backgroundMoveButton.setAttribute('aria-pressed', String(movingBackground)); backgroundMoveButton.textContent = movingBackground ? 'Finish positioning' : 'Position scene'; setStatus(movingBackground ? 'Drag the scene behind the figure' : 'Scene positioned'); });
-		eyedropperButton.addEventListener('click', () => { if (!background) return; if (movingBackground) backgroundMoveButton.click(); const active = !pickingBackground; setEyedropper(active); help.textContent = active ? 'Eyedropper: click a colour in your uploaded scene to copy it into the palette.' : 'Paint mode: drag across the figure to apply colour to its surface.'; setStatus(active ? 'Eyedropper ready — click the uploaded scene' : 'Paint mode'); });
+		eyedropperButton.addEventListener('click', () => { if (!background) return; if (movingBackground) backgroundMoveButton.click(); const active = !pickingBackground; setEyedropper(active); help.textContent = active ? 'Eyedropper: click a colour in your uploaded scene to copy it into the palette.' : modeHelpText[mode]; setStatus(active ? 'Eyedropper ready — click the uploaded scene' : modeStatusText[mode]); });
 		fitBackgroundButton.addEventListener('click', () => { fitBackground(); setStatus('Scene fitted to canvas'); });
 		clearSceneButton.addEventListener('click', () => { clearBackground(); setStatus('Scene cleared'); });
 		lab.querySelector<HTMLButtonElement>('[data-reset]')!.addEventListener('click', () => { resetPaint(); setStatus('Paint reset'); });
@@ -540,7 +610,7 @@
 			loadSceneTexture(url, file.name, uploadSceneCard, true);
 		});
 
-		drawWheel(); sync(paintColor); loadFigurePose(figurePoseSelect.value as FigurePose); updateFinish(); resize(); loadSceneTexture('/images/simulator/simulator-bg-01.png', 'Preset 01', presetBackgroundButtons[0]); syncViewportCursorMode(); viewport.setAttribute('aria-busy', 'false'); loading.remove(); setStatus('Paint mode');
+		drawWheel(); sync(paintColor); loadFigurePose(figurePoseSelect.value as FigurePose); updateFinish(); resize(); loadSceneTexture('/images/simulator/simulator-bg-01.png', 'Preset 01', presetBackgroundButtons[0]); syncViewportCursorMode(); viewport.setAttribute('aria-busy', 'false'); loading.remove(); help.textContent = modeHelpText.paint; setStatus('Paint mode');
 	};
 
 	document.querySelectorAll<HTMLElement>('[data-paint-lab-3d]').forEach((lab) => {

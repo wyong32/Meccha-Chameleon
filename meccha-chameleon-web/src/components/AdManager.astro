@@ -1,7 +1,8 @@
 ---
 ---
 
-<script src="https://pl30122472.effectivecpmnetwork.com/bf/81/ad/bf81adf2aff5ae5979d300f63def40da.js"></script>
+<!-- Interstitial (full-screen popup) ad — disabled; banner-only mode -->
+<!-- <script src="https://pl30122472.effectivecpmnetwork.com/bf/81/ad/bf81adf2aff5ae5979d300f63def40da.js"></script> -->
 
 <script is:inline>
 	(() => {
@@ -10,7 +11,8 @@
 
 		const bannerDesktop = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;width:728px;height:90px;overflow:hidden;background:transparent}</style></head><body><script>atOptions={'key':'b393fb28953bcd49e8ce6ac392406edf','format':'iframe','height':90,'width':728,'params':{}};<\/script><script src="https://www.highperformanceformat.com/b393fb28953bcd49e8ce6ac392406edf/invoke.js"><\/script></body></html>`;
 		const bannerMobile = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;width:300px;height:250px;overflow:hidden;background:transparent}</style></head><body><script>atOptions={'key':'53a87f0ddf4dc6db0543c156a066ce93','format':'iframe','height':250,'width':300,'params':{}};<\/script><script src="https://www.highperformanceformat.com/53a87f0ddf4dc6db0543c156a066ce93/invoke.js"><\/script></body></html>`;
-		const nativeBanner = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style></head><body><script async="async" data-cfasync="false" src="https://pl30122473.effectivecpmnetwork.com/86793d4698947ef6e23e7cdeee40b713/invoke.js"><\/script><div id="container-86793d4698947ef6e23e7cdeee40b713"></div></body></html>`;
+		// Native in-content ad — disabled; use banner in all slots instead
+		// const nativeBanner = `<!doctype html>...`;
 
 		const mobileQuery = window.matchMedia('(max-width: 767px)');
 
@@ -55,20 +57,9 @@
 			frame.replaceChildren(makeIframe(isMobile ? bannerMobile : bannerDesktop, width, height, `Advertisement ${width} by ${height}`));
 		}
 
-		function renderNative(slot) {
-			const frame = getFrame(slot);
-			if (slot.dataset.adRenderedSize === 'native') return;
-			slot.dataset.adRenderedSize = 'native';
-			slot.style.setProperty('--affiliate-ad-width', '728px');
-			slot.style.setProperty('--affiliate-ad-height', '280px');
-			frame.replaceChildren(makeIframe(nativeBanner, 728, 280, 'Native advertisement'));
-		}
-
 		function renderAds() {
 			document.querySelectorAll('[data-affiliate-ad]').forEach((slot) => {
-				const type = slot.getAttribute('data-affiliate-ad');
-				if (type === 'native') renderNative(slot);
-				else renderBanner(slot);
+				renderBanner(slot);
 			});
 		}
 
