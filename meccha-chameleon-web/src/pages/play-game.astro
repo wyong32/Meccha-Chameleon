@@ -1,0 +1,269 @@
+---
+// Play Game page — iframe-based H5 browser game for players.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/PlayGamePage.css';
+import { pageSeo } from '../seo/pages.js';
+import { buildWebPageJsonLd } from '../seo/meta.js';
+
+const seo = pageSeo.playGame;
+const gameUrl = 'https://mechachameleon.com/';
+const pageJsonLd = buildWebPageJsonLd({
+	name: seo.title,
+	description: seo.description,
+	path: '/play-game',
+});
+
+const videoGameJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'VideoGame',
+	name: 'Mecha Chameleon H5 Browser Game',
+	url: gameUrl,
+	gamePlatform: 'Web browser',
+	applicationCategory: 'Game',
+	isAccessibleForFree: true,
+	genre: ['Hide-and-seek', 'Casual', 'Browser game'],
+	inLanguage: 'en',
+	description:
+		'An embedded browser H5 game with hide-and-seek, paint-your-character, lobby, solo, duo, trio, and squad interface elements. It is hosted by mechachameleon.com and is separate from the paid Steam game MECCHA CHAMELEON.',
+};
+---
+
+<BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={[pageJsonLd, videoGameJsonLd]}>
+	<div class="PlayGamePage anchored-page" data-anchor-page>
+		<section class="inner-hero-section">
+			<div class="container">
+				<div class="inner-hero-content">
+					<nav class="breadcrumb" aria-label="Breadcrumb">
+						<ol class="breadcrumb-list">
+							<li><a href="/">Home</a></li>
+							<li><span aria-current="page">Play Game</span></li>
+						</ol>
+					</nav>
+					<span class="section-label">Browser H5 Game</span>
+					<h1>MECCHA CHAMELEON Play Game Online</h1>
+					<p class="page-intro">
+						Jump into a browser-friendly paint-and-hide game, then use this guide hub to turn quick
+						rounds into better hiding decisions. This page is built for players who want to try the
+						MECCHA CHAMELEON-style loop, understand what makes it fun, and move naturally into our
+						wiki maps, beginner guide, online setup help, and camouflage simulator.
+					</p>
+					<div class="inner-hero-meta">
+						<span>No download</span>
+						<span>Browser play</span>
+						<span>Paint hide and seek</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<aside class="affiliate-ad-slot" data-affiliate-ad="native" aria-label="Advertisement">
+			<span class="affiliate-ad-slot__label">Advertisement</span>
+			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
+		</aside>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Play Mecha Chameleon H5 Browser Game</h2>
+					<p>
+						Use the game frame below as a fast way to feel the core fantasy: choose a character, enter a
+						lobby-style scene, hide, and think about how colour, outline, and timing affect whether another
+						player would spot you.
+					</p>
+					<div class="play-game-embed-shell" data-play-game-shell>
+						<div class="play-game-embed-toolbar">
+							<div>
+								<span class="play-game-status">Online browser game</span>
+								<p class="play-game-note">Play here first, then use the guides below to improve your next hide.</p>
+							</div>
+							<div class="play-game-toolbar-actions">
+								<a class="btn btn-primary" href="/camouflage-simulator">Practice Painting</a>
+								<a class="btn btn-light" href="/beginners-hub">Read Beginner Guide</a>
+							</div>
+						</div>
+						<iframe
+							class="play-game-embed-frame"
+							data-src={gameUrl}
+							title="Play Mecha Chameleon H5 browser game online"
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+							allow="fullscreen; gamepad; clipboard-read; clipboard-write"
+							allowfullscreen
+						></iframe>
+						<div class="play-game-cover" data-play-game-cover>
+							<div class="play-game-cover__blur" aria-hidden="true"></div>
+							<div class="play-game-cover__content">
+								<img
+									class="play-game-cover__image"
+									src="/images/logo.webp"
+									alt="MECCHA CHAMELEON Play Game"
+									width="96"
+									height="96"
+									loading="eager"
+								/>
+								<button class="play-game-cover__button" type="button" data-play-game-button>
+									<span aria-hidden="true">▶</span>
+									<span>Play Game</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
+			<span class="affiliate-ad-slot__label">Advertisement</span>
+			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
+		</aside>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>What Is the MECCHA CHAMELEON-Style Game Loop?</h2>
+					<p>
+						The appeal is simple and instantly readable: one side hides by blending into the scene, while
+						the other side searches for anything that looks slightly wrong. The fun is not only winning; it
+						is the little moment when a painted character almost disappears into a wall, floor, prop pile,
+						or shadow line.
+					</p>
+					<div class="play-game-grid">
+						<article class="play-game-card">
+							<h3>Spot</h3>
+							<p>
+								Before painting, pick a backdrop that already helps you: a flat wall, a busy corner,
+								a repeated pattern, or a shadowed edge. Bad spots make even good colour work fail.
+							</p>
+						</article>
+						<article class="play-game-card">
+							<h3>Paint</h3>
+							<p>
+								Match large colour areas first. A convincing broad tone usually matters more than
+								tiny decoration, especially when a Seeker only has a few seconds to scan the room.
+							</p>
+						</article>
+						<article class="play-game-card">
+							<h3>Freeze</h3>
+							<p>
+								Movement breaks disguises. Once the hunt starts, the best hide often becomes a test
+								of patience: trust the spot, stay still, and let the Seeker doubt themselves.
+							</p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
+			<span class="affiliate-ad-slot__label">Advertisement</span>
+			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
+		</aside>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>How This Page Connects to Our MECCHA CHAMELEON Guide</h2>
+					<p>
+						This site is not only a play button. It is a full learning path for players who enjoy
+						paint-and-hide gameplay and want to get better at the same skills that matter in MECCHA
+						CHAMELEON: reading maps, choosing a pose, matching local colour, and understanding how Seekers
+						scan a room.
+					</p>
+					<table class="inner-data-table">
+						<thead>
+							<tr><th>Player goal</th><th>Best place on this site</th><th>Why it helps</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>Learn the basic rules</td><td><a href="/beginners-hub">Beginner's Hub</a></td><td>Explains roles, match flow, controls, and first-session habits.</td></tr>
+							<tr><td>Read official map patterns</td><td><a href="/wiki#wiki-maps">Wiki Maps</a></td><td>Turns each map into landmarks, hiding logic, and Seeker sweep questions.</td></tr>
+							<tr><td>Practice colour matching</td><td><a href="/camouflage-simulator">Camouflage Simulator</a></td><td>Lets you paint a practice figure against backgrounds before a real round.</td></tr>
+							<tr><td>Play with friends</td><td><a href="/online">Online Guide</a></td><td>Covers private rooms, player count, Workshop setup, and lobby troubleshooting.</td></tr>
+							<tr><td>Follow game changes</td><td><a href="/updates">Updates</a></td><td>Shows which patches may affect maps, characters, Workshop, and multiplayer.</td></tr>
+						</tbody>
+					</table>
+					<div class="inner-callout play-game-warning">
+						<p class="inner-callout-title">Good player habit</p>
+						<p>
+							Treat every round as a replay lesson. If you were found, ask what broke first: colour,
+							outline, scale, movement, or the route the Seeker took. Then open the matching guide page
+							and fix one thing next round.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
+			<span class="affiliate-ad-slot__label">Advertisement</span>
+			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
+		</aside>
+
+		<section class="inner-content-section is-alt">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>How to Play Better Before You Jump In</h2>
+					<ul class="play-game-fact-list">
+						<li><strong>Choose a quiet backdrop first.</strong> Hiding games reward a simple readable plan more than frantic movement.</li>
+						<li><strong>Match large colour areas before details.</strong> In the Steam game, spot, pose, and paint skill decide whether Seekers notice you.</li>
+						<li><strong>Think like a Seeker.</strong> After hiding, imagine the first sweep angle and check whether your outline breaks the scene.</li>
+						<li><strong>Use the full guides when switching to Steam.</strong> Read the <a href="/beginners-hub">Beginner's Hub</a>, <a href="/wiki">Wiki</a>, and <a href="/online">Online guide</a> for real lobby setup.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
+			<span class="affiliate-ad-slot__label">Advertisement</span>
+			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
+		</aside>
+
+		<section class="inner-content-section">
+			<div class="container">
+				<div class="inner-content-block is-wide">
+					<h2>Best Ways to Use This Play Game Page</h2>
+					<p>
+						The browser game is best used as a quick warm-up. Play one or two rounds, notice what felt
+						hard, then jump into the matching guide below instead of guessing blindly.
+					</p>
+					<div class="play-game-route-grid">
+						<a class="play-game-route-card" href="/beginners-hub">
+							<span>01</span>
+							<h3>First-time player route</h3>
+							<p>Start here if you are still learning what Hiders and Seekers should do.</p>
+						</a>
+						<a class="play-game-route-card" href="/camouflage-simulator">
+							<span>02</span>
+							<h3>Painting practice route</h3>
+							<p>Use the simulator when your colour match looks flat or too obvious.</p>
+						</a>
+						<a class="play-game-route-card" href="/wiki#wiki-maps">
+							<span>03</span>
+							<h3>Map learning route</h3>
+							<p>Study map notes when you keep choosing spots that are easy to sweep.</p>
+						</a>
+						<a class="play-game-route-card" href="/guides">
+							<span>04</span>
+							<h3>Advanced guide route</h3>
+							<p>Move here once you want deeper Hider, Seeker, controls, and multiplayer tips.</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script>
+		const playGameShell = document.querySelector('[data-play-game-shell]');
+		const playGameButton = playGameShell?.querySelector('[data-play-game-button]');
+		const playGameCover = playGameShell?.querySelector('[data-play-game-cover]');
+		const playGameFrame = playGameShell?.querySelector('iframe[data-src]');
+
+		playGameButton?.addEventListener('click', () => {
+			if (!(playGameFrame instanceof HTMLIFrameElement)) return;
+			if (!playGameFrame.src) {
+				playGameFrame.src = playGameFrame.dataset.src || '';
+			}
+			playGameShell?.classList.add('is-playing');
+			playGameCover?.setAttribute('aria-hidden', 'true');
+		});
+	</script>
+</BaseLayout>

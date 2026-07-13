@@ -26,6 +26,13 @@ const staticPages = [
 		keywords: 'multiplayer friends lobby faq troubleshooting private code',
 	},
 	{
+		title: 'MECCHA CHAMELEON Play Game Online',
+		description: 'Play a related H5 browser hide-and-seek game and compare it with the Steam version.',
+		url: '/play-game',
+		category: 'Game',
+		keywords: 'play game online h5 browser mecha chameleon iframe no download hide seek paint character',
+	},
+	{
 		title: 'MECCHA CHAMELEON Paint Hide and Seek Simulator',
 		description: 'Choose a preset or uploaded background, paint and rotate a 3D practice figure, then export a PNG.',
 		url: '/camouflage-simulator',

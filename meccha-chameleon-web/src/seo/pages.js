@@ -30,6 +30,13 @@ export const pageSeo = {
 		keywords:
 			'MECCHA CHAMELEON online, meccha chameleon multiplayer, play with friends, private lobby, steam party game, voice chat, workshop troubleshooting',
 	},
+	playGame: {
+		title: 'MECCHA CHAMELEON Play Game Online — H5 Browser',
+		description:
+			'Play a MECCHA CHAMELEON-inspired H5 browser game online, learn the paint-and-hide loop, then use our guides, wiki maps, and simulator to improve.',
+		keywords:
+			'MECCHA CHAMELEON play game, play MECCHA CHAMELEON online, mecha chameleon online, H5 hide and seek game, browser chameleon game, paint hide and seek online',
+	},
 	paintLab: {
 		title: 'MECCHA CHAMELEON Paint Hide and Seek Simulator',
 		description:

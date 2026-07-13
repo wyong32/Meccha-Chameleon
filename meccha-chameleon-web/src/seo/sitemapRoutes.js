@@ -6,6 +6,7 @@ export const sitemapStaticRoutes = [
 	{ path: '/beginners-hub', name: 'beginners-hub', lastmod: '2026-06-25' },
 	{ path: '/wiki', name: 'wiki', lastmod: '2026-06-25' },
 	{ path: '/online', name: 'online', lastmod: '2026-06-25' },
+	{ path: '/play-game', name: 'play-game', lastmod: '2026-07-13' },
 	{ path: '/camouflage-simulator', name: 'camouflage-simulator', lastmod: '2026-06-25' },
 	{ path: '/guides', name: 'guides' },
 	{ path: '/workshop', name: 'workshop' },
