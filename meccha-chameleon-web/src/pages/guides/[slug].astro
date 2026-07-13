@@ -1,13 +1,16 @@
 ---
 // Guides detail page.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { guides } from '../../data/guides.js';
 import '../../styles/pages/DetailPage.css';
 import '../../styles/pages/GuidesDetailPage.css';
 import ContentAnchorSidebar from '../../components/ContentAnchorSidebar.astro';
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, shortenBreadcrumbLabel } from '../../seo/meta.js';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+	const { guides: baseGuides } = await import('../../data/guides.js');
+	const { project2Guides20260713 } = await import('../../data/project2-guides-20260713.js');
+	const guides = [...project2Guides20260713, ...baseGuides];
+
 	return guides.map((item) => ({
 		params: { slug: item.addressBar },
 		props: { item },
@@ -50,7 +53,7 @@ const breadcrumbJsonLd = buildBreadcrumbJsonLd([
 								<li><span aria-current="page" title={item.title}>{breadcrumbLabel}</span></li>
 							</ol>
 						</nav>
-						<h1>{item.title}</h1>
+						<h1>{item.h1 || item.title}</h1>
 						<p class="detail-lead">{item.description}</p>
 						<div class="inner-hero-meta">
 							{item.tag.map((label) => (
