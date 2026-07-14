@@ -363,6 +363,14 @@ img {
 	background: transparent;
 }
 
+.gpt-banner-ad {
+	width: 100%;
+	min-height: 250px;
+	margin: 0 auto clamp(1.75rem, 4vw, 3rem);
+	padding: 1rem;
+	text-align: center;
+}
+
 .breadcrumb {
 	margin-bottom: 1.5rem;
 	max-width: 100%;

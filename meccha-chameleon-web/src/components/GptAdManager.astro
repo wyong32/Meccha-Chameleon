@@ -1,0 +1,69 @@
+---
+---
+
+<script is:inline>
+	(() => {
+		if (window.__mecchaChameleonGptBannerReady) return;
+		window.__mecchaChameleonGptBannerReady = true;
+
+		const GPT_UNITS = {
+			banner: '/23355878051/meccachameleon.com_0713_all/meccachameleon.com_0713_banner',
+		};
+
+		const BANNER_BASE_ID = 'div-gpt-ad-1783938069133';
+
+		function insertBannerSlots() {
+			const affiliateSlots = document.querySelectorAll('[data-affiliate-ad]');
+
+			affiliateSlots.forEach((slot, index) => {
+				if (slot.nextElementSibling?.matches('[data-gpt-banner-ad]')) return;
+
+				const wrapper = document.createElement('aside');
+				const gptId = index === 0 ? `${BANNER_BASE_ID}-0` : `${BANNER_BASE_ID}-${index}`;
+
+				wrapper.className = 'gpt-banner-ad';
+				wrapper.setAttribute('data-gpt-banner-ad', '');
+				wrapper.setAttribute('aria-label', 'Advertisement');
+
+				wrapper.innerHTML = `
+					<div id="${gptId}" data-gpt-banner-slot style="min-width: 300px; min-height: 250px;"></div>
+				`;
+
+				slot.insertAdjacentElement('afterend', wrapper);
+			});
+		}
+
+		insertBannerSlots();
+		window.addEventListener('DOMContentLoaded', insertBannerSlots, { once: true });
+
+		window.googletag = window.googletag || { cmd: [] };
+
+		googletag.cmd.push(function () {
+			const pubads = googletag.pubads();
+			const registeredSlots = [];
+
+			const desktopMapping = googletag
+				.sizeMapping()
+				.addSize([1024, 0], [[970, 250], [300, 250]])
+				.addSize([0, 0], [300, 250])
+				.build();
+
+			document.querySelectorAll('[data-gpt-banner-slot]').forEach((slot) => {
+				if (!slot.id) return;
+
+				const bannerSlot = googletag
+					.defineSlot(GPT_UNITS.banner, [[970, 250], [300, 250]], slot.id)
+					?.defineSizeMapping(desktopMapping)
+					.addService(pubads);
+
+				if (bannerSlot) registeredSlots.push(bannerSlot);
+			});
+
+			document.querySelectorAll('[data-gpt-banner-slot]').forEach((slot) => {
+				if (slot.id) googletag.display(slot.id);
+			});
+
+			if (registeredSlots.length) pubads.refresh(registeredSlots);
+		});
+	})();
+</script>

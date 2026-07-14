@@ -3,6 +3,7 @@
 import AppHeader from '../components/AppHeader.astro';
 import AppFooter from '../components/AppFooter.astro';
 import AdManager from '../components/AdManager.astro';
+import GptAdManager from '../components/GptAdManager.astro';
 import '../styles/global.css';
 import '../styles/pages/InnerPage.css';
 import { seoConfig } from '../seo/config.js';
@@ -84,8 +85,52 @@ const websiteJsonLd = buildWebSiteJsonLd();
 		</script>
 
 		<!-- ads -->
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3939531187802459"
+		<script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3939531187802459"
 		crossorigin="anonymous"></script>
+		<script is:inline async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+		<script is:inline>
+			window.googletag = window.googletag || { cmd: [] };
+			googletag.cmd.push(function () {
+				var anchorSlot = googletag.defineOutOfPageSlot(
+					'/23355878051/meccachameleon.com_0713_all/meccachameleon.com_0713_anchor',
+					googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+				);
+				if (anchorSlot) anchorSlot.addService(googletag.pubads());
+				window.__mecchaGptAnchorSlot = anchorSlot;
+
+				var leftRailSlot = googletag.defineOutOfPageSlot(
+					'/23355878051/meccachameleon.com_0713_all/meccachameleon.com_0713_anchor',
+					googletag.enums.OutOfPageFormat.LEFT_SIDE_RAIL
+				);
+				if (leftRailSlot) leftRailSlot.addService(googletag.pubads());
+				window.__mecchaGptLeftRailSlot = leftRailSlot;
+
+				var rightRailSlot = googletag.defineOutOfPageSlot(
+					'/23355878051/meccachameleon.com_0713_all/meccachameleon.com_0713_anchor',
+					googletag.enums.OutOfPageFormat.RIGHT_SIDE_RAIL
+				);
+				if (rightRailSlot) rightRailSlot.addService(googletag.pubads());
+				window.__mecchaGptRightRailSlot = rightRailSlot;
+			});
+		</script>
+		<script is:inline>
+			googletag.cmd.push(function () {
+				var interstitialSlot = googletag.defineOutOfPageSlot(
+					'/23355878051/meccachameleon.com_0713_all/meccachameleon.com_0713_inter',
+					googletag.enums.OutOfPageFormat.INTERSTITIAL
+				);
+				if (interstitialSlot) {
+					interstitialSlot.addService(googletag.pubads());
+				}
+				window.__mecchaGptInterstitialSlot = interstitialSlot;
+				googletag.setConfig({
+					centering: true,
+					disableInitialLoad: true,
+					singleRequest: true,
+				});
+				googletag.enableServices();
+			});
+		</script>
 	</head>
 	<body>
 		<AppHeader />
@@ -94,5 +139,28 @@ const websiteJsonLd = buildWebSiteJsonLd();
 		</main>
 		<AppFooter />
 		<AdManager />
+		<GptAdManager />
+		<script is:inline>
+			googletag.cmd.push(function () {
+				var oopSlots = [];
+				if (window.__mecchaGptAnchorSlot) {
+					googletag.display(window.__mecchaGptAnchorSlot);
+					oopSlots.push(window.__mecchaGptAnchorSlot);
+				}
+				if (window.__mecchaGptLeftRailSlot) {
+					googletag.display(window.__mecchaGptLeftRailSlot);
+					oopSlots.push(window.__mecchaGptLeftRailSlot);
+				}
+				if (window.__mecchaGptRightRailSlot) {
+					googletag.display(window.__mecchaGptRightRailSlot);
+					oopSlots.push(window.__mecchaGptRightRailSlot);
+				}
+				if (window.__mecchaGptInterstitialSlot) {
+					googletag.display(window.__mecchaGptInterstitialSlot);
+					oopSlots.push(window.__mecchaGptInterstitialSlot);
+				}
+				if (oopSlots.length) googletag.pubads().refresh(oopSlots);
+			});
+		</script>
 	</body>
 </html>
