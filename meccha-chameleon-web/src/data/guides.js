@@ -3,6 +3,7 @@
  * @typedef {Object} GuideEntry
  * @property {number} id
  * @property {string} title
+ * @property {string} [h1]
  * @property {string} description
  * @property {string} publishDate
  * @property {string} imageUrl

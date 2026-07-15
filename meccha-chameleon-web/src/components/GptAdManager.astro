@@ -13,13 +13,16 @@
 		const BANNER_BASE_ID = 'div-gpt-ad-1783938069133';
 
 		function insertBannerSlots() {
-			const affiliateSlots = document.querySelectorAll('[data-affiliate-ad]');
+			const adPositionAnchors = document.querySelectorAll('[data-affiliate-ad]');
 
-			affiliateSlots.forEach((slot, index) => {
+			adPositionAnchors.forEach((slot, index) => {
 				if (slot.nextElementSibling?.matches('[data-gpt-banner-ad]')) return;
 
 				const wrapper = document.createElement('aside');
 				const gptId = index === 0 ? `${BANNER_BASE_ID}-0` : `${BANNER_BASE_ID}-${index}`;
+
+				slot.hidden = true;
+				slot.setAttribute('data-affiliate-ad-disabled', 'true');
 
 				wrapper.className = 'gpt-banner-ad';
 				wrapper.setAttribute('data-gpt-banner-ad', '');
