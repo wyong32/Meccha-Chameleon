@@ -4,10 +4,13 @@ const paintEyedropperGuideImage = 'https://i.ytimg.com/vi/tpDM24Z5pyc/maxresdefa
 const settingsCrashGuideImage = 'https://i.ytimg.com/vi/1c-2x3ZgkPg/maxresdefault.jpg';
 
 const guideBodyBannerHtml = `
+			<!-- Affiliate ad disabled for now; keep this block for future reuse.
 			<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
 				<span class="affiliate-ad-slot__label">Advertisement</span>
 				<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
 			</aside>
+			-->
+			<div data-gpt-banner-anchor></div>
 `;
 
 export const project2Guides20260713 = [

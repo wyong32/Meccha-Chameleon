@@ -24,10 +24,13 @@ const controlsSteamInputImage = '/images/guides/meccha-controls-steam-input.webp
 const controlsLayoutImage = '/images/guides/meccha-controls-controller-layout.webp';
 const controlsTestImage = '/images/guides/meccha-controls-driver-fallback.webp';
 const guideBodyBannerHtml = `
+			<!-- Affiliate ad disabled for now; keep this block for future reuse.
 			<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
 				<span class="affiliate-ad-slot__label">Advertisement</span>
 				<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
 			</aside>
+			-->
+			<div data-gpt-banner-anchor></div>
 `;
 
 /** @type {GuideEntry[]} */
