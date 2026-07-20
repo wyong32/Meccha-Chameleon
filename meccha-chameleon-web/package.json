@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "sitemap": "npm run generate-sitemap",
+    "test:compliance": "node scripts/check-adsense-compliance.mjs",
     "prebuild": "npm run generate-sitemap",
     "build": "astro build",
     "preview": "astro preview",

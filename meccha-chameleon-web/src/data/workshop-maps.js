@@ -290,6 +290,7 @@ export const workshopMaps = [
 		},
 		detailsHtml: `
 		<div class="guide-content">
+			<!-- compliance:police-station:start -->
 			<div class="guide-summary">
 				<p class="guide-summary-label">At a glance</p>
 				<p>
@@ -371,6 +372,88 @@ export const workshopMaps = [
 				<li><strong>Corridor round:</strong> Hiders pick one wall segment; Seekers sweep perimeter first, centre last.</li>
 				<li><strong>Reverse angle:</strong> finish the hunt from the opposite end of the main hallway.</li>
 			</ol>
+
+			<h2>Private test procedure</h2>
+			<p>
+				Use a small private room before treating Police Station as ready for a regular group. First, confirm every
+				tester subscribed to Workshop item 3747815568 and can see the same map name. Load the stage and check that
+				each player reaches a valid spawn. Walk the ordinary room and corridor connections as both roles. Then run one
+				complete preparation, hunt, tag, timer, and results cycle without adding unusual house rules.
+			</p>
+			<p>
+				Record the game version, Workshop update date, selected mode, group size, and any failure. If a player loads
+				late, clips into geometry, sees different materials, or cannot complete the role loop, stop and reproduce the
+				problem with fewer variables. A private test is successful when the mechanics complete consistently, not when
+				a single dramatic hiding place wins once.
+			</p>
+
+			<h2>Host configuration and group-scale prompts</h2>
+			<p>
+				The Workshop listing and current source notes do not establish one universal recommended player count for this
+				stage. Start below the room's maximum, keep the mode familiar, and observe whether players distribute across
+				the interior or crowd the same corridor. Add players only after the role loop and main connectors remain usable.
+				Do not change map, mode, timer, and group size together because the group will not know which change affected
+				the result.
+			</p>
+			<div class="guide-table-wrap">
+				<table class="guide-table">
+					<thead><tr><th>Observation</th><th>Question for the host</th><th>Next test</th></tr></thead>
+					<tbody>
+						<tr><td>Most players meet in one corridor</td><td>Are alternative room connections visible and usable?</td><td>Repeat with the same group after explaining only the connectors</td></tr>
+						<tr><td>Search ends immediately</td><td>Did the group reuse obvious desk or cabinet positions?</td><td>Keep settings and require different material families</td></tr>
+						<tr><td>Search runs without meaningful contact</td><td>Is the route too spread out for the tested group?</td><td>Change only group size, then compare the same sweep</td></tr>
+						<tr><td>A hiding position cannot be inspected</td><td>Is camouflage responsible, or is geometry blocking a valid check?</td><td>Revisit from both sides and remove the position if geometry is broken</td></tr>
+					</tbody>
+				</table>
+			</div>
+
+			<h2>Hider backdrop and silhouette prompts</h2>
+			<p>
+				Treat desks, cabinet faces, tile seams, frames, and corridor walls as material prompts rather than guaranteed
+				hiding spots. Before painting, ask whether the selected pose continues a nearby horizontal or vertical line.
+				Sample a lit and shaded area from the same material. Check the body from the open corridor or doorway instead
+				of judging only from a close camera. Transparent or Xray-capable materials require special caution: test the
+				opaque frame and adjoining surface rather than assuming a glass pane conceals the body.
+			</p>
+			<ul class="guide-steps guide-steps--compact">
+				<li><strong>Desk row:</strong> compare the top line and width of the posed body with repeated furniture.</li>
+				<li><strong>Cabinet face:</strong> continue the panel rhythm without adding an unexplained divider or bulge.</li>
+				<li><strong>Tile seam:</strong> align the long direction of the pose and preserve the visible grout pattern.</li>
+				<li><strong>Door or partition frame:</strong> test the disguise from both rooms before trusting a thin edge.</li>
+			</ul>
+
+			<h2>Seeker corridor and room sweep prompts</h2>
+			<p>
+				A Police Station test should include a repeatable sweep rather than random firing. Follow one perimeter through
+				the connected rooms, inspect repeated desks and cabinets, then return through the main corridor from the other
+				direction. The return angle matters because a silhouette that merges with a frame from one doorway may project
+				into open space from the other. Pause where lighting changes across a threshold and compare the expected shadow
+				with the candidate shape.
+			</p>
+			<p>
+				When a Seeker finds someone, name the visual clue before moving on: an extra vertical panel, broken tile seam,
+				wrong surface finish, human-scale curve, movement, or an unexpected dark cutout through transparent material.
+				That note helps the Hider improve and tells the host whether the stage supported a readable search.
+			</p>
+
+			<h2>Failure symptoms and fixes</h2>
+			<ul class="guide-steps guide-steps--compact">
+				<li><strong>Map absent:</strong> verify the exact item subscription, wait for Steam, restart, and check selection again.</li>
+				<li><strong>Player mismatch:</strong> compare item IDs and download state instead of sending a third-party file.</li>
+				<li><strong>Broken spawn or route:</strong> record the location and current versions, then stop using that setup for a full lobby.</li>
+				<li><strong>Unclear transparent material:</strong> reproduce from both role cameras and avoid presenting it as a fair hiding technique until verified.</li>
+				<li><strong>Round-state failure:</strong> return to a simple mode with fewer players and test the complete loop again.</li>
+			</ul>
+
+			<h2>Post-session review</h2>
+			<p>
+				After the final test, ask four questions. Did every player load the same stage? Did each role receive a usable
+				spawn and complete the round? Were successful disguises readable from at least one legitimate approach when
+				the Seeker used a systematic route? Did any outcome depend on clipping, missing assets, or a material that
+				behaved inconsistently? Keep the stage in rotation only when the group can separate camouflage skill from
+				technical failure, and repeat the test after relevant game or Workshop updates.
+			</p>
+			<!-- compliance:police-station:end -->
 		</div>
 		`,
 	},

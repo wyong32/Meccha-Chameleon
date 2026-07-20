@@ -1,0 +1,6 @@
+{
+  "src/layouts/BaseLayout.astro": "b915f5682bd99a200f1d236316ce1c60166e91f8d169148692d556cb9cc052b1",
+  "src/components/GptAdManager.astro": "bc3aafd086a458398b935933cba77a63c944416b8c97bfeae9dddf6fd8ec6cda",
+  "src/components/AdManager.astro": "cc061949a282d3c1e34442d598ba002f1b9e9e0f0deb3092aa0cd2673ddcf650",
+  "public/ads.txt": "3b57794ba2426eee73d9f1c4ceafa54c563ff3d8ad60bdd8a073ec7a43af944c"
+}

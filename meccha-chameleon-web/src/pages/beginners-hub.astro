@@ -1,11 +1,10 @@
 ---
-// Beginner's Hub — complete first-match guide.
+// Beginner's Hub — a timed first-session practice plan.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/pages/BeginnersHubPage.css';
 import { pageSeo } from '../seo/pages.js';
 import { buildWebPageJsonLd } from '../seo/meta.js';
 import ContentAnchorSidebar from '../components/ContentAnchorSidebar.astro';
-
 import { siteStats } from '../data/site-meta.js';
 
 const seo = pageSeo.beginnersHub;
@@ -16,12 +15,7 @@ const pageJsonLd = buildWebPageJsonLd({
 });
 ---
 
-<BaseLayout
-	title={seo.title}
-	description={seo.description}
-	keywords={seo.keywords}
-	jsonLd={pageJsonLd}
->
+<BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={pageJsonLd}>
 	<div class="BeginnersHubPage anchored-page" data-anchor-page>
 		<section class="inner-hero-section">
 			<div class="container">
@@ -32,252 +26,191 @@ const pageJsonLd = buildWebPageJsonLd({
 							<li><span aria-current="page">Beginner's Hub</span></li>
 						</ol>
 					</nav>
-					<span class="section-label">Start Here</span>
-					<h1>MECCHA CHAMELEON Beginner's Hub — Your First Match</h1>
+					<span class="section-label">First-Session Plan</span>
+					<h1>Your First 30 Minutes in MECCHA CHAMELEON</h1>
 					<p class="page-intro">
-						A structured first-session plan for MECCHA CHAMELEON: paint, pose, hide, and hunt in
-						{siteStats.playerRange}-player Steam lobbies. The routines below turn the core loop into repeatable
-						practice.
+						Follow four focused rounds instead of trying to master every map, mode, and paint control at once.
+						The goal is a repeatable routine you can use in any {siteStats.playerRange}-player lobby.
 					</p>
 					<div class="inner-hero-meta">
-						<span>12 min read</span>
-						<span>{siteStats.currentVersion}</span>
-						<span>{siteStats.playerRange} players</span>
+						<span>10 min read</span><span>{siteStats.currentVersion}</span><span>Four-round plan</span>
 					</div>
 				</div>
 			</div>
 		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="native" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
+
 		<div data-gpt-banner-anchor></div>
 
+		<!-- compliance:beginner:start -->
 		<div class="anchored-page-body">
 			<div class="anchored-page-content">
+				<section class="inner-content-section">
+					<div class="container"><div class="inner-content-block">
+						<h2>Use this page as a session plan</h2>
+						<p>
+							This hub answers one practical question: what should you do during your first half hour with
+							MECCHA CHAMELEON? It is not a complete rules reference. Your first objective is to finish a short
+							learning loop as both roles, notice one useful clue, and review the result before changing maps or
+							settings. A private room with patient friends is ideal, but the same plan works in a public lobby if
+							you keep each round simple.
+						</p>
+						<p>
+							If you need exact win conditions, role transitions, mode differences, or an explanation of Spoid,
+							pose, paint, and tagging systems, <a href="/guides/meccha-chameleon-how-to-play">Read the complete rules and mode differences</a>.
+							Return here when you are ready to turn those systems into a four-round routine.
+						</p>
+					</div></div>
+				</section>
 
-		<section class="inner-content-section">
-			<div class="container">
-				<div class="inner-content-block">
-					<h2>How the game works</h2>
-					<p>
-						Each round is short and different from the last. Hiders paint a humanoid chameleon with the in-game
-						palette and Spoid eyedropper; Seekers hunt in first person with no flashlight. Success depends on
-						spot choice, silhouette (poses), and local colour layers — not preset skins.
-					</p>
-					<p>
-						Before a serious session, confirm controls and mode labels in Settings — patch updates can change
-						defaults. Deeper rules live in the <a href="/wiki">Wiki</a>; update context in the
-						<a href="/updates">patch archive</a>; map-specific drills in the
-						<a href="/wiki#wiki-maps">map notes</a>.
-					</p>
-					<p>
-						If you are not ready to open a Steam lobby yet, use <a href="/play-game">Play Game</a> as a quick
-						browser warm-up, then come back here and run the first-match plan with fewer distractions.
-					</p>
-				</div>
-			</div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
+				<div data-gpt-banner-anchor></div>
 
-		<section class="inner-content-section is-alt">
-			<div class="container">
-				<div class="inner-content-block">
-					<h2>Match Flow — Four Phases</h2>
-					<ol class="inner-steps">
-						<li><strong>Lobby</strong> — Host picks map, mode (Normal / Infection / Double), and privacy. Join via public browse or invite code.</li>
-						<li><strong>Role assignment</strong> — Split into Hiders (chameleons) and Seekers (Oni). Ratio depends on mode and player count.</li>
-						<li><strong>Preparation</strong> — Hiders choose a spot, set pose (<kbd>R</kbd>), Spoid colours, paint (<kbd>F</kbd>). Seekers wait.</li>
-						<li><strong>Hunt</strong> — Seekers enter, search, and tag with left click. Round ends when all Hiders are tagged or the timer expires.</li>
-					</ol>
-					<div class="inner-callout">
-						<p class="inner-callout-title">Results screen = free coaching</p>
-						<p>Every round reveals all hiding spots and paint jobs. Review it whether you won or lost — consistent players treat it as mandatory feedback.</p>
+				<section class="inner-content-section is-alt">
+					<div class="container"><div class="inner-content-block is-wide">
+						<h2>Minutes 0–5: prepare before joining</h2>
+						<p>
+							Open Settings before a live round. Confirm that movement and camera input respond, find the prompts
+							for the paint and pose menus, and choose a camera sensitivity that lets you make small Seeker scans.
+							Do not spend this first session rebuilding every key binding. If a controller is not behaving, use the
+							<a href="/guides/meccha-chameleon-controls-settings">controls and settings guide</a> before holding up a lobby.
+						</p>
+						<ul>
+							<li>Choose a stable official map or a Workshop stage the host has already tested privately.</li>
+							<li>Use Normal mode while the group is learning fixed Hider and Seeker responsibilities.</li>
+							<li>Agree that the results screen is part of practice, not a signal to rush into the next round.</li>
+							<li>Keep voice chat quiet while someone hides so sound does not replace visual learning.</li>
+						</ul>
+						<div class="inner-callout">
+							<p class="inner-callout-title">Success at minute five</p>
+							<p>You can move, look, open the role tools, and explain which map and mode the room will use.</p>
+						</div>
+					</div></div>
+				</section>
+
+				<div data-gpt-banner-anchor></div>
+
+				<section class="inner-content-section">
+					<div class="container"><div class="inner-content-block is-wide">
+						<h2>Minutes 5–12: play one disciplined Hider round</h2>
+						<p>
+							For the first Hider round, ignore elaborate patterns and viral spots. Pick a backdrop within roughly
+							fifteen seconds so most preparation time remains for silhouette and colour. A wall edge, low prop,
+							floor seam, or compact cluster is easier to evaluate than a route that requires climbing through the
+							whole map. Look at the spot from the direction a Seeker is likely to approach.
+						</p>
+						<ol class="inner-steps">
+							<li><strong>Spot:</strong> commit to one local backdrop instead of roaming until the timer is nearly gone.</li>
+							<li><strong>Pose:</strong> change the body outline before painting so limbs and height fit the nearby shapes.</li>
+							<li><strong>Paint:</strong> sample the same material you are hiding against, then add one darker tone for shadow.</li>
+							<li><strong>Check:</strong> rotate the camera and inspect the outline from the open side of the route.</li>
+							<li><strong>Freeze:</strong> when the hunt begins, do not repair small paint errors with revealing movement.</li>
+						</ol>
+						<p>
+							Your learning target is not survival. After the round, name whether the first visible problem was your
+							location, outline, colour, shadow, or movement. One specific answer is more useful than a win you cannot explain.
+						</p>
+					</div></div>
+				</section>
+
+				<div data-gpt-banner-anchor></div>
+
+				<section class="inner-content-section is-alt">
+					<div class="container"><div class="inner-content-block is-wide">
+						<h2>Minutes 12–18: make one deliberate Seeker sweep</h2>
+						<p>
+							A first-time Seeker often sprints through the center and repeatedly checks the same obvious objects.
+							Slow down and use a route you can remember. Begin at the perimeter, follow one wall, then cross the
+							middle only after the outside pass. Pause when a repeated pattern has an extra shape, a flat colour
+							blob lacks the expected shadow, or an object has a human-scale outline.
+						</p>
+						<table class="inner-data-table">
+							<thead><tr><th>Pass</th><th>Look for</th><th>Do not do</th></tr></thead>
+							<tbody>
+								<tr><td>Perimeter</td><td>Corners, wall edges, ceiling lines, and silhouettes against open space</td><td>Zigzag across the center</td></tr>
+								<tr><td>Repeated surfaces</td><td>Broken rows, unexpected gaps, wrong-scale shapes, and mismatched finish</td><td>Test every prop randomly</td></tr>
+								<tr><td>Return angle</td><td>Outlines hidden from the first direction of travel</td><td>Repeat the same viewing angle</td></tr>
+							</tbody>
+						</table>
+						<p>At the results screen, choose one Hider you missed and identify the approach angle that would have exposed the disguise.</p>
+					</div></div>
+				</section>
+
+				<div data-gpt-banner-anchor></div>
+
+				<section class="inner-content-section">
+					<div class="container"><div class="inner-content-block is-wide">
+						<h2>Minutes 18–25: repeat one variable at a time</h2>
+						<p>
+							Rounds three and four are controlled repeats. Do not change map, mode, backdrop type, paint method,
+							and route all at once. A repeat teaches you whether the adjustment helped; a completely new attempt
+							only gives you another collection of guesses.
+						</p>
+						<table class="inner-data-table">
+							<thead><tr><th>Round</th><th>Keep constant</th><th>Change one thing</th><th>Question afterward</th></tr></thead>
+							<tbody>
+								<tr><td>3 — Hider</td><td>Same kind of backdrop and two-tone method</td><td>Use a lower or more compact pose</td><td>Did the outline survive the main approach?</td></tr>
+								<tr><td>4 — Seeker</td><td>Same perimeter-first route</td><td>Pause longer on repeated materials</td><td>Which visual break became easier to notice?</td></tr>
+							</tbody>
+						</table>
+						<p>
+							If no live room is available, use the <a href="/camouflage-simulator">Camouflage Simulator</a> to
+							compare two poses against one background. The separate <a href="/play-game">browser practice experience</a>
+							can introduce a lighter paint-and-hide loop, but it is not the official Steam game.
+						</p>
+					</div></div>
+				</section>
+
+				<div data-gpt-banner-anchor></div>
+
+				<section class="inner-content-section is-alt">
+					<div class="container"><div class="inner-content-block">
+						<h2>Minutes 25–30: write a three-line review</h2>
+						<p>
+							Finish the session before fatigue turns practice into random play. Record one Hider observation, one
+							Seeker observation, and one experiment for next time. For example: “My colour matched, but my upright
+							shoulder broke the shelf line. I missed a Hider because I never returned through the doorway. Next
+							session I will test a compact pose and one reverse-angle sweep.”
+						</p>
+						<ul>
+							<li>Open one relevant <a href="/wiki#wiki-maps">map note</a>, not the entire library.</li>
+							<li>Check <a href="/updates">patch notes</a> if a control, route, or result differs from a guide.</li>
+							<li>Use <a href="/online">multiplayer help</a> only if joining, hosting, or invites blocked the session.</li>
+							<li>Save advanced paint drills for the next session instead of extending this one indefinitely.</li>
+						</ul>
+					</div></div>
+				</section>
+
+				<div data-gpt-banner-anchor></div>
+
+				<section class="inner-content-section">
+					<div class="container"><div class="inner-content-block is-wide">
+						<h2>First-session questions</h2>
+						<h3>Should I memorize hiding spots before playing?</h3>
+						<p>No. Learn how to judge a backdrop and approach angle. Fixed spots become familiar to Seekers and can change after patches.</p>
+						<h3>What if I lose all four rounds?</h3>
+						<p>The session still worked if you can identify why a disguise failed and which part of your sweep missed a Hider. The plan measures observations, not wins.</p>
+						<h3>When should I try Infection or Double?</h3>
+						<p>After everyone can describe the fixed-role loop. Read the <a href="/guides/meccha-chameleon-how-to-play">rules and mechanics reference</a> before changing modes.</p>
+						<h3>What should I practise next?</h3>
+						<p>Choose the weakest item in your three-line review: silhouette, two-tone paint, stillness, perimeter routing, or reverse-angle checks. Practise only that item first.</p>
+					</div></div>
+				</section>
+
+				<div data-gpt-banner-anchor></div>
+
+				<section class="cta-section">
+					<div class="container">
+						<h2>Choose one next step</h2>
+						<p>Move from the timed plan to the reference or practice tool that answers the question you recorded.</p>
+						<div class="cta-actions">
+							<a class="btn btn-primary" href="/guides/meccha-chameleon-how-to-play">Rules & Mechanics</a>
+							<a class="btn btn-outline btn-outline-light" href="/camouflage-simulator">Camouflage Simulator</a>
+							<a class="btn btn-outline btn-outline-light" href="/wiki#wiki-maps">Wiki Maps</a>
+						</div>
 					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
-
-		<section class="inner-content-section">
-			<div class="container"><div class="inner-content-block is-wide">
-				<h2>Your First 30 Minutes</h2>
-				<p>Goal: one repeatable loop — backdrop → pose → local colour → stillness — not a win streak. A <a href="/online">private room</a> is ideal; a public match works if you keep the plan simple.</p>
-				<table class="inner-data-table"><thead><tr><th>Round</th><th>Practise one thing</th><th>Ignore for now</th></tr></thead><tbody>
-					<tr><td>1</td><td>Commit to one wall, floor edge, or prop cluster before opening paint.</td><td>Complex patterns, score, or clever routes.</td></tr>
-					<tr><td>2</td><td>Use pose so the outline fits the backdrop.</td><td>Perfect coverage on every body part.</td></tr>
-					<tr><td>3</td><td>Sample a lit tone and a darker shadow on the same material.</td><td>Moving after the hunt starts.</td></tr>
-					<tr><td>4</td><td>Play one Seeker round slowly; name the clue that exposed each Hider.</td><td>Memorising an entire map.</td></tr>
-				</tbody></table>
-				<p>Then open the matching <a href="/wiki#wiki-maps">map note</a>, try the browser <a href="/play-game">Play Game</a> warm-up, or use the <a href="/camouflage-simulator">Camouflage Simulator</a> before learning every stage at once.</p>
-			</div></div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
-
-		<section class="inner-content-section is-alt">
-			<div class="container">
-				<div class="inner-content-block is-wide">
-					<h2>Roles, Controls & Modes</h2>
-					<h3>Hider vs Seeker</h3>
-					<table class="inner-data-table">
-						<thead><tr><th></th><th>Hider (Chameleon)</th><th>Seeker (Oni)</th></tr></thead>
-						<tbody>
-							<tr><th>Goal</th><td>Survive until time runs out</td><td>Tag every Hider before timer</td></tr>
-							<tr><th>View</th><td>Third person during prep</td><td>First person during hunt</td></tr>
-							<tr><th>Tools</th><td>Paint palette, Spoid, poses</td><td>Tag gun, eyes, patience</td></tr>
-							<tr><th>Core skill</th><td>Spot + pose + colour layers</td><td>Pattern recognition, sweep order</td></tr>
-							<tr><th>Common mistake</th><td>Roaming prep, flat one-colour paint</td><td>Sprinting centre map first</td></tr>
-						</tbody>
-					</table>
-					<h3>PC controls (confirm in Settings after patches)</h3>
-					<table class="inner-data-table">
-						<thead><tr><th>Action</th><th>Default</th><th>Notes</th></tr></thead>
-						<tbody>
-							<tr><td>Move</td><td>W A S D</td><td>Rebind if needed</td></tr>
-							<tr><td>Camera</td><td>Mouse</td><td>Lower sensitivity helps Seeker scans</td></tr>
-							<tr><td>Paint menu</td><td>F</td><td>Open before a live round</td></tr>
-							<tr><td>Pose menu</td><td>R</td><td>Choose shape before colour work</td></tr>
-							<tr><td>Paint / Tag</td><td>Mouse input</td><td>Role-dependent; follow in-game prompt</td></tr>
-						</tbody>
-					</table>
-					<h3>Pick a mode for your group</h3>
-					<table class="inner-data-table">
-						<thead><tr><th>Mode</th><th>Players</th><th>Summary</th></tr></thead>
-						<tbody>
-							<tr><td>Normal</td><td>2–4</td><td>Classic one Seeker; best for learning</td></tr>
-							<tr><td>Infection</td><td>6–10</td><td>Tagged Hiders join the hunt</td></tr>
-							<tr><td>Double</td><td>4–8</td><td>Everyone hides, then everyone hunts</td></tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
-
-		<section class="inner-content-section">
-			<div class="container">
-				<div class="inner-content-block is-wide">
-					<h2>Hider Playbook</h2>
-					<ol class="inner-steps">
-						<li><strong>Commit early</strong> — Within ~15 seconds, pick a wall edge, clutter zone, or prop cluster; stop roaming.</li>
-						<li><strong>Pose first</strong> — Open poses (<kbd>R</kbd>); curl, crouch, or flatten against the backdrop.</li>
-						<li><strong>Two-tone paint</strong> — Spoid the lit surface, fill large zones; Spoid a shadow tone for the dark side.</li>
-						<li><strong>Freeze on hunt</strong> — Audio and motion expose you before bad paint does.</li>
-					</ol>
-					<div class="inner-callout is-warn">
-						<p class="inner-callout-title">Golden order</p>
-						<p><strong>Spot → Pose → Paint.</strong> Silhouette and backdrop come before detail work.</p>
-					</div>
-					<h3>Choosing a backdrop</h3>
-					<table class="inner-data-table"><thead><tr><th>Backdrop</th><th>Match this</th><th>What exposes you</th></tr></thead><tbody>
-						<tr><td>Flat wall or poster</td><td>Width, edge direction, flatter pose</td><td>Standing silhouette or hard outline</td></tr>
-						<tr><td>Floor edge or tile</td><td>Local tone and surface seam</td><td>Colour blob ignoring the seam</td></tr>
-						<tr><td>Low furniture</td><td>Height first, then nearest face colour</td><td>Head or limbs above the prop</td></tr>
-						<tr><td>Busy prop cluster</td><td>One material family, compact shape</td><td>Mixing unrelated colours</td></tr>
-						<tr><td>Repeated pattern</td><td>Rhythm and spacing, not every detail</td><td>Extra stripe, tile, or gap</td></tr>
-					</tbody></table>
-				</div>
-			</div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
-
-		<section class="inner-content-section is-alt">
-			<div class="container"><div class="inner-content-block">
-				<h2>Seeker Playbook</h2>
-				<p>Random sprinting feels fast but teaches little. Use three deliberate passes instead:</p>
-				<ol class="inner-steps">
-					<li><strong>Pass one — large shapes</strong> — Open edges, tall props, wrong-scale objects.</li>
-					<li><strong>Pass two — repeated surfaces</strong> — Shelves, tiles, frames, stripes, object rows.</li>
-					<li><strong>Pass three — return angle</strong> — Walk back along the main route; look for outlines visible only from the other side.</li>
-				</ol>
-				<p>Quick habits: start at the perimeter; count repeating props; pause on flat colour blobs without shadow gradient. Since v1.2.0, ranking considers distance and line-of-sight time — keep main paths in your sweep.</p>
-			</div></div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
-
-		<section class="inner-content-section">
-			<div class="container">
-				<div class="inner-content-block is-wide">
-					<h2>Common Mistakes & FAQ</h2>
-					<table class="inner-data-table">
-						<thead><tr><th>Mistake</th><th>Why it fails</th><th>Fix</th></tr></thead>
-						<tbody>
-							<tr><td>Late spot choice</td><td>No time to pose + two-layer paint</td><td>Commit in ~15s</td></tr>
-							<tr><td>Paint before pose</td><td>Colours misalign after curl/flatten</td><td>Pose first</td></tr>
-							<tr><td>Single flat colour</td><td>Obvious under map lighting</td><td>Lit + shadow Spoid</td></tr>
-							<tr><td>Moving during hunt</td><td>Audio/motion tells</td><td>Freeze completely</td></tr>
-							<tr><td>Skipping results</td><td>Repeat the same bad hides</td><td>Review every round</td></tr>
-						</tbody>
-					</table>
-					<h3>Should I copy a viral hiding clip?</h3>
-					<p>Use it to learn an idea — tile line, lower silhouette — then adapt to your room. Popular clips also tell Seekers where to look.</p>
-					<h3>When should I read a map guide?</h3>
-					<p>After one full match loop. Open the <a href="/wiki#wiki-maps">map you are about to play</a>, read landmark prompts only, test one idea per round.</p>
-					<h3>What if controls differ from this page?</h3>
-					<p>Trust your Settings menu. <a href="/updates">Patch notes</a> may change defaults; this page tracks {siteStats.currentVersion} as of {siteStats.lastVerified}.</p>
-				</div>
-			</div>
-		</section>
-		<!-- Affiliate ad disabled for now; keep this block for future reuse.
-		<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-			<span class="affiliate-ad-slot__label">Advertisement</span>
-			<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-		</aside>
-		-->
-		<div data-gpt-banner-anchor></div>
-
-		<section class="cta-section">
-			<div class="container">
-				<h2>Next Steps</h2>
-				<p>Move to map data, role deep dives, and lobby setup once the basic loop feels familiar.</p>
-				<div class="cta-actions">
-					<a class="btn btn-primary" href="/camouflage-simulator">Camouflage Simulator</a>
-					<a class="btn btn-outline btn-outline-light" href="/wiki#wiki-maps">Wiki Maps</a>
-					<a class="btn btn-outline btn-outline-light" href="/guides">Strategy Guides</a>
-					<a class="btn btn-outline btn-outline-light" href="/online">Play Online</a>
-				</div>
-			</div>
-		</section>
+				</section>
 			</div>
 			<ContentAnchorSidebar />
 		</div>
+		<!-- compliance:beginner:end -->
 	</div>
 </BaseLayout>

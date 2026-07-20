@@ -10,11 +10,11 @@ export const pageSeo = {
 			'MECCHA CHAMELEON game, paint hide and seek, meccha chameleon beginner, meccha chameleon wiki, MECCHA CHAMELEON online, camouflage simulator, paint simulator, hide and seek steam game, map guides, patch notes',
 	},
 	beginnersHub: {
-		title: "Beginner's Hub — How to Play MECCHA CHAMELEON",
+		title: 'Your First 30 Minutes in MECCHA CHAMELEON',
 		description:
-			'Complete MECCHA CHAMELEON beginner guide for Steam: controls, Hider vs Seeker roles, match phases, game modes, and a first-match plan you can repeat in private lobbies.',
+			'Follow a four-round MECCHA CHAMELEON practice plan: prepare your settings, play one focused Hider round, learn a deliberate Seeker sweep, and review the results.',
 		keywords:
-			'meccha chameleon how to play, beginner guide, steam tutorial, controls spoid pose, first match guide',
+			'meccha chameleon first session, 30 minute practice plan, first hider round, first seeker sweep, results review',
 	},
 	wiki: {
 		title: 'MECCHA CHAMELEON Wiki — Rules & Mechanics',
@@ -31,11 +31,11 @@ export const pageSeo = {
 			'MECCHA CHAMELEON online, meccha chameleon multiplayer, play with friends, private lobby, steam party game, voice chat, workshop troubleshooting',
 	},
 	playGame: {
-		title: 'MECCHA CHAMELEON Play Game Online — H5 Browser',
+		title: 'Browser Practice — Third-Party Paint-and-Hide Game',
 		description:
-			'Play a MECCHA CHAMELEON-inspired H5 browser game online, learn the paint-and-hide loop, then use our guides, wiki maps, and simulator to improve.',
+			'Try a separate third-party H5 paint-and-hide browser experience, then return to MECCHA CHAMELEON rules, map notes, and camouflage practice.',
 		keywords:
-			'MECCHA CHAMELEON play game, play MECCHA CHAMELEON online, mecha chameleon online, H5 hide and seek game, browser chameleon game, paint hide and seek online',
+			'browser practice, third-party H5 game, paint and hide warm-up, browser chameleon game, camouflage practice',
 	},
 	paintLab: {
 		title: 'MECCHA CHAMELEON Paint Hide and Seek Simulator',

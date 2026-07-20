@@ -8,11 +8,11 @@ const guides = [...project2Guides20260713, ...baseGuides];
 
 const staticPages = [
 	{
-		title: "MECCHA CHAMELEON Beginner's Hub — First Match Guide",
-		description: 'Learn Hider vs Seeker roles, controls, modes, and first-match tips.',
+		title: 'Your First 30 Minutes in MECCHA CHAMELEON',
+		description: 'Follow a four-round first-session plan with focused Hider, Seeker, and results-review goals.',
 		url: '/beginners-hub',
 		category: 'Guide',
-		keywords: 'beginner how to play controls first match steam tutorial',
+		keywords: 'first session 30 minute practice plan hider seeker review',
 	},
 	{
 		title: 'MECCHA CHAMELEON Wiki',
@@ -29,11 +29,11 @@ const staticPages = [
 		keywords: 'multiplayer friends lobby faq troubleshooting private code',
 	},
 	{
-		title: 'MECCHA CHAMELEON Play Game Online',
-		description: 'Play a related H5 browser hide-and-seek game and compare it with the Steam version.',
+		title: 'Browser Practice — Third-Party Paint-and-Hide Game',
+		description: 'Try a separate third-party H5 browser warm-up, then return to the Steam game guides.',
 		url: '/play-game',
 		category: 'Game',
-		keywords: 'play game online h5 browser mecha chameleon iframe no download hide seek paint character',
+		keywords: 'browser practice third party h5 iframe hide seek paint warm-up',
 	},
 	{
 		title: 'MECCHA CHAMELEON Paint Hide and Seek Simulator',

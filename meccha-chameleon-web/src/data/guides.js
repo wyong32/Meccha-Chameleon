@@ -37,173 +37,178 @@ const guideBodyBannerHtml = `
 export const guides = [
 	{
 		id: 4,
-		title: 'MECCHA CHAMELEON Guide: How to Play, Tips, and First Match Basics',
+		title: 'MECCHA CHAMELEON Rules and Mechanics Explained',
 		description:
-			'Learn how to play MECCHA CHAMELEON with the Hider and Seeker objective, paint discipline, pose checks, mode basics, and first-match mistakes to avoid.',
-		publishDate: '2026-07-06',
+			'Reference MECCHA CHAMELEON win conditions, match phases, role transitions, paint and pose mechanics, tagging, mode differences, controls, and results-screen behavior.',
+		publishDate: '2026-07-20',
 		imageUrl: howToPlayPaintImage,
-		imageAlt: 'MECCHA CHAMELEON how to play guide showing Hider paint setup before the search phase',
+		imageAlt: 'MECCHA CHAMELEON rules reference showing Hider paint controls before the search phase',
 		addressBar: 'meccha-chameleon-how-to-play',
 		tag: [
-			'How to Play',
-			'Beginner Guide',
+			'Rules',
+			'Mechanics',
 			'Hider',
 			'Seeker',
-			'Paint',
-			'Pose',
-			'Gameplay',
-			'Tips',
+			'Game Modes',
 			'v1.9.0',
 		],
 		seo: {
-			title: 'MECCHA CHAMELEON How to Play Guide',
+			title: 'MECCHA CHAMELEON Rules & Mechanics Guide',
 			description:
-				'Learn how to play MECCHA CHAMELEON with objectives, Hider paint, Seeker checks, pose rules, mode basics, and beginner tips.',
+				'Reference MECCHA CHAMELEON win conditions, match phases, paint, Spoid, pose and tagging mechanics, mode differences, controls, and results.',
 			keywords:
-				'MECCHA CHAMELEON how to play, beginner guide, tips, gameplay',
+				'MECCHA CHAMELEON rules, game mechanics, win conditions, Hider Seeker, paint Spoid pose, Normal Infection Double',
 		},
 		detailsHtml: `
 		<div class="guide-content">
+			<!-- compliance:mechanics:start -->
 			<div class="guide-summary">
-				<p class="guide-summary-label">Fast answer</p>
+				<p class="guide-summary-label">Rules reference</p>
 				<p>
-					MECCHA CHAMELEON is a multiplayer hide-and-seek game built around <strong>visual camouflage</strong>.
-					Hiders paint and pose themselves into the map before the search starts. Seekers win by finding and
-					shooting every Hider before the timer ends. Hiders win if at least one Hider survives. For a first match,
-					learn this order: <strong>pick a surface, match the silhouette, paint with local colour, then stop moving</strong>.
+					MECCHA CHAMELEON divides a round between Hiders who prepare visual camouflage and Seekers who inspect
+					the stage after preparation ends. The rules are simple at the top level, but several systems determine
+					what each role can do: match phases, paint and surface controls, pose selection, movement, tagging,
+					mode-specific role changes, and the results screen. This page explains those systems as a reference.
 				</p>
 			</div>
 
 			<figure class="guide-media">
-				<img src="${howToPlayPaintImage}" alt="MECCHA CHAMELEON how to play Hider paint setup with colour wheel and roughness controls" title="MECCHA CHAMELEON Hider paint setup before search starts" loading="lazy" />
-				<figcaption>Start with the body outline and local colour. A perfect hue does not save a standing human shape.</figcaption>
+				<img src="${howToPlayPaintImage}" alt="MECCHA CHAMELEON Hider paint controls with colour and surface options" title="MECCHA CHAMELEON paint mechanics" loading="lazy" />
+				<figcaption>Paint affects the visible body, while pose and placement determine whether that painted body belongs in the scene.</figcaption>
 			</figure>
 
-			<h2>What MECCHA CHAMELEON is</h2>
-			<h3>Game concept short answer</h3>
+			<h2>Core win conditions</h2>
 			<p>
-				If you are asking "what is MECCHA CHAMELEON", the clean answer is: it is hide-and-seek where the hiding player
-				manually paints their body to blend into the stage. The game is not about radar pings or minimap tracking.
-				Most finds happen because the Hider has the wrong <strong>shape</strong>, wrong <strong>surface finish</strong>,
-				or moves after the search begins.
+				A Hider's objective is to remain untagged until the hunt timer expires. A Seeker's objective is to tag
+				all Hiders before that timer reaches zero. The current room settings and selected mode determine how
+				roles are assigned and whether a tagged player remains out or joins the hunt. Because those details can
+				change between modes or patches, the lobby screen and current in-game prompts are authoritative.
 			</p>
-
-			<h3>Gameplay intent versus guide intent</h3>
-			<p>
-				The core gameplay loop is simple, but the skill ceiling is not. Hiders need paint control, pose discipline,
-				and route reading. Seekers need systematic sweeps and patience. This page covers first-match execution; use
-				the <a href="/guides/hider-camouflage-masterclass">Hider Camouflage Masterclass</a> once you want deeper
-				Spoid, pose, and scene-reading drills.
-			</p>
-
 			<div class="guide-table-wrap">
 				<table class="guide-table">
-					<thead>
-						<tr><th>Role</th><th>Win condition</th><th>First skill to learn</th></tr>
-					</thead>
+					<thead><tr><th>Role state</th><th>Objective</th><th>Round-ending condition</th></tr></thead>
 					<tbody>
-						<tr><td>Hider</td><td>Survive until the timer ends</td><td>Pose before paint</td></tr>
-						<tr><td>Seeker</td><td>Find every Hider before time expires</td><td>Sweep the room edge first</td></tr>
-						<tr><td>Host</td><td>Set a stable map, mode, and timer</td><td>Do not start with untested Workshop maps</td></tr>
+						<tr><td>Active Hider</td><td>Avoid a valid tag through the hunt</td><td>The timer expires or the player is tagged</td></tr>
+						<tr><td>Active Seeker</td><td>Locate and tag remaining Hiders</td><td>Every required Hider is tagged or time expires</td></tr>
+						<tr><td>Host</td><td>Choose the map, mode, privacy, and available room options</td><td>The host starts or closes the session</td></tr>
 					</tbody>
 				</table>
 			</div>
 
 			${guideBodyBannerHtml}
 
-			<h2>How to play your first match</h2>
-			<h3>First-match objective</h3>
+			<h2>Match phases and role transitions</h2>
 			<p>
-				When the round assigns roles, do not overthink the lobby. If you are a Hider, your job is to become a believable
-				part of the room. If you are a Seeker, your job is to test objects that break the room pattern. The match turns
-				on three checks: <strong>surface match</strong>, <strong>silhouette match</strong>, and <strong>stillness</strong>.
+				A normal round moves through a lobby or setup state, role assignment, Hider preparation, the hunt,
+				and results. During preparation, Hiders can choose a position, select a pose, sample local colour, and
+				paint. Seekers do not receive a fair visual search until that preparation window closes. During the hunt,
+				Hiders protect their disguise while Seekers inspect the environment and attempt valid tags.
 			</p>
-
 			<ol class="guide-steps">
-				<li><strong>Read your role.</strong> Hider prepares; Seeker waits for the search phase.</li>
-				<li><strong>As Hider, choose one surface quickly.</strong> A wall, prop cluster, ceiling plane, or shadow lane is enough.</li>
-				<li><strong>Set the pose before the paint.</strong> Use a compact pose that matches nearby objects and breaks the human outline.</li>
-				<li><strong>Sample local colour.</strong> Use the colour picker on the same surface you are hiding against, then add only the shadow or finish you need.</li>
-				<li><strong>Freeze once the search begins.</strong> Late movement gives Seekers a better tell than imperfect paint.</li>
-				<li><strong>As Seeker, sweep from edges inward.</strong> Check corners, ceiling lines, prop rows, and surfaces that look slightly off.</li>
+				<li><strong>Lobby:</strong> players join and the host selects available map, mode, and room options.</li>
+				<li><strong>Assignment:</strong> the game communicates each player's current role.</li>
+				<li><strong>Preparation:</strong> Hiders create and check a disguise while Seekers wait.</li>
+				<li><strong>Hunt:</strong> Seekers enter the stage; the timer and selected mode govern the remaining state.</li>
+				<li><strong>Results:</strong> the round reports outcomes and reveals information useful for the next attempt.</li>
 			</ol>
 
 			<figure class="guide-media">
-				<img src="${howToPlayCamouflageImage}" alt="MECCHA CHAMELEON beginner guide showing a Hider using pose and paint on a high hiding route" title="MECCHA CHAMELEON Hider pose and paint route" loading="lazy" />
-				<figcaption>High or ceiling-adjacent spots work only when the body reads like part of the map from the main approach angle.</figcaption>
+				<img src="${howToPlayCamouflageImage}" alt="MECCHA CHAMELEON Hider checking pose, paint, and camouflage against a map surface" title="MECCHA CHAMELEON Hider mechanics" loading="lazy" />
+				<figcaption>The game evaluates a visible combination of body shape, local colour, surface treatment, placement, and movement.</figcaption>
 			</figure>
 
-			<h3>Beginner controls and movement</h3>
+			<h2>Paint, Spoid, pose, and movement</h2>
 			<p>
-				For first sessions, keep the control goal narrow: move, crouch, climb, pose, paint, and stop. The on-screen
-				prompts expose the important actions, including paint mode, pose, taunt, shadow toggle, and free-camera checks.
-				If you are setting up a gamepad, use the dedicated <a href="/guides/meccha-chameleon-controls-settings">controls
-				and settings guide</a> instead of remapping keys mid-lobby.
+				Paint changes the Hider's visible body rather than turning the player into a preset prop. Spoid samples a
+				colour from the environment so a Hider can work from a local reference instead of guessing. Surface
+				options such as roughness or metallic appearance affect how that colour reacts to light. Pose changes the
+				body outline; it should be selected before detailed paint because moving limbs afterward changes which
+				surfaces face the room.
 			</p>
-
+			<p>
+				Movement remains a separate system from paint. A good colour match does not hide motion, audio, or an outline
+				that cuts across the backdrop. Likewise, a compact pose cannot compensate for a bright colour break. The
+				mechanics work together: placement supplies the background, pose manages silhouette, paint manages local
+				appearance, and stillness preserves the finished disguise during the hunt.
+			</p>
 			<div class="guide-table-wrap">
 				<table class="guide-table">
-					<thead>
-						<tr><th>Beginner action</th><th>Why it matters</th><th>Bad habit</th></tr>
-					</thead>
+					<thead><tr><th>System</th><th>What it changes</th><th>What it does not guarantee</th></tr></thead>
 					<tbody>
-						<tr><td>Paint mode</td><td>Matches hue, roughness, and finish</td><td>Using one flat colour for the whole body</td></tr>
-						<tr><td>Pose</td><td>Reduces human silhouette</td><td>Standing upright against flat scenery</td></tr>
-						<tr><td>Climb</td><td>Opens wall and ceiling routes</td><td>Climbing into a spot that auto-reveals or clips</td></tr>
-						<tr><td>Free camera</td><td>Checks how your hide reads from the Seeker angle</td><td>Trusting only your close-up view</td></tr>
-						<tr><td>Taunt</td><td>Baits nearby Seekers without exact reveal</td><td>Taunting when your silhouette is already weak</td></tr>
+						<tr><td>Spoid and colour</td><td>Local hue reference</td><td>Correct shadow or convincing outline</td></tr>
+						<tr><td>Surface settings</td><td>Light response and finish</td><td>A match from every viewing angle</td></tr>
+						<tr><td>Pose</td><td>Body silhouette and scale</td><td>Correct colour or safe placement</td></tr>
+						<tr><td>Movement</td><td>Position and approach options</td><td>Continued concealment once observed</td></tr>
 					</tbody>
 				</table>
 			</div>
 
 			${guideBodyBannerHtml}
 
-			<h2>Beginner tips and mistakes</h2>
-			<h3>Early tips that matter</h3>
-			<ul class="guide-steps guide-steps--compact">
-				<li><strong>Do not rush paint.</strong> One local sample plus one shadow pass beats random full-body noise.</li>
-				<li><strong>Match material finish.</strong> The metallic and roughness sliders matter when the nearby surface is glossy or flat.</li>
-				<li><strong>Use visual clutter.</strong> Busy walls, prop groups, banners, ceiling beams, and repeated shapes hide mistakes better than clean corners.</li>
-				<li><strong>Leave obvious furniture alone.</strong> A beginner who hides as a single chair in an empty route gets checked first.</li>
-				<li><strong>Stay quiet in voice chat.</strong> Proximity voice can expose a Hider before the Seeker sees the outline.</li>
-			</ul>
-
-			<h3>Common new-player mistakes</h3>
+			<h2>Tagging and Seeker interaction</h2>
 			<p>
-				The biggest beginner mistake is painting first and thinking second. Pick the spot, set the pose, then paint.
-				The second mistake is staying in a hiding place that the game warns is invalid or too deep inside geometry.
-				If a cover warning appears, shift before the search begins instead of gambling the round.
+				Seekers convert a visual suspicion into a game action by attempting a tag with the role's current input and
+				on-screen rules. A sweep therefore has two stages: identify a shape or surface that breaks the environment,
+				then test it using the permitted interaction. The game, not the guide, determines whether an attempted tag is
+				valid. Players should follow current prompts rather than assuming an older key binding or patch behavior.
 			</p>
-
 			<figure class="guide-media">
-				<img src="${howToPlaySeekerImage}" alt="MECCHA CHAMELEON gameplay guide showing mode and map settings for a first match" title="MECCHA CHAMELEON mode and map setup for beginners" loading="lazy" />
-				<figcaption>For new groups, start on a stable map and mode before adding custom maps or harder rule changes.</figcaption>
+				<img src="${howToPlaySeekerImage}" alt="MECCHA CHAMELEON Seeker route and room settings reference" title="MECCHA CHAMELEON Seeker and mode mechanics" loading="lazy" />
+				<figcaption>Mode and room settings determine the rules around the visual search; the map determines what the Seeker must read.</figcaption>
 			</figure>
 
-			<h2>Modes to understand first</h2>
+			<h2>Normal, Infection, and Double</h2>
 			<p>
-				Normal play keeps fixed roles. Infection makes caught Hiders become Seekers, which turns late rounds chaotic.
-				Double-style play asks everyone to hide and then seek, so reverse-angle checks matter more. For custom map
-				selection and Workshop setup, use the <a href="/guides/meccha-chameleon-maps-custom-maps-workshop">maps and
-				Workshop guide</a>. For friend-room setup, use the <a href="/guides/meccha-chameleon-multiplayer-friends-guide">multiplayer
-				guide</a>.
+				Normal preserves the clearest fixed-role hide-and-seek structure. Infection changes the hunt after a Hider
+				is caught by adding that player to the searching side, so the number of active Seekers can grow. Double gives
+				players both hiding and searching responsibilities within its round structure. Confirm the live lobby text
+				before starting because player counts, available settings, and patch revisions can alter practical details.
+			</p>
+			<div class="guide-table-wrap">
+				<table class="guide-table">
+					<thead><tr><th>Mode</th><th>Defining role behavior</th><th>Rule detail to confirm</th></tr></thead>
+					<tbody>
+						<tr><td>Normal</td><td>Fixed-role hide and hunt</td><td>Selected map, timer, and room settings</td></tr>
+						<tr><td>Infection</td><td>Tagged Hiders can join the search</td><td>How the current lobby communicates conversion</td></tr>
+						<tr><td>Double</td><td>Players take both role responsibilities</td><td>Round order and scoring shown by the current build</td></tr>
+					</tbody>
+				</table>
+			</div>
+
+			<h2>Controls, settings, and patch caveats</h2>
+			<p>
+				Control labels in this reference describe functions, not a permanent binding promise. Use the current Settings
+				menu and on-screen prompts for movement, camera, painting, pose, tagging, and any accessibility or surface
+				options. Controller users should consult the <a href="/guides/meccha-chameleon-controls-settings">controls and
+				settings reference</a>. If a mechanic differs from this page, check the <a href="/updates">verified patch archive</a>
+				and trust the current build while the article is reviewed.
 			</p>
 
-			<h2>Beginner FAQ</h2>
+			<h2>Results screen and rule feedback</h2>
+			<p>
+				The results screen closes the rule loop by showing the outcome after the timer or required tags resolve the
+				round. It can reveal hiding choices and help players distinguish a rules misunderstanding from a tactical
+				mistake. A player who misunderstood a role transition should verify the mode; a player who was found because
+				of an outline should move to camouflage practice. Do not treat a displayed score as proof that one route or
+				paint pattern will remain optimal after a patch.
+			</p>
+
+			<h2>Rules FAQ</h2>
 			<div class="guide-reference">
 				<div class="guide-reference-item">
-					<span class="guide-reference-key">How do you play?</span>
-					<span class="guide-reference-value">Hiders paint and pose into the map; Seekers search and shoot suspicious bodies before time expires.</span>
+					<span class="guide-reference-key">Does paint turn a Hider into a prop?</span>
+					<span class="guide-reference-value">No. The player paints the body and uses pose and placement to make that body fit the scene.</span>
 				</div>
 				<div class="guide-reference-item">
-					<span class="guide-reference-key">Hard for beginners?</span>
-					<span class="guide-reference-value">No, if you learn role objective, silhouette, local colour, and stillness before chasing advanced spots.</span>
+					<span class="guide-reference-key">Which mode changes teams during the hunt?</span>
+					<span class="guide-reference-value">Infection can convert caught Hiders into Seekers; confirm the current lobby description.</span>
 				</div>
 				<div class="guide-reference-item">
-					<span class="guide-reference-key">First thing to learn?</span>
-					<span class="guide-reference-value">Pose before paint. Wrong shape gets caught faster than wrong shade.</span>
+					<span class="guide-reference-key">Where should I start playing?</span>
+					<span class="guide-reference-value"><a href="/beginners-hub">Follow the first-30-minute practice plan</a> for a timed session rather than another rules explanation.</span>
 				</div>
 			</div>
+			<!-- compliance:mechanics:end -->
 		</div>
 		`,
 	},
