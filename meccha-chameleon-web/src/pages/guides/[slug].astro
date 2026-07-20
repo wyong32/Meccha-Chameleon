@@ -8,8 +8,9 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, shortenBreadcrumbLabel } fro
 
 export async function getStaticPaths() {
 	const { guides: baseGuides } = await import('../../data/guides.js');
+	const { project2Guides20260720 } = await import('../../data/project2-guides-20260720.js');
 	const { project2Guides20260713 } = await import('../../data/project2-guides-20260713.js');
-	const guides = [...project2Guides20260713, ...baseGuides];
+	const guides = [...project2Guides20260720, ...project2Guides20260713, ...baseGuides];
 
 	return guides.map((item) => ({
 		params: { slug: item.addressBar },

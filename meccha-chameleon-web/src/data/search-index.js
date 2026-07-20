@@ -1,10 +1,11 @@
 // Site search index for /search and filterSearchIndex.
 import { wikiMaps } from './wiki-maps.js';
 import { guides as baseGuides } from './guides.js';
+import { project2Guides20260720 } from './project2-guides-20260720.js';
 import { project2Guides20260713 } from './project2-guides-20260713.js';
 import { workshopMaps } from './workshop-maps.js';
 
-const guides = [...project2Guides20260713, ...baseGuides];
+const guides = [...project2Guides20260720, ...project2Guides20260713, ...baseGuides];
 
 const staticPages = [
 	{

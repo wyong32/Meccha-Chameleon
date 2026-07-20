@@ -2,12 +2,13 @@
 // Guides list page.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { guides as baseGuides } from '../../data/guides.js';
+import { project2Guides20260720 } from '../../data/project2-guides-20260720.js';
 import { project2Guides20260713 } from '../../data/project2-guides-20260713.js';
 import { pageSeo } from '../../seo/pages.js';
 import { buildWebPageJsonLd } from '../../seo/meta.js';
 import '../../styles/pages/ListPage.css';
 
-const guides = [...project2Guides20260713, ...baseGuides];
+const guides = [...project2Guides20260720, ...project2Guides20260713, ...baseGuides];
 const hasGuides = guides.length > 0;
 const seo = hasGuides
 	? pageSeo.guidesIndex

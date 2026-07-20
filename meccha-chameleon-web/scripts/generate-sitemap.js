@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { wikiMaps } from '../src/data/wiki-maps.js';
 import { guides as baseGuides } from '../src/data/guides.js';
+import { project2Guides20260720 } from '../src/data/project2-guides-20260720.js';
 import { project2Guides20260713 } from '../src/data/project2-guides-20260713.js';
 import { workshopMaps } from '../src/data/workshop-maps.js';
 import { seoConfig } from '../src/seo/config.js';
@@ -13,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const fullDomain = seoConfig.fullDomain.replace(/\/+$/, '');
-const guides = [...project2Guides20260713, ...baseGuides];
+const guides = [...project2Guides20260720, ...project2Guides20260713, ...baseGuides];
 
 function getPriority(name) {
 	return seoConfig.priorities[name] ?? 0.7;
