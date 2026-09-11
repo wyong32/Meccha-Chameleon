@@ -121,7 +121,8 @@ for (const [id, source, min, max] of [
 const manifest = JSON.parse(manifestText);
 for (const [relativePath, expectedHash] of Object.entries(manifest)) {
   const bytes = await readFile(path.join(root, relativePath));
-  const actualHash = createHash('sha256').update(bytes).digest('hex');
+  const normalizedText = bytes.toString('utf8').replace(/\r\n/g, '\n');
+  const actualHash = createHash('sha256').update(normalizedText).digest('hex');
   expect(actualHash === expectedHash, `Protected advertising file changed: ${relativePath}`);
 }
 

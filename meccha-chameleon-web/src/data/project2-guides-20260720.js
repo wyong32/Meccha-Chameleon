@@ -4,13 +4,7 @@ const wikiDeveloperGuideImage = '/images/guides/meccha-wiki-developer-meaning-gu
 const robloxClonesGuideImage = '/images/guides/meccha-roblox-clones-similar-games-guide.jpg';
 
 const guideBodyBannerHtml = `
-			<!-- Affiliate ad disabled for now; keep this block for future reuse.
-			<aside class="affiliate-ad-slot" data-affiliate-ad="banner" aria-label="Advertisement">
-				<span class="affiliate-ad-slot__label">Advertisement</span>
-				<div class="affiliate-ad-slot__frame" data-affiliate-ad-frame></div>
-			</aside>
-			-->
-			<div data-gpt-banner-anchor></div>
+			<div data-ad-placeholder-anchor aria-hidden="true"></div>
 `;
 
 export const project2Guides20260720 = [

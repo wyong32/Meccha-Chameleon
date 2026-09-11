@@ -20,20 +20,20 @@ Use this checklist after deploying the code changes and before requesting anothe
 | ADS-PROG-01 | No self-clicking or artificial impressions | Confirm the owner and collaborators never click live ads; use publisher testing tools where available | Written team rule and invalid-traffic monitoring note | Pending |
 | ADS-PROG-04 | Traffic sources are legitimate | Review analytics acquisition reports for paid-to-click, exchange, spam email, bot, or junk-comment traffic | Export showing source/medium distribution for the review period | Pending |
 
-## Advertising implementation — GPT unchanged by request
+## Advertising implementation — currently disabled
 
-The current GPT/AdSense implementation was deliberately left unchanged. These rows require visual and account-side review and must not be marked passed based only on the repository test.
+The site currently renders non-interactive placeholders only. It does not load GPT, AdSense, or affiliate ad networks. Use the checklist below before any future advertising integration is enabled.
 
 | ID | Check | How to verify | Pass evidence | Status |
 | --- | --- | --- | --- | --- |
-| ADS-UX-06 | Layout is not ad-first or confusing | Inspect representative desktop and mobile pages with filled ads | Screenshots showing content remains primary | Owner review required — GPT unchanged by request |
-| ADS-PROG-03 | Ads are distinguishable from content | Check every format for neutral labeling and spacing from editorial elements | Screenshots of banner, anchor, rail, and interstitial formats | Owner review required — GPT unchanged by request |
-| ADS-PROG-05 | Official ad code is not manipulated | Compare deployed GPT and AdSense configuration with account-generated code and unit paths | Saved comparison with matching publisher and network IDs | Owner review required — GPT unchanged by request |
-| ADS-PROG-06 | Ads appear only in allowed contexts | Test content, search, legal, simulator, embedded-game, and error pages | Page-by-page placement inventory | Owner review required — GPT unchanged by request |
-| ADS-PUB-10 | Ads do not cover navigation or content | Trigger each format at common viewport sizes and test close controls | Desktop/mobile recording without obstruction | Owner review required — GPT unchanged by request |
-| ADS-PUB-11 | No ads on low-value pages | Recount visible editorial copy and inspect all pages that can serve ads | URL inventory showing adequate content or documented suppression | Owner review required — Workshop content expanded; GPT unchanged |
-| ADS-PUB-12 | Ads do not appear outside a meaningful context | Check background tabs, route loads, and out-of-page placements | Test notes for each GPT format | Owner review required — GPT unchanged by request |
-| ADS-REST-08 | No prohibited overlay/sticky-video behavior | Inspect anchor, interstitial, rails, and any video placements against Google format rules | Screenshots and account-format list | Owner review required — GPT unchanged by request |
+| ADS-UX-06 | Layout is not ad-first or confusing | Inspect representative desktop and mobile pages with filled ads | Screenshots showing content remains primary | Deferred — advertising disabled |
+| ADS-PROG-03 | Ads are distinguishable from content | Check every format for neutral labeling and spacing from editorial elements | Screenshots of banner, anchor, rail, and interstitial formats | Deferred — advertising disabled |
+| ADS-PROG-05 | Official ad code is not manipulated | Compare deployed GPT and AdSense configuration with account-generated code and unit paths | Saved comparison with matching publisher and network IDs | Deferred — advertising disabled |
+| ADS-PROG-06 | Ads appear only in allowed contexts | Test content, search, legal, simulator, embedded-game, and error pages | Page-by-page placement inventory | Deferred — advertising disabled |
+| ADS-PUB-10 | Ads do not cover navigation or content | Trigger each format at common viewport sizes and test close controls | Desktop/mobile recording without obstruction | Deferred — advertising disabled |
+| ADS-PUB-11 | No ads on low-value pages | Recount visible editorial copy and inspect all pages that can serve ads | URL inventory showing adequate content or documented suppression | Deferred — advertising disabled |
+| ADS-PUB-12 | Ads do not appear outside a meaningful context | Check background tabs, route loads, and out-of-page placements | Test notes for each GPT format | Deferred — advertising disabled |
+| ADS-REST-08 | No prohibited overlay/sticky-video behavior | Inspect anchor, interstitial, rails, and any video placements against Google format rules | Screenshots and account-format list | Deferred — advertising disabled |
 
 ## Privacy, consent, and targeting
 
